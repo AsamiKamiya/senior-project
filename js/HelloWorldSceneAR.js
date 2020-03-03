@@ -57,15 +57,16 @@ export default class HelloWorldSceneAR extends Component {
         />
     */}
 
-        <ViroARImageMarker target={"targetOne"}>
+        <ViroARImageMarker
+          target={"targetOne"}
+          pauseUpdates={this.state.pauseUpdates}
+        >
           <Viro3DObject
             source={require("./res/cat2.obj")}
-            position={[-0.0, -1, -1]}
-            // materials={["suica"]}
+            //position={[-0.0, -1, -1]}
             resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
             type="OBJ"
-            scale={[0.1, 0.1, 0.1]}
-            position={[0.5, -1, -1]}
+            scale={[0.3, 0.3, 0.3]}
           />
         </ViroARImageMarker>
 
@@ -85,7 +86,7 @@ export default class HelloWorldSceneAR extends Component {
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: "It works!!(^o^)"
+        text: "Welcome to Tamamon"
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
@@ -109,7 +110,7 @@ ViroARTrackingTargets.createTargets({
   targetOne: {
     source: require("./res/FinalMark.jpg"),
     orientation: "Up",
-    physicalWidth: 0.1
+    physicalWidth: 0.15
   }
 });
 
