@@ -15,6 +15,7 @@ import {
   StyleSheet,
   PixelRatio,
   TouchableHighlight,
+  ImageBackground,
 } from 'react-native';
 
 import {
@@ -72,27 +73,21 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer} >
+      <View>
+        <ImageBackground source={require('./js/res/images/background.png')} style={{width: '100%', height: '100%'}}>
         <View style={localStyles.inner} >
 
           <Text style={localStyles.titleText}>
-            Choose your desired experience:
+            TAMAMON
           </Text>
-
-          <TouchableHighlight style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
-            underlayColor={'#68a0ff'} >
-
-            <Text style={localStyles.buttonText}>AR</Text>
-          </TouchableHighlight>
-
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
             underlayColor={'#68a0ff'} >
 
-            <Text style={localStyles.buttonText}>VR</Text>
+            <Text style={localStyles.buttonText}>START</Text>
           </TouchableHighlight>
         </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -134,24 +129,17 @@ var localStyles = StyleSheet.create({
     flex : 1,
     backgroundColor: "black",
   },
-  outer : {
-    flex : 1,
-    flexDirection: 'row',
-    alignItems:'center',
-    backgroundColor: "black",
-  },
   inner: {
     flex : 1,
     flexDirection: 'column',
     alignItems:'center',
-    backgroundColor: "black",
   },
   titleText: {
-    paddingTop: 30,
+    paddingTop: 100,
     paddingBottom: 20,
     color:'#fff',
     textAlign:'center',
-    fontSize : 25
+    fontSize : 25,
   },
   buttonText: {
     color:'#fff',
@@ -163,12 +151,11 @@ var localStyles = StyleSheet.create({
     width: 150,
     paddingTop:20,
     paddingBottom:20,
-    marginTop: 10,
+    marginTop: 100,
     marginBottom: 10,
-    backgroundColor:'#68a0cf',
-    borderRadius: 10,
+    borderRadius: 100,
     borderWidth: 1,
-    borderColor: '#fff',
+    borderColor: '#fff'
   },
   exitButton : {
     height: 50,
