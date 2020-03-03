@@ -27,11 +27,13 @@ export default class HelloWorldSceneAR extends Component {
 
     // Set initial state here
     this.state = {
-      text: "Initializing AR..."
+      text: "Initializing AR...",
+      animate: false
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
+    this._animateFinished = this._animateFinished.bind(this);
   }
 
   render() {
@@ -60,13 +62,21 @@ export default class HelloWorldSceneAR extends Component {
         <ViroARImageMarker
           target={"targetOne"}
           pauseUpdates={this.state.pauseUpdates}
+          onAnchorFound={this._onAnchorFound}
         >
           <Viro3DObject
             source={require("./res/cat2.obj")}
             //position={[-0.0, -1, -1]}
             resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
             type="OBJ"
-            scale={[0.3, 0.3, 0.3]}
+            scale={[0.1, 0.1, 0.1]}
+            onTouch={this._onTouch}
+            onClick={this._animateTamamon}
+            animation={{
+              name: "tapAnimation",
+              run: this.state.animate,
+              onFinish: this._animateFinished
+            }}
           />
         </ViroARImageMarker>
 
@@ -94,6 +104,34 @@ export default class HelloWorldSceneAR extends Component {
       });
     }
   }
+
+  _animateTamamon(state, source) {
+    if (state == 1) {
+      console.log("User clicked down");
+    } else if (state == 2) {
+      console.log("User has click-up on the image!");
+    } else if (state == 3) {
+      console.log("USER FINALLY CLICKED");
+    }
+  }
+
+  _onTouch(state, touchPos, source) {
+    var touchX = touchPos[0];
+    var touchY = touchPos[1];
+    if (state == 1) {
+      // Touch Down
+    } else if (state == 2) {
+      // Touch Down Move
+    } else if (state == 3) {
+      // Touch Up
+    }
+  }
+
+  _animateFinished() {
+    this.setState({
+      animateTamamon: false
+    });
+  }
 }
 
 var styles = StyleSheet.create({
@@ -112,6 +150,20 @@ ViroARTrackingTargets.createTargets({
     orientation: "Up",
     physicalWidth: 0.15
   }
+});
+
+ViroAnimations.registerAnimations({
+  scaleUp: {
+    properties: { scaleX: 1, scaleY: 1, scaleZ: 1 },
+    duration: 50,
+    easing: "easeineaseout"
+  },
+  scaleDown: {
+    properties: { scaleX: 0.1, scaleY: 0.1, scaleZ: 0.1 },
+    duration: 50,
+    easing: "easeineaseout"
+  },
+  tapAnimation: [["scaleUp", "scaleDown"]]
 });
 
 module.exports = HelloWorldSceneAR;
