@@ -1,0 +1,34 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateTamomon(
+  $input: CreateTamomonInput!
+  $condition: ModeltamomonConditionInput
+) {
+  createTamomon(input: $input, condition: $condition) {
+    id
+    name
+    hunger
+    modified
+  }
+}
+mutation UpdateTamomon(
+  $input: UpdateTamomonInput!
+  $condition: ModeltamomonConditionInput
+) {
+  updateTamomon(input: $input, condition: $condition) {
+    id
+    name
+    hunger
+    modified
+  }
+}
+mutation DeleteTamomon(
+  $input: DeleteTamomonInput!
+  $condition: ModeltamomonConditionInput
+) {
+  deleteTamomon(input: $input, condition: $condition) {
+    id
+    name
+    hunger
+    modified
+  }
+}

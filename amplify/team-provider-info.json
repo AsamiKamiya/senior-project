@@ -1,0 +1,15 @@
+{
+    "test": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-tamomon-test-163836-authRole",
+            "UnauthRoleArn": "arn:aws:iam::424664815860:role/amplify-tamomon-test-163836-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::424664815860:role/amplify-tamomon-test-163836-authRole",
+            "Region": "ap-northeast-1",
+            "DeploymentBucketName": "amplify-tamomon-test-163836-deployment",
+            "UnauthRoleName": "amplify-tamomon-test-163836-unauthRole",
+            "StackName": "amplify-tamomon-test-163836",
+            "StackId": "arn:aws:cloudformation:ap-northeast-1:424664815860:stack/amplify-tamomon-test-163836/fef8bec0-5d21-11ea-aef8-0ab0e844d044",
+            "AmplifyAppId": "d1nivq7vpv8uw2"
+        }
+    }
+}
