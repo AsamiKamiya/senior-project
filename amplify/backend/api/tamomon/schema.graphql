@@ -1,0 +1,6 @@
+type tamomon @model {
+  id: ID!
+  name: String!
+  hunger: Int
+  modified: String
+}
