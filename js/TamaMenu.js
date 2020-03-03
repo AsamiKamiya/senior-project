@@ -8,7 +8,8 @@ import {
   View,
   StyleSheet,
   PixelRatio,
-  TouchableHighlight
+  TouchableHighlight,
+  ImageBackground,
 } from "react-native";
 
 import {
@@ -49,25 +50,27 @@ export default class TamaMenu extends Component {
 
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer}>
+      <View>
+        <ImageBackground source={require('./res/images/background.png')} style={{width: '100%', height: '100%'}}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>It works!</Text>
+          <Text style={localStyles.titleText}>Tamamon List</Text>
 
           <TouchableHighlight
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             style={localStyles.buttons}
             underlayColor={"#68a0ff"}
           >
-            <Text style={localStyles.buttonText}>AR</Text>
+            <Text style={localStyles.buttonText}>1</Text>
           </TouchableHighlight>
 
           <TouchableHighlight
             style={localStyles.buttons}
             underlayColor={"#68a0ff"}
           >
-            <Text style={localStyles.buttonText}>VR</Text>
+            <Text style={localStyles.buttonText}>2</Text>
           </TouchableHighlight>
         </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -99,16 +102,14 @@ var localStyles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: "black"
   },
   inner: {
     flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    backgroundColor: "black"
   },
   titleText: {
-    paddingTop: 30,
+    paddingTop: 100,
     paddingBottom: 20,
     color: "#fff",
     textAlign: "center",
@@ -126,7 +127,6 @@ var localStyles = StyleSheet.create({
     paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "#68a0cf",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#fff"
