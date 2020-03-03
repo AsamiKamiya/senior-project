@@ -10,6 +10,7 @@ import {
   PixelRatio,
   TouchableHighlight,
   ImageBackground,
+  Image,
 } from "react-native";
 
 import {
@@ -60,7 +61,9 @@ export default class TamaMenu extends Component {
             style={localStyles.buttons}
             underlayColor={"#68a0ff"}
           >
-            <Text style={localStyles.buttonText}>1</Text>
+            <Image source={require('./res/images/icons/cat-1.png')} style={localStyles.images}/>
+            {/* <Text style={localStyles.buttonText}>1</Text> */}
+            
           </TouchableHighlight>
 
           <TouchableHighlight
@@ -94,14 +97,13 @@ export default class TamaMenu extends Component {
   }
 }
 var localStyles = StyleSheet.create({
+  images: {
+    width: 80,
+    height: 80,
+  },
   viroContainer: {
     flex: 1,
     backgroundColor: "black"
-  },
-  outer: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
   },
   inner: {
     flex: 1,
@@ -121,15 +123,14 @@ var localStyles = StyleSheet.create({
     fontSize: 20
   },
   buttons: {
-    height: 80,
+    height: 90,
     width: 150,
-    paddingTop: 20,
-    paddingBottom: 20,
     marginTop: 10,
     marginBottom: 10,
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: "#fff"
+    borderColor: "#fff",
+    alignItems: "center",
   },
   exitButton: {
     height: 50,
