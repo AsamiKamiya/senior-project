@@ -62,9 +62,9 @@ export default class HelloWorldSceneAR extends Component {
           pauseUpdates={this.state.pauseUpdates}
         >
           <Viro3DObject
-            source={require("./res/cat2.obj")}
+            source={require("./res/cat.obj")}
             //position={[-0.0, -1, -1]}
-            resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+            resources={[require("./res/cat.mtl"), require("./res/cat.png")]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
           />
@@ -86,7 +86,7 @@ export default class HelloWorldSceneAR extends Component {
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: "Welcome to Tamamon"
+        text: "2ndWelcome to Tamamon"
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
@@ -108,7 +108,7 @@ var styles = StyleSheet.create({
 
 ViroARTrackingTargets.createTargets({
   targetOne: {
-    source: require("./res/FinalMark.jpg"),
+    source: require("./res/FinalMark2nd.jpg"),
     orientation: "Up",
     physicalWidth: 0.15
   }
