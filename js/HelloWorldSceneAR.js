@@ -66,7 +66,7 @@ export default class HelloWorldSceneAR extends Component {
             //position={[-0.0, -1, -1]}
             resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
             type="OBJ"
-            scale={[0.1, 0.1, 0.1]}
+            scale={[0.3, 0.3, 0.3]}
           />
         </ViroARImageMarker>
 
