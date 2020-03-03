@@ -20,9 +20,11 @@ import {
 } from "react-viro";
 
 const InitialARScene = require("./HelloWorldSceneAR");
+const InitialARSceneForTama2nd = require("./Tamamon2nd");
 
 const UNSET = "UNSET";
 const AR_NAVIGATOR_TYPE = "AR";
+const AR_NAVIGATOR_TYPE_2nd = "2nd";
 const defaultNavigatorType = UNSET;
 
 export default class TamaMenu extends Component {
@@ -30,11 +32,12 @@ export default class TamaMenu extends Component {
     super();
 
     this.state = {
-      navigatorType: defaultNavigatorType
+      navigatorType: defaultNavigatorType,
     };
 
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
+    this._getARNavigator2nd = this._getARNavigator2nd.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
@@ -46,6 +49,8 @@ export default class TamaMenu extends Component {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
       return this._getARNavigator();
+    } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE_2nd) {
+      return this._getARNavigator2nd();
     }
   }
 
@@ -62,15 +67,15 @@ export default class TamaMenu extends Component {
             underlayColor={"#68a0ff"}
           >
             <Image source={require('./res/images/icons/cat-1.png')} style={localStyles.images}/>
-            {/* <Text style={localStyles.buttonText}>1</Text> */}
             
           </TouchableHighlight>
 
           <TouchableHighlight
+            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
             style={localStyles.buttons}
             underlayColor={"#68a0ff"}
           >
-            <Text style={localStyles.buttonText}>2</Text>
+            <Image source={require('./res/images/icons/cat-2.png')} style={localStyles.images}/>
           </TouchableHighlight>
         </View>
         </ImageBackground>
@@ -81,11 +86,14 @@ export default class TamaMenu extends Component {
   _getARNavigator() {
     return <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />;
   }
+  _getARNavigator2nd() {
+    return <ViroARSceneNavigator initialScene={{ scene: InitialARSceneForTama2nd }} />;
+  }
 
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType: navigatorType
+        navigatorType: navigatorType,
       });
     };
   }
