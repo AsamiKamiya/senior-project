@@ -14,6 +14,7 @@ import {
   StyleSheet,
   TouchableHighlight,
   ImageBackground,
+  Image
 } from 'react-native';
 
 import {
@@ -72,9 +73,8 @@ export default class ViroSample extends Component {
       <View>
         <ImageBackground source={require('./js/res/images/Sprite-0001.gif')} style={{width: '100%', height: '100%'}}>
         <View style={localStyles.inner} >
-          <Text style={localStyles.titleText}>
-            TAMAMON
-          </Text>
+
+          <Image source={require('./js/res/images/logo.png')} style={localStyles.images}/>
           <TouchableHighlight style={localStyles.buttons}
             onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
             underlayColor={'#68a0ff'} >
@@ -122,6 +122,9 @@ export default class ViroSample extends Component {
 }
 
 var localStyles = StyleSheet.create({
+  images :{
+    marginTop:150,
+  },
   viroContainer :{
     flex : 1,
     backgroundColor: "black",

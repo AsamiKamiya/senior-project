@@ -59,7 +59,7 @@ export default class TamaMenu extends Component {
       <View>
         <ImageBackground source={require('./res/images/Sprite-0002.gif')} style={{width: '100%', height: '100%'}}>
         <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>Tamamon List</Text>
+          <Image source={require('./res/images/logo.png')} style={localStyles.title}/>
 
           <TouchableHighlight
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
@@ -118,12 +118,9 @@ var localStyles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  titleText: {
-    paddingTop: 100,
-    paddingBottom: 20,
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 25
+  title: {
+    marginTop: 100,
+    marginBottom: 20,
   },
   buttonText: {
     color: "#fff",
