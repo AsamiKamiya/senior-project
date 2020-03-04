@@ -57,7 +57,7 @@ export default class TamaMenu extends Component {
   _getExperienceSelector() {
     return (
       <View>
-        <ImageBackground source={require('./res/images/background.png')} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source={require('./res/images/Sprite-0002.gif')} style={{width: '100%', height: '100%'}}>
         <View style={localStyles.inner}>
           <Text style={localStyles.titleText}>Tamamon List</Text>
 
@@ -135,7 +135,7 @@ var localStyles = StyleSheet.create({
     width: 150,
     marginTop: 10,
     marginBottom: 10,
-    borderRadius: 10,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: "#fff",
     alignItems: "center",

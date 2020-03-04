@@ -9,19 +9,15 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   Text,
   View,
   StyleSheet,
-  PixelRatio,
   TouchableHighlight,
   ImageBackground,
 } from 'react-native';
 
 import {
   ViroARSceneNavigator,
-  ViroVRSceneNavigator,
-  ViroScene,
 } from 'react-viro';
 
 /*
@@ -49,7 +45,7 @@ export default class ViroSample extends Component {
 
     this.state = {
       navigatorType : defaultNavigatorType,
-      sharedProps : sharedProps
+      sharedProps : sharedProps,
     }
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
@@ -74,9 +70,8 @@ export default class ViroSample extends Component {
   _getExperienceSelector() {
     return (
       <View>
-        <ImageBackground source={require('./js/res/images/background.png')} style={{width: '100%', height: '100%'}}>
+        <ImageBackground source={require('./js/res/images/Sprite-0001.gif')} style={{width: '100%', height: '100%'}}>
         <View style={localStyles.inner} >
-
           <Text style={localStyles.titleText}>
             TAMAMON
           </Text>
@@ -111,8 +106,10 @@ export default class ViroSample extends Component {
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType : navigatorType
+        navigatorType : navigatorType,
+        
       })
+      
     }
   }
 
