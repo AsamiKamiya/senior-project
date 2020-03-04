@@ -72,6 +72,15 @@ export default class HelloWorldSceneAR extends Component {
           </ViroFlexView>
         </ViroFlexView>
 
+        <ViroImage
+          source={require("./res/heart.png")}
+          position={[0.5, 0.5, -3]}
+          scale={[0.5, 0.5, 0.5]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{ name: "moveUp", run: this.state.fed }}
+        />
+
         <Viro3DObject
           source={require("./res/cat2.obj")}
           position={[-0.0, -1, -3]}
@@ -128,7 +137,7 @@ export default class HelloWorldSceneAR extends Component {
       });
     } else if (fedCount === 2) {
       this.setState({
-        text: "I coud totally eat more..."
+        text: "I could totally eat more..."
       });
     } else if (fedCount === 3) {
       this.setState({
@@ -176,6 +185,11 @@ var localStyles = StyleSheet.create({
 });
 
 ViroAnimations.registerAnimations({
+  moveUp: {
+    properties: { positionY: "+=0.3", opacity: 1.0 },
+    duration: 500,
+    easing: "bounce"
+  },
   scaleUp: {
     properties: { scaleX: 1, scaleY: 1, scaleZ: 1 },
     duration: 50,
