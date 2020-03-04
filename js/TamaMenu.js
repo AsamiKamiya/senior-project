@@ -10,7 +10,7 @@ import {
   PixelRatio,
   TouchableHighlight,
   ImageBackground,
-  Image,
+  Image
 } from "react-native";
 
 import {
@@ -32,7 +32,7 @@ export default class TamaMenu extends Component {
     super();
 
     this.state = {
-      navigatorType: defaultNavigatorType,
+      navigatorType: defaultNavigatorType
     };
 
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
@@ -57,27 +57,35 @@ export default class TamaMenu extends Component {
   _getExperienceSelector() {
     return (
       <View>
-        <ImageBackground source={require('./res/images/Sprite-0002.gif')} style={{width: '100%', height: '100%'}}>
-        <View style={localStyles.inner}>
+        <ImageBackground
+          source={require("./res/images/Sprite-0002.gif")}
+          style={{ width: "100%", height: "100%" }}
+        >
+          <View style={localStyles.inner}>
           <Image source={require('./res/images/logo.png')} style={localStyles.title}/>
 
-          <TouchableHighlight
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
-            style={localStyles.buttons}
-            underlayColor={"#68a0ff"}
-          >
-            <Image source={require('./res/images/icons/cat-1.png')} style={localStyles.images}/>
-            
-          </TouchableHighlight>
+            <TouchableHighlight
+              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+              style={localStyles.buttons}
+              underlayColor={"#68a0ff"}
+            >
+              <Image
+                source={require("./res/images/icons/cat-1.png")}
+                style={localStyles.images}
+              />
+            </TouchableHighlight>
 
-          <TouchableHighlight
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
-            style={localStyles.buttons}
-            underlayColor={"#68a0ff"}
-          >
-            <Image source={require('./res/images/icons/cat-2.png')} style={localStyles.images}/>
-          </TouchableHighlight>
-        </View>
+            <TouchableHighlight
+              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
+              style={localStyles.buttons}
+              underlayColor={"#68a0ff"}
+            >
+              <Image
+                source={require("./res/images/icons/cat-2.png")}
+                style={localStyles.images}
+              />
+            </TouchableHighlight>
+          </View>
         </ImageBackground>
       </View>
     );
@@ -87,13 +95,17 @@ export default class TamaMenu extends Component {
     return <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />;
   }
   _getARNavigator2nd() {
-    return <ViroARSceneNavigator initialScene={{ scene: InitialARSceneForTama2nd }} />;
+    return (
+      <ViroARSceneNavigator
+        initialScene={{ scene: InitialARSceneForTama2nd }}
+      />
+    );
   }
 
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType: navigatorType,
+        navigatorType: navigatorType
       });
     };
   }
@@ -107,7 +119,7 @@ export default class TamaMenu extends Component {
 var localStyles = StyleSheet.create({
   images: {
     width: 80,
-    height: 80,
+    height: 80
   },
   viroContainer: {
     flex: 1,
@@ -116,7 +128,7 @@ var localStyles = StyleSheet.create({
   inner: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center",
+    alignItems: "center"
   },
   title: {
     marginTop: 100,
@@ -135,7 +147,7 @@ var localStyles = StyleSheet.create({
     borderRadius: 20,
     borderWidth: 1,
     borderColor: "#fff",
-    alignItems: "center",
+    alignItems: "center"
   },
   exitButton: {
     height: 50,

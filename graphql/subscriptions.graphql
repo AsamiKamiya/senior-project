@@ -1,0 +1,25 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateTamomon {
+  onCreateTamomon {
+    id
+    name
+    hunger
+    modified
+  }
+}
+subscription OnUpdateTamomon {
+  onUpdateTamomon {
+    id
+    name
+    hunger
+    modified
+  }
+}
+subscription OnDeleteTamomon {
+  onDeleteTamomon {
+    id
+    name
+    hunger
+    modified
+  }
+}
