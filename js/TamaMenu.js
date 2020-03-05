@@ -9,8 +9,10 @@ import {
   StyleSheet,
   PixelRatio,
   TouchableHighlight,
+  TouchableOpacity,
   ImageBackground,
-  Image
+  Image,
+  Button
 } from "react-native";
 
 import {
@@ -97,6 +99,7 @@ export default class TamaMenu extends Component {
   _getARNavigator() {
     return (
       //if we want to create a 2D UI stuck to the screen, we must define it here
+      //TODO: Add styling. Add food button. Add ViroAppProps.
       <View
         style={{
           position: "absolute",
@@ -109,6 +112,35 @@ export default class TamaMenu extends Component {
         }}
       >
         <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />
+        <View style={localStyles.bottomNav}>
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO")} //this is a placeholder for the actual feed function
+          >
+            <Image
+              source={require("./res/foodIcon.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
+          >
+            <Image
+              source={require("./res/foodIcon.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO3")} //this is a placeholder for the play function
+          >
+            <Image
+              source={require("./res/heart.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
@@ -178,6 +210,27 @@ var localStyles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#fff"
+  },
+  bottomNav: {
+    height: 60,
+    borderTopWidth: 0.5,
+    borderColor: "#E5E5E5",
+    flexDirection: "row",
+    justifyContent: "space-around"
+  },
+  tabItem: {
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  tabTitle: {
+    fontSize: 11,
+    color: "#3c3c3c",
+    paddingTop: 4
+  },
+  icons: {
+    height: 90,
+    width: 90,
+    marginBottom: 40
   }
 });
 module.exports = TamaMenu;
