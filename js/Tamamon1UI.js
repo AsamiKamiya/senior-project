@@ -1,4 +1,4 @@
-//NOTE: This is completely broken. Unable to figure out how to make UI work without throwing a "unrecognized selector sent to instance" error
+//NOTE: THIS FILE IS FOR TESTING PURPOSES. FIGURED OUT WHAT THE ISSUE WAS. TIME TO TRY AGAIN WITH 2D UI ELEMENTS.
 import React, { Component } from "react";
 import {
   AppRegistry,

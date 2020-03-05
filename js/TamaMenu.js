@@ -62,7 +62,10 @@ export default class TamaMenu extends Component {
           style={{ width: "100%", height: "100%" }}
         >
           <View style={localStyles.inner}>
-          <Image source={require('./res/images/logo.png')} style={localStyles.title}/>
+            <Image
+              source={require("./res/images/logo.png")}
+              style={localStyles.title}
+            />
 
             <TouchableHighlight
               onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
@@ -92,7 +95,22 @@ export default class TamaMenu extends Component {
   }
 
   _getARNavigator() {
-    return <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />;
+    return (
+      //if we want to create a 2D UI stuck to the screen, we must define it here
+      <View
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "100%",
+          height: "100%"
+        }}
+      >
+        <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />
+      </View>
+    );
   }
   _getARNavigator2nd() {
     return (
@@ -132,7 +150,7 @@ var localStyles = StyleSheet.create({
   },
   title: {
     marginTop: 100,
-    marginBottom: 20,
+    marginBottom: 20
   },
   buttonText: {
     color: "#fff",
