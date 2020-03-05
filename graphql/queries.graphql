@@ -1,22 +1,26 @@
 # this is an auto generated file. This will be overwritten
-query GetTamomon($id: ID!) {
-  getTamomon(id: $id) {
+query GetTamamon($id: ID!) {
+  getTamamon(id: $id) {
     id
     name
-    hunger
+    fed
+    played
+    washed
     modified
   }
 }
-query ListTamomons(
-  $filter: ModeltamomonFilterInput
+query ListTamamons(
+  $filter: ModeltamamonFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTamomons(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listTamamons(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
       name
-      hunger
+      fed
+      played
+      washed
       modified
     }
     nextToken
