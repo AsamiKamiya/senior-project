@@ -123,7 +123,7 @@ export default class TamaMenu extends Component {
             onPress={() => console.log("BOO")} //this is a placeholder for the back button function
           >
             <Image
-              source={require("./res/icons/house2.png")}
+              source={require("./res/icons/houseIcon2.png")}
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
@@ -134,7 +134,7 @@ export default class TamaMenu extends Component {
             onPress={() => console.log("BOO")} //this is a placeholder for the actual feed function
           >
             <Image
-              source={require("./res/foodIcon.png")}
+              source={require("./res/icons/hamburgerIcon.png")}
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
@@ -145,7 +145,7 @@ export default class TamaMenu extends Component {
             onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
           >
             <Image
-              source={require("./res/playPlaceholder.png")}
+              source={require("./res/icons/washIcon.png")}
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
@@ -156,7 +156,7 @@ export default class TamaMenu extends Component {
             onPress={() => console.log("BOO3")} //this is a placeholder for the play function
           >
             <Image
-              source={require("./res/heart.png")}
+              source={require("./res/icons/heartIcon3.png")}
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
