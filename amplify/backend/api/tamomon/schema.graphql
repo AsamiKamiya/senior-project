@@ -1,6 +1,8 @@
-type tamomon @model {
+type tamamon @model {
   id: ID!
   name: String!
-  hunger: Int
+  fed: Int
+  played: Int
+  washed: Int
   modified: String
 }

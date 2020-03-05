@@ -2,11 +2,11 @@
 
 import AWSAppSync
 
-public struct CreateTamomonInput: GraphQLMapConvertible {
+public struct CreateTamamonInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: GraphQLID? = nil, name: String, hunger: Int? = nil, modified: String? = nil) {
-    graphQLMap = ["id": id, "name": name, "hunger": hunger, "modified": modified]
+  public init(id: GraphQLID? = nil, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+    graphQLMap = ["id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified]
   }
 
   public var id: GraphQLID? {
@@ -27,12 +27,30 @@ public struct CreateTamomonInput: GraphQLMapConvertible {
     }
   }
 
-  public var hunger: Int? {
+  public var fed: Int? {
     get {
-      return graphQLMap["hunger"] as! Int?
+      return graphQLMap["fed"] as! Int?
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "hunger")
+      graphQLMap.updateValue(newValue, forKey: "fed")
+    }
+  }
+
+  public var played: Int? {
+    get {
+      return graphQLMap["played"] as! Int?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "played")
+    }
+  }
+
+  public var washed: Int? {
+    get {
+      return graphQLMap["washed"] as! Int?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "washed")
     }
   }
 
@@ -46,11 +64,11 @@ public struct CreateTamomonInput: GraphQLMapConvertible {
   }
 }
 
-public struct ModeltamomonConditionInput: GraphQLMapConvertible {
+public struct ModeltamamonConditionInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(name: ModelStringInput? = nil, hunger: ModelIntInput? = nil, modified: ModelStringInput? = nil, and: [ModeltamomonConditionInput?]? = nil, or: [ModeltamomonConditionInput?]? = nil, not: ModeltamomonConditionInput? = nil) {
-    graphQLMap = ["name": name, "hunger": hunger, "modified": modified, "and": and, "or": or, "not": not]
+  public init(name: ModelStringInput? = nil, fed: ModelIntInput? = nil, played: ModelIntInput? = nil, washed: ModelIntInput? = nil, modified: ModelStringInput? = nil, and: [ModeltamamonConditionInput?]? = nil, or: [ModeltamamonConditionInput?]? = nil, not: ModeltamamonConditionInput? = nil) {
+    graphQLMap = ["name": name, "fed": fed, "played": played, "washed": washed, "modified": modified, "and": and, "or": or, "not": not]
   }
 
   public var name: ModelStringInput? {
@@ -62,12 +80,30 @@ public struct ModeltamomonConditionInput: GraphQLMapConvertible {
     }
   }
 
-  public var hunger: ModelIntInput? {
+  public var fed: ModelIntInput? {
     get {
-      return graphQLMap["hunger"] as! ModelIntInput?
+      return graphQLMap["fed"] as! ModelIntInput?
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "hunger")
+      graphQLMap.updateValue(newValue, forKey: "fed")
+    }
+  }
+
+  public var played: ModelIntInput? {
+    get {
+      return graphQLMap["played"] as! ModelIntInput?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "played")
+    }
+  }
+
+  public var washed: ModelIntInput? {
+    get {
+      return graphQLMap["washed"] as! ModelIntInput?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "washed")
     }
   }
 
@@ -80,27 +116,27 @@ public struct ModeltamomonConditionInput: GraphQLMapConvertible {
     }
   }
 
-  public var and: [ModeltamomonConditionInput?]? {
+  public var and: [ModeltamamonConditionInput?]? {
     get {
-      return graphQLMap["and"] as! [ModeltamomonConditionInput?]?
+      return graphQLMap["and"] as! [ModeltamamonConditionInput?]?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "and")
     }
   }
 
-  public var or: [ModeltamomonConditionInput?]? {
+  public var or: [ModeltamamonConditionInput?]? {
     get {
-      return graphQLMap["or"] as! [ModeltamomonConditionInput?]?
+      return graphQLMap["or"] as! [ModeltamamonConditionInput?]?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "or")
     }
   }
 
-  public var not: ModeltamomonConditionInput? {
+  public var not: ModeltamamonConditionInput? {
     get {
-      return graphQLMap["not"] as! ModeltamomonConditionInput?
+      return graphQLMap["not"] as! ModeltamamonConditionInput?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "not")
@@ -458,11 +494,11 @@ public struct ModelIntInput: GraphQLMapConvertible {
   }
 }
 
-public struct UpdateTamomonInput: GraphQLMapConvertible {
+public struct UpdateTamamonInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: GraphQLID, name: String? = nil, hunger: Int? = nil, modified: String? = nil) {
-    graphQLMap = ["id": id, "name": name, "hunger": hunger, "modified": modified]
+  public init(id: GraphQLID, name: String? = nil, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+    graphQLMap = ["id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified]
   }
 
   public var id: GraphQLID {
@@ -483,12 +519,30 @@ public struct UpdateTamomonInput: GraphQLMapConvertible {
     }
   }
 
-  public var hunger: Int? {
+  public var fed: Int? {
     get {
-      return graphQLMap["hunger"] as! Int?
+      return graphQLMap["fed"] as! Int?
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "hunger")
+      graphQLMap.updateValue(newValue, forKey: "fed")
+    }
+  }
+
+  public var played: Int? {
+    get {
+      return graphQLMap["played"] as! Int?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "played")
+    }
+  }
+
+  public var washed: Int? {
+    get {
+      return graphQLMap["washed"] as! Int?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "washed")
     }
   }
 
@@ -502,7 +556,7 @@ public struct UpdateTamomonInput: GraphQLMapConvertible {
   }
 }
 
-public struct DeleteTamomonInput: GraphQLMapConvertible {
+public struct DeleteTamamonInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
   public init(id: GraphQLID? = nil) {
@@ -519,11 +573,11 @@ public struct DeleteTamomonInput: GraphQLMapConvertible {
   }
 }
 
-public struct ModeltamomonFilterInput: GraphQLMapConvertible {
+public struct ModeltamamonFilterInput: GraphQLMapConvertible {
   public var graphQLMap: GraphQLMap
 
-  public init(id: ModelIDInput? = nil, name: ModelStringInput? = nil, hunger: ModelIntInput? = nil, modified: ModelStringInput? = nil, and: [ModeltamomonFilterInput?]? = nil, or: [ModeltamomonFilterInput?]? = nil, not: ModeltamomonFilterInput? = nil) {
-    graphQLMap = ["id": id, "name": name, "hunger": hunger, "modified": modified, "and": and, "or": or, "not": not]
+  public init(id: ModelIDInput? = nil, name: ModelStringInput? = nil, fed: ModelIntInput? = nil, played: ModelIntInput? = nil, washed: ModelIntInput? = nil, modified: ModelStringInput? = nil, and: [ModeltamamonFilterInput?]? = nil, or: [ModeltamamonFilterInput?]? = nil, not: ModeltamamonFilterInput? = nil) {
+    graphQLMap = ["id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified, "and": and, "or": or, "not": not]
   }
 
   public var id: ModelIDInput? {
@@ -544,12 +598,30 @@ public struct ModeltamomonFilterInput: GraphQLMapConvertible {
     }
   }
 
-  public var hunger: ModelIntInput? {
+  public var fed: ModelIntInput? {
     get {
-      return graphQLMap["hunger"] as! ModelIntInput?
+      return graphQLMap["fed"] as! ModelIntInput?
     }
     set {
-      graphQLMap.updateValue(newValue, forKey: "hunger")
+      graphQLMap.updateValue(newValue, forKey: "fed")
+    }
+  }
+
+  public var played: ModelIntInput? {
+    get {
+      return graphQLMap["played"] as! ModelIntInput?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "played")
+    }
+  }
+
+  public var washed: ModelIntInput? {
+    get {
+      return graphQLMap["washed"] as! ModelIntInput?
+    }
+    set {
+      graphQLMap.updateValue(newValue, forKey: "washed")
     }
   }
 
@@ -562,27 +634,27 @@ public struct ModeltamomonFilterInput: GraphQLMapConvertible {
     }
   }
 
-  public var and: [ModeltamomonFilterInput?]? {
+  public var and: [ModeltamamonFilterInput?]? {
     get {
-      return graphQLMap["and"] as! [ModeltamomonFilterInput?]?
+      return graphQLMap["and"] as! [ModeltamamonFilterInput?]?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "and")
     }
   }
 
-  public var or: [ModeltamomonFilterInput?]? {
+  public var or: [ModeltamamonFilterInput?]? {
     get {
-      return graphQLMap["or"] as! [ModeltamomonFilterInput?]?
+      return graphQLMap["or"] as! [ModeltamamonFilterInput?]?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "or")
     }
   }
 
-  public var not: ModeltamomonFilterInput? {
+  public var not: ModeltamamonFilterInput? {
     get {
-      return graphQLMap["not"] as! ModeltamomonFilterInput?
+      return graphQLMap["not"] as! ModeltamamonFilterInput?
     }
     set {
       graphQLMap.updateValue(newValue, forKey: "not")
@@ -715,14 +787,14 @@ public struct ModelIDInput: GraphQLMapConvertible {
   }
 }
 
-public final class CreateTamomonMutation: GraphQLMutation {
+public final class CreateTamamonMutation: GraphQLMutation {
   public static let operationString =
-    "mutation CreateTamomon($input: CreateTamomonInput!, $condition: ModeltamomonConditionInput) {\n  createTamomon(input: $input, condition: $condition) {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "mutation CreateTamamon($input: CreateTamamonInput!, $condition: ModeltamamonConditionInput) {\n  createTamamon(input: $input, condition: $condition) {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
-  public var input: CreateTamomonInput
-  public var condition: ModeltamomonConditionInput?
+  public var input: CreateTamamonInput
+  public var condition: ModeltamamonConditionInput?
 
-  public init(input: CreateTamomonInput, condition: ModeltamomonConditionInput? = nil) {
+  public init(input: CreateTamamonInput, condition: ModeltamamonConditionInput? = nil) {
     self.input = input
     self.condition = condition
   }
@@ -735,7 +807,7 @@ public final class CreateTamomonMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("createTamomon", arguments: ["input": GraphQLVariable("input"), "condition": GraphQLVariable("condition")], type: .object(CreateTamomon.selections)),
+      GraphQLField("createTamamon", arguments: ["input": GraphQLVariable("input"), "condition": GraphQLVariable("condition")], type: .object(CreateTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -744,27 +816,29 @@ public final class CreateTamomonMutation: GraphQLMutation {
       self.snapshot = snapshot
     }
 
-    public init(createTamomon: CreateTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "createTamomon": createTamomon.flatMap { $0.snapshot }])
+    public init(createTamamon: CreateTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Mutation", "createTamamon": createTamamon.flatMap { $0.snapshot }])
     }
 
-    public var createTamomon: CreateTamomon? {
+    public var createTamamon: CreateTamamon? {
       get {
-        return (snapshot["createTamomon"] as? Snapshot).flatMap { CreateTamomon(snapshot: $0) }
+        return (snapshot["createTamamon"] as? Snapshot).flatMap { CreateTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "createTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "createTamamon")
       }
     }
 
-    public struct CreateTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct CreateTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -774,8 +848,8 @@ public final class CreateTamomonMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -805,12 +879,30 @@ public final class CreateTamomonMutation: GraphQLMutation {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
@@ -826,14 +918,14 @@ public final class CreateTamomonMutation: GraphQLMutation {
   }
 }
 
-public final class UpdateTamomonMutation: GraphQLMutation {
+public final class UpdateTamamonMutation: GraphQLMutation {
   public static let operationString =
-    "mutation UpdateTamomon($input: UpdateTamomonInput!, $condition: ModeltamomonConditionInput) {\n  updateTamomon(input: $input, condition: $condition) {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "mutation UpdateTamamon($input: UpdateTamamonInput!, $condition: ModeltamamonConditionInput) {\n  updateTamamon(input: $input, condition: $condition) {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
-  public var input: UpdateTamomonInput
-  public var condition: ModeltamomonConditionInput?
+  public var input: UpdateTamamonInput
+  public var condition: ModeltamamonConditionInput?
 
-  public init(input: UpdateTamomonInput, condition: ModeltamomonConditionInput? = nil) {
+  public init(input: UpdateTamamonInput, condition: ModeltamamonConditionInput? = nil) {
     self.input = input
     self.condition = condition
   }
@@ -846,7 +938,7 @@ public final class UpdateTamomonMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("updateTamomon", arguments: ["input": GraphQLVariable("input"), "condition": GraphQLVariable("condition")], type: .object(UpdateTamomon.selections)),
+      GraphQLField("updateTamamon", arguments: ["input": GraphQLVariable("input"), "condition": GraphQLVariable("condition")], type: .object(UpdateTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -855,27 +947,29 @@ public final class UpdateTamomonMutation: GraphQLMutation {
       self.snapshot = snapshot
     }
 
-    public init(updateTamomon: UpdateTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "updateTamomon": updateTamomon.flatMap { $0.snapshot }])
+    public init(updateTamamon: UpdateTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Mutation", "updateTamamon": updateTamamon.flatMap { $0.snapshot }])
     }
 
-    public var updateTamomon: UpdateTamomon? {
+    public var updateTamamon: UpdateTamamon? {
       get {
-        return (snapshot["updateTamomon"] as? Snapshot).flatMap { UpdateTamomon(snapshot: $0) }
+        return (snapshot["updateTamamon"] as? Snapshot).flatMap { UpdateTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "updateTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "updateTamamon")
       }
     }
 
-    public struct UpdateTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct UpdateTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -885,8 +979,8 @@ public final class UpdateTamomonMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -916,12 +1010,30 @@ public final class UpdateTamomonMutation: GraphQLMutation {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
@@ -937,14 +1049,14 @@ public final class UpdateTamomonMutation: GraphQLMutation {
   }
 }
 
-public final class DeleteTamomonMutation: GraphQLMutation {
+public final class DeleteTamamonMutation: GraphQLMutation {
   public static let operationString =
-    "mutation DeleteTamomon($input: DeleteTamomonInput!, $condition: ModeltamomonConditionInput) {\n  deleteTamomon(input: $input, condition: $condition) {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "mutation DeleteTamamon($input: DeleteTamamonInput!, $condition: ModeltamamonConditionInput) {\n  deleteTamamon(input: $input, condition: $condition) {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
-  public var input: DeleteTamomonInput
-  public var condition: ModeltamomonConditionInput?
+  public var input: DeleteTamamonInput
+  public var condition: ModeltamamonConditionInput?
 
-  public init(input: DeleteTamomonInput, condition: ModeltamomonConditionInput? = nil) {
+  public init(input: DeleteTamamonInput, condition: ModeltamamonConditionInput? = nil) {
     self.input = input
     self.condition = condition
   }
@@ -957,7 +1069,7 @@ public final class DeleteTamomonMutation: GraphQLMutation {
     public static let possibleTypes = ["Mutation"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("deleteTamomon", arguments: ["input": GraphQLVariable("input"), "condition": GraphQLVariable("condition")], type: .object(DeleteTamomon.selections)),
+      GraphQLField("deleteTamamon", arguments: ["input": GraphQLVariable("input"), "condition": GraphQLVariable("condition")], type: .object(DeleteTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -966,27 +1078,29 @@ public final class DeleteTamomonMutation: GraphQLMutation {
       self.snapshot = snapshot
     }
 
-    public init(deleteTamomon: DeleteTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Mutation", "deleteTamomon": deleteTamomon.flatMap { $0.snapshot }])
+    public init(deleteTamamon: DeleteTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Mutation", "deleteTamamon": deleteTamamon.flatMap { $0.snapshot }])
     }
 
-    public var deleteTamomon: DeleteTamomon? {
+    public var deleteTamamon: DeleteTamamon? {
       get {
-        return (snapshot["deleteTamomon"] as? Snapshot).flatMap { DeleteTamomon(snapshot: $0) }
+        return (snapshot["deleteTamamon"] as? Snapshot).flatMap { DeleteTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "deleteTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "deleteTamamon")
       }
     }
 
-    public struct DeleteTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct DeleteTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -996,8 +1110,8 @@ public final class DeleteTamomonMutation: GraphQLMutation {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -1027,12 +1141,30 @@ public final class DeleteTamomonMutation: GraphQLMutation {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
@@ -1048,9 +1180,9 @@ public final class DeleteTamomonMutation: GraphQLMutation {
   }
 }
 
-public final class GetTamomonQuery: GraphQLQuery {
+public final class GetTamamonQuery: GraphQLQuery {
   public static let operationString =
-    "query GetTamomon($id: ID!) {\n  getTamomon(id: $id) {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "query GetTamamon($id: ID!) {\n  getTamamon(id: $id) {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
   public var id: GraphQLID
 
@@ -1066,7 +1198,7 @@ public final class GetTamomonQuery: GraphQLQuery {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("getTamomon", arguments: ["id": GraphQLVariable("id")], type: .object(GetTamomon.selections)),
+      GraphQLField("getTamamon", arguments: ["id": GraphQLVariable("id")], type: .object(GetTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -1075,27 +1207,29 @@ public final class GetTamomonQuery: GraphQLQuery {
       self.snapshot = snapshot
     }
 
-    public init(getTamomon: GetTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Query", "getTamomon": getTamomon.flatMap { $0.snapshot }])
+    public init(getTamamon: GetTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Query", "getTamamon": getTamamon.flatMap { $0.snapshot }])
     }
 
-    public var getTamomon: GetTamomon? {
+    public var getTamamon: GetTamamon? {
       get {
-        return (snapshot["getTamomon"] as? Snapshot).flatMap { GetTamomon(snapshot: $0) }
+        return (snapshot["getTamamon"] as? Snapshot).flatMap { GetTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "getTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "getTamamon")
       }
     }
 
-    public struct GetTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct GetTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -1105,8 +1239,8 @@ public final class GetTamomonQuery: GraphQLQuery {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -1136,12 +1270,30 @@ public final class GetTamomonQuery: GraphQLQuery {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
@@ -1157,15 +1309,15 @@ public final class GetTamomonQuery: GraphQLQuery {
   }
 }
 
-public final class ListTamomonsQuery: GraphQLQuery {
+public final class ListTamamonsQuery: GraphQLQuery {
   public static let operationString =
-    "query ListTamomons($filter: ModeltamomonFilterInput, $limit: Int, $nextToken: String) {\n  listTamomons(filter: $filter, limit: $limit, nextToken: $nextToken) {\n    __typename\n    items {\n      __typename\n      id\n      name\n      hunger\n      modified\n    }\n    nextToken\n  }\n}"
+    "query ListTamamons($filter: ModeltamamonFilterInput, $limit: Int, $nextToken: String) {\n  listTamamons(filter: $filter, limit: $limit, nextToken: $nextToken) {\n    __typename\n    items {\n      __typename\n      id\n      name\n      fed\n      played\n      washed\n      modified\n    }\n    nextToken\n  }\n}"
 
-  public var filter: ModeltamomonFilterInput?
+  public var filter: ModeltamamonFilterInput?
   public var limit: Int?
   public var nextToken: String?
 
-  public init(filter: ModeltamomonFilterInput? = nil, limit: Int? = nil, nextToken: String? = nil) {
+  public init(filter: ModeltamamonFilterInput? = nil, limit: Int? = nil, nextToken: String? = nil) {
     self.filter = filter
     self.limit = limit
     self.nextToken = nextToken
@@ -1179,7 +1331,7 @@ public final class ListTamomonsQuery: GraphQLQuery {
     public static let possibleTypes = ["Query"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("listTamomons", arguments: ["filter": GraphQLVariable("filter"), "limit": GraphQLVariable("limit"), "nextToken": GraphQLVariable("nextToken")], type: .object(ListTamomon.selections)),
+      GraphQLField("listTamamons", arguments: ["filter": GraphQLVariable("filter"), "limit": GraphQLVariable("limit"), "nextToken": GraphQLVariable("nextToken")], type: .object(ListTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -1188,21 +1340,21 @@ public final class ListTamomonsQuery: GraphQLQuery {
       self.snapshot = snapshot
     }
 
-    public init(listTamomons: ListTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Query", "listTamomons": listTamomons.flatMap { $0.snapshot }])
+    public init(listTamamons: ListTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Query", "listTamamons": listTamamons.flatMap { $0.snapshot }])
     }
 
-    public var listTamomons: ListTamomon? {
+    public var listTamamons: ListTamamon? {
       get {
-        return (snapshot["listTamomons"] as? Snapshot).flatMap { ListTamomon(snapshot: $0) }
+        return (snapshot["listTamamons"] as? Snapshot).flatMap { ListTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "listTamomons")
+        snapshot.updateValue(newValue?.snapshot, forKey: "listTamamons")
       }
     }
 
-    public struct ListTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["ModeltamomonConnection"]
+    public struct ListTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["ModeltamamonConnection"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
@@ -1217,7 +1369,7 @@ public final class ListTamomonsQuery: GraphQLQuery {
       }
 
       public init(items: [Item?]? = nil, nextToken: String? = nil) {
-        self.init(snapshot: ["__typename": "ModeltamomonConnection", "items": items.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, "nextToken": nextToken])
+        self.init(snapshot: ["__typename": "ModeltamamonConnection", "items": items.flatMap { $0.map { $0.flatMap { $0.snapshot } } }, "nextToken": nextToken])
       }
 
       public var __typename: String {
@@ -1248,13 +1400,15 @@ public final class ListTamomonsQuery: GraphQLQuery {
       }
 
       public struct Item: GraphQLSelectionSet {
-        public static let possibleTypes = ["tamomon"]
+        public static let possibleTypes = ["tamamon"]
 
         public static let selections: [GraphQLSelection] = [
           GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
           GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
           GraphQLField("name", type: .nonNull(.scalar(String.self))),
-          GraphQLField("hunger", type: .scalar(Int.self)),
+          GraphQLField("fed", type: .scalar(Int.self)),
+          GraphQLField("played", type: .scalar(Int.self)),
+          GraphQLField("washed", type: .scalar(Int.self)),
           GraphQLField("modified", type: .scalar(String.self)),
         ]
 
@@ -1264,8 +1418,8 @@ public final class ListTamomonsQuery: GraphQLQuery {
           self.snapshot = snapshot
         }
 
-        public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-          self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+        public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+          self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
         }
 
         public var __typename: String {
@@ -1295,12 +1449,30 @@ public final class ListTamomonsQuery: GraphQLQuery {
           }
         }
 
-        public var hunger: Int? {
+        public var fed: Int? {
           get {
-            return snapshot["hunger"] as? Int
+            return snapshot["fed"] as? Int
           }
           set {
-            snapshot.updateValue(newValue, forKey: "hunger")
+            snapshot.updateValue(newValue, forKey: "fed")
+          }
+        }
+
+        public var played: Int? {
+          get {
+            return snapshot["played"] as? Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "played")
+          }
+        }
+
+        public var washed: Int? {
+          get {
+            return snapshot["washed"] as? Int
+          }
+          set {
+            snapshot.updateValue(newValue, forKey: "washed")
           }
         }
 
@@ -1317,9 +1489,9 @@ public final class ListTamomonsQuery: GraphQLQuery {
   }
 }
 
-public final class OnCreateTamomonSubscription: GraphQLSubscription {
+public final class OnCreateTamamonSubscription: GraphQLSubscription {
   public static let operationString =
-    "subscription OnCreateTamomon {\n  onCreateTamomon {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "subscription OnCreateTamamon {\n  onCreateTamamon {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
   public init() {
   }
@@ -1328,7 +1500,7 @@ public final class OnCreateTamomonSubscription: GraphQLSubscription {
     public static let possibleTypes = ["Subscription"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("onCreateTamomon", type: .object(OnCreateTamomon.selections)),
+      GraphQLField("onCreateTamamon", type: .object(OnCreateTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -1337,27 +1509,29 @@ public final class OnCreateTamomonSubscription: GraphQLSubscription {
       self.snapshot = snapshot
     }
 
-    public init(onCreateTamomon: OnCreateTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Subscription", "onCreateTamomon": onCreateTamomon.flatMap { $0.snapshot }])
+    public init(onCreateTamamon: OnCreateTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Subscription", "onCreateTamamon": onCreateTamamon.flatMap { $0.snapshot }])
     }
 
-    public var onCreateTamomon: OnCreateTamomon? {
+    public var onCreateTamamon: OnCreateTamamon? {
       get {
-        return (snapshot["onCreateTamomon"] as? Snapshot).flatMap { OnCreateTamomon(snapshot: $0) }
+        return (snapshot["onCreateTamamon"] as? Snapshot).flatMap { OnCreateTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "onCreateTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "onCreateTamamon")
       }
     }
 
-    public struct OnCreateTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct OnCreateTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -1367,8 +1541,8 @@ public final class OnCreateTamomonSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -1398,12 +1572,30 @@ public final class OnCreateTamomonSubscription: GraphQLSubscription {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
@@ -1419,9 +1611,9 @@ public final class OnCreateTamomonSubscription: GraphQLSubscription {
   }
 }
 
-public final class OnUpdateTamomonSubscription: GraphQLSubscription {
+public final class OnUpdateTamamonSubscription: GraphQLSubscription {
   public static let operationString =
-    "subscription OnUpdateTamomon {\n  onUpdateTamomon {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "subscription OnUpdateTamamon {\n  onUpdateTamamon {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
   public init() {
   }
@@ -1430,7 +1622,7 @@ public final class OnUpdateTamomonSubscription: GraphQLSubscription {
     public static let possibleTypes = ["Subscription"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("onUpdateTamomon", type: .object(OnUpdateTamomon.selections)),
+      GraphQLField("onUpdateTamamon", type: .object(OnUpdateTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -1439,27 +1631,29 @@ public final class OnUpdateTamomonSubscription: GraphQLSubscription {
       self.snapshot = snapshot
     }
 
-    public init(onUpdateTamomon: OnUpdateTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Subscription", "onUpdateTamomon": onUpdateTamomon.flatMap { $0.snapshot }])
+    public init(onUpdateTamamon: OnUpdateTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Subscription", "onUpdateTamamon": onUpdateTamamon.flatMap { $0.snapshot }])
     }
 
-    public var onUpdateTamomon: OnUpdateTamomon? {
+    public var onUpdateTamamon: OnUpdateTamamon? {
       get {
-        return (snapshot["onUpdateTamomon"] as? Snapshot).flatMap { OnUpdateTamomon(snapshot: $0) }
+        return (snapshot["onUpdateTamamon"] as? Snapshot).flatMap { OnUpdateTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "onUpdateTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "onUpdateTamamon")
       }
     }
 
-    public struct OnUpdateTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct OnUpdateTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -1469,8 +1663,8 @@ public final class OnUpdateTamomonSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -1500,12 +1694,30 @@ public final class OnUpdateTamomonSubscription: GraphQLSubscription {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
@@ -1521,9 +1733,9 @@ public final class OnUpdateTamomonSubscription: GraphQLSubscription {
   }
 }
 
-public final class OnDeleteTamomonSubscription: GraphQLSubscription {
+public final class OnDeleteTamamonSubscription: GraphQLSubscription {
   public static let operationString =
-    "subscription OnDeleteTamomon {\n  onDeleteTamomon {\n    __typename\n    id\n    name\n    hunger\n    modified\n  }\n}"
+    "subscription OnDeleteTamamon {\n  onDeleteTamamon {\n    __typename\n    id\n    name\n    fed\n    played\n    washed\n    modified\n  }\n}"
 
   public init() {
   }
@@ -1532,7 +1744,7 @@ public final class OnDeleteTamomonSubscription: GraphQLSubscription {
     public static let possibleTypes = ["Subscription"]
 
     public static let selections: [GraphQLSelection] = [
-      GraphQLField("onDeleteTamomon", type: .object(OnDeleteTamomon.selections)),
+      GraphQLField("onDeleteTamamon", type: .object(OnDeleteTamamon.selections)),
     ]
 
     public var snapshot: Snapshot
@@ -1541,27 +1753,29 @@ public final class OnDeleteTamomonSubscription: GraphQLSubscription {
       self.snapshot = snapshot
     }
 
-    public init(onDeleteTamomon: OnDeleteTamomon? = nil) {
-      self.init(snapshot: ["__typename": "Subscription", "onDeleteTamomon": onDeleteTamomon.flatMap { $0.snapshot }])
+    public init(onDeleteTamamon: OnDeleteTamamon? = nil) {
+      self.init(snapshot: ["__typename": "Subscription", "onDeleteTamamon": onDeleteTamamon.flatMap { $0.snapshot }])
     }
 
-    public var onDeleteTamomon: OnDeleteTamomon? {
+    public var onDeleteTamamon: OnDeleteTamamon? {
       get {
-        return (snapshot["onDeleteTamomon"] as? Snapshot).flatMap { OnDeleteTamomon(snapshot: $0) }
+        return (snapshot["onDeleteTamamon"] as? Snapshot).flatMap { OnDeleteTamamon(snapshot: $0) }
       }
       set {
-        snapshot.updateValue(newValue?.snapshot, forKey: "onDeleteTamomon")
+        snapshot.updateValue(newValue?.snapshot, forKey: "onDeleteTamamon")
       }
     }
 
-    public struct OnDeleteTamomon: GraphQLSelectionSet {
-      public static let possibleTypes = ["tamomon"]
+    public struct OnDeleteTamamon: GraphQLSelectionSet {
+      public static let possibleTypes = ["tamamon"]
 
       public static let selections: [GraphQLSelection] = [
         GraphQLField("__typename", type: .nonNull(.scalar(String.self))),
         GraphQLField("id", type: .nonNull(.scalar(GraphQLID.self))),
         GraphQLField("name", type: .nonNull(.scalar(String.self))),
-        GraphQLField("hunger", type: .scalar(Int.self)),
+        GraphQLField("fed", type: .scalar(Int.self)),
+        GraphQLField("played", type: .scalar(Int.self)),
+        GraphQLField("washed", type: .scalar(Int.self)),
         GraphQLField("modified", type: .scalar(String.self)),
       ]
 
@@ -1571,8 +1785,8 @@ public final class OnDeleteTamomonSubscription: GraphQLSubscription {
         self.snapshot = snapshot
       }
 
-      public init(id: GraphQLID, name: String, hunger: Int? = nil, modified: String? = nil) {
-        self.init(snapshot: ["__typename": "tamomon", "id": id, "name": name, "hunger": hunger, "modified": modified])
+      public init(id: GraphQLID, name: String, fed: Int? = nil, played: Int? = nil, washed: Int? = nil, modified: String? = nil) {
+        self.init(snapshot: ["__typename": "tamamon", "id": id, "name": name, "fed": fed, "played": played, "washed": washed, "modified": modified])
       }
 
       public var __typename: String {
@@ -1602,12 +1816,30 @@ public final class OnDeleteTamomonSubscription: GraphQLSubscription {
         }
       }
 
-      public var hunger: Int? {
+      public var fed: Int? {
         get {
-          return snapshot["hunger"] as? Int
+          return snapshot["fed"] as? Int
         }
         set {
-          snapshot.updateValue(newValue, forKey: "hunger")
+          snapshot.updateValue(newValue, forKey: "fed")
+        }
+      }
+
+      public var played: Int? {
+        get {
+          return snapshot["played"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "played")
+        }
+      }
+
+      public var washed: Int? {
+        get {
+          return snapshot["washed"] as? Int
+        }
+        set {
+          snapshot.updateValue(newValue, forKey: "washed")
         }
       }
 
