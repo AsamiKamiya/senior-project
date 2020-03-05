@@ -34,7 +34,8 @@ export default class HelloWorldSceneAR extends Component {
     this.state = {
       text: "Initializing AR...",
       fed: false,
-      animate: false
+      animate: false,
+      animecount: 0
     };
 
     // bind 'this' to functions
@@ -45,13 +46,13 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        <ViroFlexView
+        {/* <ViroFlexView
           height={2.5}
           width={2.5}
           position={[-0.5, 0, -5]}
           transformBehaviors={["billboard"]}
-        >
-          {/*}
+        > */}
+        {/*}
             <ViroFlexView backgroundColor={"white"} style={{ flex: 0.1 }}>
               <ViroImage
                 style={{ flex: 1 }}
@@ -60,7 +61,7 @@ export default class HelloWorldSceneAR extends Component {
             </ViroFlexView>
     */}
 
-          <ViroFlexView
+        {/* <ViroFlexView
             backgroundColor={"white"}
             style={{ flex: 0.8, flexDirection: "row" }}
           >
@@ -70,24 +71,78 @@ export default class HelloWorldSceneAR extends Component {
               fontSize={30}
             />
           </ViroFlexView>
-        </ViroFlexView>
-
-        <ViroImage
-          source={require("./res/heart.png")}
-          position={[0.5, 0.5, -3]}
-          scale={[0.5, 0.5, 0.5]}
-          opacity={0}
-          transformBehaviors={["billboard"]}
-          animation={{ name: "moveUp", run: this.state.fed }}
-        />
+        </ViroFlexView> */}
 
         <Viro3DObject
-          source={require("./res/cat2.obj")}
-          position={[-0.0, -1, -3]}
-          resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+          source={require("./res/speechBubble.obj")}
+          resources={[
+            require("./res/speechBubble.mtl"),
+            require("./res/speechBubble.png")
+          ]}
           type="OBJ"
-          scale={[0.3, 0.3, 0.3]}
+          scale={[-0.4, 0.4, 0.4]}
+          position={[0.1, -0.95, -3]}
+        ></Viro3DObject>
+        <ViroText
+          text={this.state.text}
+          scale={[0.4, 0.4, 0.4]}
+          position={[-0.7, 0.8, -2.9]}
+          style={styles.helloWorldTextStyle}
+          width={2}
+          height={2}
         />
+        {this.state.animecount === 1 ? (
+          <ViroImage
+            source={require("./res/heart.png")}
+            position={[0.5, 0.8, -3]}
+            scale={[0.5, 0.5, 0.5]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{ name: "moveUp", run: this.state.fed }}
+          />
+        ) : (
+          // for empty
+          <ViroText
+            text=""
+            scale={[0.3, 0.3, 0.3]}
+            Ï
+            position={[0.6, 0.08, -0.9]}
+            style={styles.helloWorldTextStyle}
+          />
+        )}
+
+        {this.state.animecount === 0 || this.state.animecount === 2 ? (
+          <Viro3DObject
+            source={require("./res/cat2.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            animation={{ name: "catBoundNo1st", run: this.state.fed }}
+          />
+        ) : this.state.animecount === 1 ? (
+          <Viro3DObject
+            source={require("./res/cat2-a1.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[
+              require("./res/cat2-a1.mtl"),
+              require("./res/cat2-a1.png")
+            ]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            animation={{ name: "catBound1st", run: this.state.fed }}
+          />
+        ) : (
+          // TODO change angry or sad face
+          <Viro3DObject
+            source={require("./res/cat2.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            animation={{ name: "catBoundAngry", run: this.state.fed }}
+          />
+        )}
 
         <ViroButton
           source={require("./res/foodIcon.png")}
@@ -131,15 +186,19 @@ export default class HelloWorldSceneAR extends Component {
     if (fedCount === 1) {
       this.setState({
         text: "Thank you for feeding me!",
-        fed: true
+        fed: true,
+        animecount: fedCount
       });
+      console.log(this.state.animecount);
     } else if (fedCount === 2) {
       this.setState({
-        text: "I could totally eat more..."
+        text: "I could totally eat more...",
+        animecount: fedCount
       });
     } else if (fedCount === 3) {
       this.setState({
-        text: "I'm really full!!"
+        text: "I'm really full!!",
+        animecount: fedCount
       });
     } else if (fedCount >= 5) {
       this.setState({
@@ -153,7 +212,7 @@ var styles = StyleSheet.create({
   helloWorldTextStyle: {
     fontFamily: "Arial",
     fontSize: 30,
-    color: "pink",
+    color: "black",
     textAlignVertical: "center",
     textAlign: "center"
   }
@@ -198,7 +257,68 @@ ViroAnimations.registerAnimations({
     duration: 50,
     easing: "easeineaseout"
   },
-  tapAnimation: [["scaleUp", "scaleDown"]]
+  boundUp: {
+    properties: { positionY: "+=0.1", opacity: 1.0 },
+    duration: 100,
+    easing: "bounce"
+  },
+  boundDown: {
+    properties: { positionY: "-=0.1", opacity: 1.0 },
+    duration: 50,
+    easing: "bounce"
+  },
+  rotate: {
+    properties: { rotateY: "+=90", opacity: 1.0 },
+    duration: 250
+  },
+  moveLeft1st: {
+    properties: { positionX: "+=0.1" },
+    duration: 100,
+    easing: "bounce"
+  },
+  moveRight1st: {
+    properties: { positionX: "-=0.1" },
+    duration: 100,
+    easing: "bounce"
+  },
+  catBoundDown: {
+    properties: { positionY: "-=0.2", positionX: "-=0.1", opacity: 1.0 },
+    duration: 100,
+    easing: "bounce"
+  },
+  catBoundUp: {
+    properties: { positionY: "+=0.2", positionX: "+=0.1", opacity: 1.0 },
+    duration: 200,
+    easing: "bounce"
+  },
+  catBoundDownR: {
+    properties: { positionY: "-=0.2", positionX: "+=0.1", opacity: 1.0 },
+    duration: 100,
+    easing: "bounce"
+  },
+  catBoundUpR: {
+    properties: { positionY: "+=0.2", positionX: "-=0.1", opacity: 1.0 },
+    duration: 200,
+    easing: "bounce"
+  },
+  tapAnimation: [["scaleUp", "scaleDown"]],
+  catBoundNo1st: [
+    ["moveLeft1st", "moveRight1st", "moveLeft1st", "moveRight1st"]
+  ],
+  catBound1st: [
+    [
+      "catBoundUp",
+      "catBoundDown",
+      "catBoundUpR",
+      "catBoundDownR",
+      "catBoundUp",
+      "catBoundDown",
+      "catBoundUpR",
+      "catBoundDownR"
+    ]
+  ],
+  // catBoundAngry: [["catBound"]],
+  heartAnimation: [["moveUp", "rotate"]]
 });
 
 module.exports = HelloWorldSceneAR;

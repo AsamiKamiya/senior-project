@@ -64,7 +64,7 @@ export default class Tamamon2nd extends Component {
             type="OBJ"
             scale={[0.2, 0.2, 0.2]}
             position={[0.2, -0.8, -1]}
-          />
+          ></Viro3DObject>
           {this.state.animeFlg === 1 ? (
             <ViroImage
               source={require("./res/heart.png")}
@@ -268,8 +268,10 @@ ViroAnimations.registerAnimations({
     ]
   ],
   catBoundNo: [["moveLeft", "moveRight", "moveLeft", "moveRight"]],
-  catBound: [["boundUp", "boundDown"]],
-  catBoundAngry: [["catBound", "catBound", "catBound"]],
+  catBound: [
+    ["boundUp", "boundDown", "boundUp", "boundDown", "boundUp", "boundDown"]
+  ],
+  catBoundAngry: [["catBound"]],
   heartAnimation: [["moveUp", "rotate"]]
 });
 
