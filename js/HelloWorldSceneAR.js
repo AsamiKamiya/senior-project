@@ -21,7 +21,8 @@ import {
   ViroARTrackingTarget,
   ViroButton,
   ViroFlexView,
-  ViroImage
+  ViroImage,
+  ViroParticleEmitter
 } from "react-viro";
 
 let fedCount = 0;
@@ -46,32 +47,69 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {/* <ViroFlexView
-          height={2.5}
-          width={2.5}
-          position={[-0.5, 0, -5]}
-          transformBehaviors={["billboard"]}
-        > */}
-        {/*}
-            <ViroFlexView backgroundColor={"white"} style={{ flex: 0.1 }}>
-              <ViroImage
-                style={{ flex: 1 }}
-                source={require("./res/grid_bg.jpg")}
-              />
-            </ViroFlexView>
-    */}
-
-        {/* <ViroFlexView
-            backgroundColor={"white"}
-            style={{ flex: 0.8, flexDirection: "row" }}
-          >
-            <ViroText
-              style={{ color: "black", flex: 1 }}
-              text={this.state.text}
-              fontSize={30}
-            />
-          </ViroFlexView>
-        </ViroFlexView> */}
+        {/* {this.state.animecount === 1 ? (
+          // TODO fix?? for heart effect when feeding
+          <ViroParticleEmitter
+            position={[-0.0, 1.5, -3]}
+            duration={1000}
+            visible={true}
+            run={true}
+            fixedToEmitter={true}
+            image={{
+              source: require("./res/heart.png"),
+              height: 0.03,
+              width: 0.03,
+              bloomThreshold: -1
+            }}
+            spawnBehavior={{
+              particleLifetime: [5000, 5000],
+              emissionRatePerSecond: [200, 200],
+              spawnVolume: {
+                shape: "box",
+                params: [20, 1, 20],
+                spawnOnSurface: false
+              },
+              maxParticles: 2000
+            }}
+            particleAppearance={{
+              opacity: {
+                initialRange: [0, 0],
+                interpolation: [
+                  { endValue: 1.0, interval: [0, 500] },
+                  { endValue: 0.0, interval: [4000, 5000] }
+                ]
+              },
+              scale: {
+                initialRange: [
+                  [5, 5, 5],
+                  [10, 10, 10]
+                ],
+                interpolation: [
+                  { endValue: [6, 6, 6], interval: [0, 1000] },
+                  { endValue: [10, 10, 10], interval: [3000, 5000] },
+                  { endValue: [5, 5, 5], interval: [4000, 5000] }
+                ]
+              }
+            }}
+            particlePhysics={{
+              velocity: {
+                initialRange: [
+                  [-2, -0.5, 0],
+                  [2, -3.0, 0]
+                ]
+              }
+            }}
+          />
+        ) : (
+          // for empty
+          <ViroText
+            text=""
+            scale={[0.3, 0.3, 0.3]}
+            Ï
+            position={[0.6, 0.08, -0.9]}
+            style={styles.helloWorldTextStyle}
+          />
+        )} */}
 
         <Viro3DObject
           source={require("./res/speechBubble.obj")}
@@ -133,11 +171,13 @@ export default class HelloWorldSceneAR extends Component {
             animation={{ name: "catBound1st", run: this.state.fed }}
           />
         ) : (
-          // TODO change angry or sad face
           <Viro3DObject
-            source={require("./res/cat2.obj")}
+            source={require("./res/cat2-a2.obj")}
             position={[-0.0, -1, -3]}
-            resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+            resources={[
+              require("./res/cat2-a2.mtl"),
+              require("./res/cat2-a2.png")
+            ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
             animation={{ name: "catBoundAngry", run: this.state.fed }}
@@ -181,6 +221,8 @@ export default class HelloWorldSceneAR extends Component {
   }
   _onTap() {
     console.log(fedCount);
+    console.log("state", this.state.animecount);
+
     ++fedCount;
 
     if (fedCount === 1) {
@@ -189,7 +231,6 @@ export default class HelloWorldSceneAR extends Component {
         fed: true,
         animecount: fedCount
       });
-      console.log(this.state.animecount);
     } else if (fedCount === 2) {
       this.setState({
         text: "I could totally eat more...",
