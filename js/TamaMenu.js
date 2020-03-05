@@ -28,7 +28,7 @@ const UNSET = "UNSET";
 const AR_NAVIGATOR_TYPE = "AR";
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
 const defaultNavigatorType = UNSET;
-//TODO: Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection.
+//TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
 
 export default class TamaMenu extends Component {
   constructor() {
@@ -45,6 +45,7 @@ export default class TamaMenu extends Component {
       this
     );
     this._exitViro = this._exitViro.bind(this);
+    this._returnToMenu = this._returnToMenu.bind(this);
   }
 
   render() {
@@ -120,7 +121,7 @@ export default class TamaMenu extends Component {
           {/*Home button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO")} //this is a placeholder for the back button function
+            onPress={this._getExperienceButtonOnPress(UNSET)}
           >
             <Image
               source={require("./res/icons/houseIcon2.png")}
@@ -184,6 +185,10 @@ export default class TamaMenu extends Component {
     this.setState({
       navigatorType: UNSET
     });
+  }
+
+  _returnToMenu() {
+    return <TamaMenu></TamaMenu>;
   }
 }
 var localStyles = StyleSheet.create({
