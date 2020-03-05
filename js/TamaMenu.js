@@ -28,6 +28,7 @@ const UNSET = "UNSET";
 const AR_NAVIGATOR_TYPE = "AR";
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
 const defaultNavigatorType = UNSET;
+//TODO: Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection.
 
 export default class TamaMenu extends Component {
   constructor() {
@@ -99,7 +100,7 @@ export default class TamaMenu extends Component {
   _getARNavigator() {
     return (
       //if we want to create a 2D UI stuck to the screen, we must define it here
-      //TODO: Add styling. Add food button. Add ViroAppProps.
+      //TODO: Add ViroAppProps.
       <View
         style={{
           position: "absolute",
@@ -111,8 +112,23 @@ export default class TamaMenu extends Component {
           height: "100%"
         }}
       >
+        {/* This is our AR Scene */}
         <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />
+
+        {/*This is our bottom navbar*/}
         <View style={localStyles.bottomNav}>
+          {/*Home button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO")} //this is a placeholder for the back button function
+          >
+            <Image
+              source={require("./res/icons/icon_home.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Feed button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={() => console.log("BOO")} //this is a placeholder for the actual feed function
@@ -122,15 +138,19 @@ export default class TamaMenu extends Component {
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
+
+          {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
           >
             <Image
-              source={require("./res/foodIcon.png")}
+              source={require("./res/playPlaceholder.png")}
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
+
+          {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={() => console.log("BOO3")} //this is a placeholder for the play function
@@ -230,7 +250,20 @@ var localStyles = StyleSheet.create({
   icons: {
     height: 90,
     width: 90,
-    marginBottom: 40
+    marginBottom: 40,
+    backgroundColor: "transparent"
+  },
+  backButton: {
+    height: 80,
+    width: 80,
+    paddingTop: 20,
+    paddingBottom: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    backgroundColor: "#00000000",
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#ffffff00"
   }
 });
 module.exports = TamaMenu;
