@@ -94,9 +94,7 @@ export default class HelloWorldSceneAR extends Component {
           position={[-0, -1, -3]}
           scale={[0.5, 0.5, 0.5]}
           onClick={this._onTap}
-        >
-          <ViroText text="Feed meeeee"></ViroText>
-        </ViroButton>
+        ></ViroButton>
 
         <ViroSpotLight
           innerAngle={5}
