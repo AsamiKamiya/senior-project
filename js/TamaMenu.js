@@ -123,7 +123,7 @@ export default class TamaMenu extends Component {
             onPress={() => console.log("BOO")} //this is a placeholder for the back button function
           >
             <Image
-              source={require("./res/icons/icon_home.png")}
+              source={require("./res/icons/house2.png")}
               style={localStyles.icons}
             ></Image>
           </TouchableOpacity>
@@ -248,9 +248,9 @@ var localStyles = StyleSheet.create({
     paddingTop: 4
   },
   icons: {
-    height: 90,
-    width: 90,
-    marginBottom: 40,
+    height: 160, //looks good on iPad but might not on smaller screens. Will test.
+    width: 160, //looks good on iPad but might not on smaller screens. Will test.
+    marginBottom: 100,
     backgroundColor: "transparent"
   },
   backButton: {
