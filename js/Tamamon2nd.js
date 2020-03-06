@@ -18,39 +18,35 @@ import {
   ViroImage
 } from "react-viro";
 
-let fedCount = 0;
-
 export default class Tamamon2nd extends Component {
   constructor() {
     super();
 
     // Set initial state here
     this.state = {
-      text: "Initializing AR...",
-      fed: false,
-      animate: false,
-      animeFlg: fedCount
+      text: "Initializing AR..."
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
-    this._onTap = this._onTap.bind(this);
   }
 
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         <ViroText
-          text="Please scan the AR Marker!"
+          text={this.state.text}
           position={[0, 0, -5]}
           style={styles.announceTextStyle}
+          width={2}
+          height={2}
         />
         <ViroARImageMarker
           target={"targetOne"}
           pauseUpdates={this.state.pauseUpdates}
         >
           <ViroText
-            text={this.state.text}
+            text={this.props.arSceneNavigator.viroAppProps.text}
             scale={[0.3, 0.3, 0.3]}
             position={[0.6, 0.08, -0.9]}
             style={styles.helloWorldTextStyle}
@@ -67,7 +63,7 @@ export default class Tamamon2nd extends Component {
             opacity={0}
             animation={{
               name: "angryAnimation",
-              run: this.state.animeFlg >= 5,
+              run: this.props.arSceneNavigator.viroAppProps.fedCount >= 5,
               loop: true
             }}
           />
@@ -81,26 +77,31 @@ export default class Tamamon2nd extends Component {
             scale={[0.2, 0.2, 0.2]}
             position={[0.2, -0.8, -1]}
           ></Viro3DObject>
-          {this.state.animeFlg === 1 ? (
+          {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
             <ViroImage
               source={require("./res/heart.png")}
               position={[0.3, -0.3, -0.8]}
               scale={[0.2, 0.2, 0.2]}
               opacity={0}
               transformBehaviors={["billboard"]}
-              animation={{ name: "heartAnimation", run: this.state.fed }}
+              animation={{
+                name: "heartAnimation",
+                run: this.props.arSceneNavigator.viroAppProps.fedCount === 1
+              }}
             />
           ) : (
             <ViroText
               text=""
               scale={[0.3, 0.3, 0.3]}
-              Ï
+              width={2}
+              height={2}
               position={[0.6, 0.08, -0.9]}
               style={styles.helloWorldTextStyle}
             />
           )}
 
-          {this.state.animeFlg === 0 || this.state.animeFlg === 2 ? (
+          {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
+          this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
             <Viro3DObject
               source={require("./res/tamamon2nd/cat.obj")}
               position={[-0.0, -5.5, -1.15]}
@@ -111,14 +112,12 @@ export default class Tamamon2nd extends Component {
               type="OBJ"
               scale={[0.2, 0.2, 0.2]}
               position={[0, -1.3, -1]}
-              // animation={
-              //   this.state.fed
-              //     ? { name: "catBoundNo", run: this.state.fed }
-              //     : { name: "catNormal", run: !this.state.fed, loop: true }
-              // }
-              animation={{ name: "catBoundNo", run: this.state.fed }}
+              animation={{
+                name: "catBoundNo",
+                run: this.props.arSceneNavigator.viroAppProps.fed
+              }}
             />
-          ) : this.state.animeFlg === 1 ? (
+          ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
             <Viro3DObject
               source={require("./res/tamamon2nd/cat-a1.obj")}
               position={[-0.0, -5.5, -1.15]}
@@ -129,7 +128,10 @@ export default class Tamamon2nd extends Component {
               type="OBJ"
               scale={[0.2, 0.2, 0.2]}
               position={[0, -1.3, -1]}
-              animation={{ name: "catBound", run: this.state.fed }}
+              animation={{
+                name: "catBound",
+                run: this.props.arSceneNavigator.viroAppProps.fed
+              }}
             />
           ) : (
             <Viro3DObject
@@ -142,7 +144,10 @@ export default class Tamamon2nd extends Component {
               type="OBJ"
               scale={[0.2, 0.2, 0.2]}
               position={[0, -1.3, -1]}
-              animation={{ name: "catBoundAngry", run: this.state.fed }}
+              animation={{
+                name: "catBoundAngry",
+                run: this.props.arSceneNavigator.viroAppProps.fed
+              }}
             />
           )}
           <ViroButton
@@ -169,37 +174,11 @@ export default class Tamamon2nd extends Component {
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
-        text: "Welcome to Tamamon"
+        text: "Please scan the marker."
       });
     } else if (state == ViroConstants.TRACKING_NONE) {
       this.setState({
         text: "It's not working"
-      });
-    }
-  }
-  _onTap() {
-    ++fedCount;
-
-    if (fedCount === 1) {
-      this.setState({
-        text: "Thank you for feeding me!",
-        fed: true,
-        animeFlg: fedCount
-      });
-    } else if (fedCount === 2) {
-      this.setState({
-        text: "I could totally eat more...",
-        animeFlg: fedCount
-      });
-    } else if (fedCount === 3) {
-      this.setState({
-        text: "I'm really full!!",
-        animeFlg: fedCount
-      });
-    } else if (fedCount >= 5) {
-      this.setState({
-        text: "I can't eat anymore..!",
-        animeFlg: fedCount
       });
     }
   }
