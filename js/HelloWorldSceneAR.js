@@ -25,8 +25,6 @@ import {
   ViroParticleEmitter
 } from "react-viro";
 
-let fedCount = 0;
-
 export default class HelloWorldSceneAR extends Component {
   constructor() {
     super();
@@ -34,7 +32,6 @@ export default class HelloWorldSceneAR extends Component {
     // Set initial state here
     this.state = {
       text: "Initializing AR...",
-      fed: false,
       animate: false,
       animecount: 0
     };
@@ -122,21 +119,24 @@ export default class HelloWorldSceneAR extends Component {
           position={[0.1, -0.95, -3]}
         ></Viro3DObject>
         <ViroText
-          text={this.state.text}
+          text={this.props.arSceneNavigator.viroAppProps.text}
           scale={[0.4, 0.4, 0.4]}
           position={[-0.7, 0.8, -2.9]}
           style={styles.helloWorldTextStyle}
           width={2}
           height={2}
         />
-        {this.state.animecount === 1 ? (
+        {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
             source={require("./res/heart.png")}
             position={[0.5, 0.8, -3]}
             scale={[0.5, 0.5, 0.5]}
             opacity={0}
             transformBehaviors={["billboard"]}
-            animation={{ name: "moveUp", run: this.state.fed }}
+            animation={{
+              name: "moveUp",
+              run: this.props.arSceneNavigator.viroAppProps.fedCount === 1
+            }}
           />
         ) : (
           // for empty
@@ -149,16 +149,20 @@ export default class HelloWorldSceneAR extends Component {
           />
         )}
 
-        {this.state.animecount === 0 || this.state.animecount === 2 ? (
+        {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
+        this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
             source={require("./res/cat2.obj")}
             position={[-0.0, -1, -3]}
             resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
-            animation={{ name: "catBoundNo1st", run: this.state.fed }}
+            animation={{
+              name: "catBoundNo1st",
+              run: this.props.arSceneNavigator.viroAppProps.fed
+            }}
           />
-        ) : this.state.animecount === 1 ? (
+        ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
             source={require("./res/cat2-a1.obj")}
             position={[-0.0, -1, -3]}
@@ -168,7 +172,10 @@ export default class HelloWorldSceneAR extends Component {
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
-            animation={{ name: "catBound1st", run: this.state.fed }}
+            animation={{
+              name: "catBound1st",
+              run: this.props.arSceneNavigator.viroAppProps.fed
+            }}
           />
         ) : (
           <Viro3DObject
@@ -180,7 +187,10 @@ export default class HelloWorldSceneAR extends Component {
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
-            animation={{ name: "catBoundAngry", run: this.state.fed }}
+            animation={{
+              name: "catBoundAngry",
+              run: this.props.arSceneNavigator.viroAppProps.fed
+            }}
           />
         )}
 
@@ -220,28 +230,34 @@ export default class HelloWorldSceneAR extends Component {
     }
   }
   _onTap() {
-    console.log(fedCount);
-    console.log("state", this.state.animecount);
+    // console.log("state", this.state.animecount);
 
-    ++fedCount;
+    this.props.arSceneNavigator.viroAppProps.fedCountUp();
+    console.log(this.props.arSceneNavigator.viroAppProps.fedCount);
 
-    if (fedCount === 1) {
-      this.setState({
-        text: "Thank you for feeding me!",
-        fed: true,
-        animecount: fedCount
-      });
-    } else if (fedCount === 2) {
+    if (this.props.arSceneNavigator.viroAppProps.fedCount === 1) {
+      // this.setState({
+      //   text: "Thank you for feeding me!",
+      //   animecount: this.props.arSceneNavigator.viroAppProps.fedCount
+      // });
+      this.props.arSceneNavigator.viroAppProps.updateText(
+        "Thank you for feeding me!"
+      );
+      this.props.arSceneNavigator.viroAppProps.feedTamamon();
+    } else if (this.props.arSceneNavigator.viroAppProps.fedCount === 2) {
       this.setState({
         text: "I could totally eat more...",
-        animecount: fedCount
+        animecount: this.props.arSceneNavigator.viroAppProps.fedCount
       });
-    } else if (fedCount === 3) {
+    } else if (
+      this.props.arSceneNavigator.viroAppProps.fedCount === 3 ||
+      this.props.arSceneNavigator.viroAppProps.fedCount === 4
+    ) {
       this.setState({
         text: "I'm really full!!",
-        animecount: fedCount
+        animecount: this.props.arSceneNavigator.viroAppProps.fedCount
       });
-    } else if (fedCount >= 5) {
+    } else if (this.props.arSceneNavigator.viroAppProps.fedCount >= 5) {
       this.setState({
         text: "I can't eat anymore..!"
       });

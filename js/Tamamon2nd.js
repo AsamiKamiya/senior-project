@@ -29,7 +29,7 @@ export default class Tamamon2nd extends Component {
       text: "Initializing AR...",
       fed: false,
       animate: false,
-      animeFlg: 0
+      animeFlg: fedCount
     };
 
     // bind 'this' to functions
@@ -54,6 +54,22 @@ export default class Tamamon2nd extends Component {
             scale={[0.3, 0.3, 0.3]}
             position={[0.6, 0.08, -0.9]}
             style={styles.helloWorldTextStyle}
+          />
+          <Viro3DObject
+            source={require("./res/tamamon2nd/angrymark.obj")}
+            resources={[
+              require("./res/tamamon2nd/angrymark.mtl"),
+              require("./res/tamamon2nd/angrymark.png")
+            ]}
+            type="OBJ"
+            position={[0.2, -0.6, -0.8]}
+            scale={[0.1, 0.1, 0.1]}
+            opacity={0}
+            animation={{
+              name: "angryAnimation",
+              run: this.state.animeFlg >= 5,
+              loop: true
+            }}
           />
           <Viro3DObject
             source={require("./res/speechBubble.obj")}
@@ -88,7 +104,6 @@ export default class Tamamon2nd extends Component {
             <Viro3DObject
               source={require("./res/tamamon2nd/cat.obj")}
               position={[-0.0, -5.5, -1.15]}
-              // materials={["suica"]}
               resources={[
                 require("./res/tamamon2nd/cat.mtl"),
                 require("./res/tamamon2nd/cat.png")
@@ -120,7 +135,6 @@ export default class Tamamon2nd extends Component {
             <Viro3DObject
               source={require("./res/tamamon2nd/cat-a2.obj")}
               position={[-0.0, -5.5, -1.15]}
-              // materials={["suica"]}
               resources={[
                 require("./res/tamamon2nd/cat-a2.mtl"),
                 require("./res/tamamon2nd/cat-a2.png")
@@ -184,7 +198,8 @@ export default class Tamamon2nd extends Component {
       });
     } else if (fedCount >= 5) {
       this.setState({
-        text: "I can't eat anymore..!"
+        text: "I can't eat anymore..!",
+        animeFlg: fedCount
       });
     }
   }
@@ -231,14 +246,24 @@ ViroAnimations.registerAnimations({
     easing: "bounce"
   },
   scaleUp: {
-    properties: { scaleX: 1, scaleY: 1, scaleZ: 1 },
-    duration: 50,
-    easing: "easeineaseout"
+    properties: {
+      scaleX: "+=0.01",
+      scaleY: "+=0.01",
+      scaleZ: "+=0.01",
+      opacity: 1.0
+    },
+    duration: 200,
+    easing: "bounce"
   },
   scaleDown: {
-    properties: { scaleX: 0.1, scaleY: 0.1, scaleZ: 0.1 },
-    duration: 50,
-    easing: "easeineaseout"
+    properties: {
+      scaleX: "-=0.01",
+      scaleY: "-=0.01",
+      scaleZ: "-=0.01",
+      opacity: 1.0
+    },
+    duration: 200,
+    easing: "bounce"
   },
   rotate: {
     properties: { rotateY: "+=90", opacity: 1.0 },
@@ -272,7 +297,8 @@ ViroAnimations.registerAnimations({
     ["boundUp", "boundDown", "boundUp", "boundDown", "boundUp", "boundDown"]
   ],
   catBoundAngry: [["catBound"]],
-  heartAnimation: [["moveUp", "rotate"]]
+  heartAnimation: [["moveUp"]],
+  angryAnimation: [["scaleUp", "scaleDown"]]
 });
 
 module.exports = Tamamon2nd;
