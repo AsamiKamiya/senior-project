@@ -35,7 +35,32 @@ export default class TamaMenu extends Component {
     super();
 
     this.state = {
-      navigatorType: defaultNavigatorType
+      navigatorType: defaultNavigatorType,
+      displayText: "Welcome to Tamamon!",
+      tamamon: [
+        {
+          name: "Pocchamon",
+          fed: false,
+          fedCount: 0,
+          text: [
+            "Thank you for feeding me!",
+            "I could totally eat more...",
+            "I'm really full!!",
+            "I can't eat anymore..!"
+          ]
+        },
+        {
+          name: "Intelimon",
+          fed: false,
+          fedCount: 0,
+          text: [
+            "Thank you for feeding me!",
+            "I could totally eat more...",
+            "I'm really full!!",
+            "I can't eat anymore..!"
+          ]
+        }
+      ]
     };
 
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
@@ -44,8 +69,6 @@ export default class TamaMenu extends Component {
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
-    this._exitViro = this._exitViro.bind(this);
-    this._returnToMenu = this._returnToMenu.bind(this);
   }
 
   render() {
@@ -113,8 +136,15 @@ export default class TamaMenu extends Component {
           height: "100%"
         }}
       >
-        {/* This is our AR Scene */}
-        <ViroARSceneNavigator initialScene={{ scene: InitialARScene }} />
+        {/* This is our AR Scene for fat cat.*/}
+        <ViroARSceneNavigator
+          viroAppProps={{
+            fed: this.state.tamamon[0].fed,
+            fedCount: this.state.tamamon[0].fedCount,
+            text: this.state.displayText
+          }}
+          initialScene={{ scene: InitialARScene }}
+        />
 
         {/*This is our bottom navbar*/}
         <View style={localStyles.bottomNav}>
@@ -132,7 +162,9 @@ export default class TamaMenu extends Component {
           {/*Feed button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO")} //this is a placeholder for the actual feed function
+            onPress={() => {
+              this._feedButtonHandler("Pocchamon");
+            }} //this is a placeholder for the actual feed function
           >
             <Image
               source={require("./res/icons/hamburgerIcon.png")}
@@ -167,29 +199,125 @@ export default class TamaMenu extends Component {
   }
   _getARNavigator2nd() {
     return (
-      <ViroARSceneNavigator
-        initialScene={{ scene: InitialARSceneForTama2nd }}
-      />
+      <View
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "100%",
+          height: "100%"
+        }}
+      >
+        {/* This is our AR Scene for smart cat.*/}
+        <ViroARSceneNavigator
+          viroAppProps={{
+            fed: this.state.tamamon[1].fed,
+            fedCount: this.state.tamamon[1].fedCount,
+            text: this.state.displayText
+          }}
+          initialScene={{ scene: InitialARSceneForTama2nd }}
+        />
+
+        {/*This is our bottom navbar*/}
+        <View style={localStyles.bottomNav}>
+          {/*Home button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={this._getExperienceButtonOnPress(UNSET)}
+          >
+            <Image
+              source={require("./res/icons/houseIcon2.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Feed button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => {
+              this._feedButtonHandler("Intelimon");
+            }}
+          >
+            <Image
+              source={require("./res/icons/hamburgerIcon.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Clean button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
+          >
+            <Image
+              source={require("./res/icons/washIcon.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Play button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO3")} //this is a placeholder for the play function
+          >
+            <Image
+              source={require("./res/icons/heartIcon3.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
-        navigatorType: navigatorType
+        navigatorType: navigatorType,
+        displayText: "Welcome to Tamamon!"
       });
     };
   }
 
-  _exitViro() {
-    this.setState({
-      navigatorType: UNSET
+  _feedTamamon = name => {
+    let fedTamamon = this.state.tamamon.filter(obj => {
+      return obj.name === name;
     });
-  }
+    this.setState(
+      prevState => ({
+        tamamon: prevState.tamamon.map(obj =>
+          obj.name === name
+            ? Object.assign(obj, { fed: true, fedCount: ++obj.fedCount })
+            : obj
+        )
+      }),
+      () => {
+        if (fedTamamon[0].fedCount === 1) {
+          this._updateText(fedTamamon[0].text[0]);
+        }
+        if (fedTamamon[0].fedCount === 2) {
+          this._updateText(fedTamamon[0].text[1]);
+        }
+        if (fedTamamon[0].fedCount === 3 || fedTamamon[0].fedCount === 4) {
+          this._updateText(fedTamamon[0].text[2]);
+        }
+        if (fedTamamon[0].fedCount >= 5) {
+          this._updateText(fedTamamon[0].text[3]);
+        }
+      }
+    );
+  };
 
-  _returnToMenu() {
-    return <TamaMenu></TamaMenu>;
-  }
+  _updateText = text => {
+    this.setState({
+      displayText: text
+    });
+  };
+  _feedButtonHandler = name => {
+    this._feedTamamon(name);
+  };
 }
 var localStyles = StyleSheet.create({
   images: {
