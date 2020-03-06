@@ -1,86 +1,50 @@
 /* THIS FILE IS MEANT FOR TESTING PURPOSES */
+"use strict";
 
 import React, { Component } from "react";
+
+import { StyleSheet } from "react-native";
+
 import {
-  AppRegistry,
-  ActivityIndicator,
-  Text,
-  View,
-  StyleSheet,
-  TouchableHighlight,
-  Image,
-  Alert
-} from "react-native";
+  ViroSceneNavigator,
+  ViroScene,
+  ViroARScene,
+  ViroAmbientLight,
+  Viro360Video,
+  Viro360Image,
+  ViroUtils,
+  ViroPortal,
+  ViroPortalScene,
+  Viro3DObject
+} from "react-viro";
 
-import { ViroARSceneNavigator } from "react-viro";
-
-const renderIf = function(condition, content) {
-  if (condition) {
-    return content;
-  } else {
-    return null;
-  }
-};
-
-InitialARScene = require("./HelloWorldSceneAR");
-
-var objArray = [
-  require("./res/foodIcon.png"),
-  require("./res/foodIcon.png"),
-  require("./res/foodIcon.png")
-];
-
-export default class App extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  render() {
+var createReactClass = require("create-react-class");
+var MainScene = createReactClass({
+  render: function() {
     return (
-      <View style={localStyles.outer}>
-        <View
-          style={{
-            position: "absolute",
-            left: 0,
-            right: 0,
-            bottom: 77,
-            alignItems: "center"
-          }}
+      <ViroARScene>
+        <ViroAmbientLight color="#ffffff" intensity={200} />
+        <ViroPortalScene
+          passable={true}
+          dragType="FixedDistance"
+          onDrag={() => {}}
         >
-          <TouchableHighlight
-            style={localStyles.buttons}
-            underlayColor={"#00000000"}
-          >
-            <Image source={require("./res/foodIcon.png")} />
-          </TouchableHighlight>
-        </View>
-      </View>
+          <ViroPortal position={[0, 0, -1]} scale={[0.1, 0.1, 0.1]}>
+            <Viro3DObject
+              source={require("./portal_res/portal_ship/portal_ship.vrx")}
+              resources={[
+                require("./portal_res/portal_ship/portal_ship_diffuse.png"),
+                require("./portal_res/portal_ship/portal_ship_normal.png"),
+                require("./portal_res/portal_ship/portal_ship_specular.png")
+              ]}
+              type="VRX"
+            />
+          </ViroPortal>
+          <Viro360Image source={require("./portal_res/360_island.jpg")} />
+        </ViroPortalScene>
+      </ViroARScene>
     );
-  }
-}
-
-var localStyles = StyleSheet.create({
-  outer: {
-    flex: 1
-  },
-
-  arView: {
-    flex: 1
-  },
-
-  buttons: {
-    height: 80,
-    width: 80,
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#00000000",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ffffff00"
   }
 });
 
-module.exports = App;
+module.exports = MainScene;
