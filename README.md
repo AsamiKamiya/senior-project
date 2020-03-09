@@ -57,10 +57,19 @@ yarn
 ./setup-ide.sh --ios
 ```
 
-6. Navigate to the iOS subdirectory to open the app in Xcode:
+6. Modify the Podfile to have the correct ios version and pods.
+
+- Change platmform to ios 13.1
+- Comment out or delete `use frameworks!` and <br />
+- Replace `pod 'ViroKit', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/'` with <br />
+  `pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'`
+
+7. Navigate to the iOS subdirectory, update the podfiles, and open the app in Xcode:
 
 ```
 cd ios
+pod update
+pod install
 open <app-name>.xcworkspace
 ```
 
