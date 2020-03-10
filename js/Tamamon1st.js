@@ -35,79 +35,12 @@ export default class HelloWorldSceneAR extends Component {
       animate: false,
       animecount: 0
     };
-
-    // bind 'this' to functions
-    this._onInitialized = this._onInitialized.bind(this);
-    this._onTap = this._onTap.bind(this);
   }
 
   render() {
     return (
-      <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {/* {this.state.animecount === 1 ? (
-          // TODO fix?? for heart effect when feeding
-          <ViroParticleEmitter
-            position={[-0.0, 1.5, -3]}
-            duration={1000}
-            visible={true}
-            run={true}
-            fixedToEmitter={true}
-            image={{
-              source: require("./res/heart.png"),
-              height: 0.03,
-              width: 0.03,
-              bloomThreshold: -1
-            }}
-            spawnBehavior={{
-              particleLifetime: [5000, 5000],
-              emissionRatePerSecond: [200, 200],
-              spawnVolume: {
-                shape: "box",
-                params: [20, 1, 20],
-                spawnOnSurface: false
-              },
-              maxParticles: 2000
-            }}
-            particleAppearance={{
-              opacity: {
-                initialRange: [0, 0],
-                interpolation: [
-                  { endValue: 1.0, interval: [0, 500] },
-                  { endValue: 0.0, interval: [4000, 5000] }
-                ]
-              },
-              scale: {
-                initialRange: [
-                  [5, 5, 5],
-                  [10, 10, 10]
-                ],
-                interpolation: [
-                  { endValue: [6, 6, 6], interval: [0, 1000] },
-                  { endValue: [10, 10, 10], interval: [3000, 5000] },
-                  { endValue: [5, 5, 5], interval: [4000, 5000] }
-                ]
-              }
-            }}
-            particlePhysics={{
-              velocity: {
-                initialRange: [
-                  [-2, -0.5, 0],
-                  [2, -3.0, 0]
-                ]
-              }
-            }}
-          />
-        ) : (
-          // for empty
-          <ViroText
-            text=""
-            scale={[0.3, 0.3, 0.3]}
-            Ï
-            position={[0.6, 0.08, -0.9]}
-            style={styles.helloWorldTextStyle}
-          />
-        )} */}
-
+      <ViroARScene>
+        {/* This is the speech bubble and text */}
         <Viro3DObject
           source={require("./res/speechBubble.obj")}
           resources={[
@@ -126,6 +59,7 @@ export default class HelloWorldSceneAR extends Component {
           width={2}
           height={2}
         />
+        {/* This is the heart that appears */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
             source={require("./res/heart.png")}
@@ -149,6 +83,7 @@ export default class HelloWorldSceneAR extends Component {
           />
         )}
 
+        {/* This is the Pocchamon animation */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
         this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
@@ -194,13 +129,6 @@ export default class HelloWorldSceneAR extends Component {
           />
         )}
 
-        <ViroButton
-          source={require("./res/foodIcon.png")}
-          position={[-0, -1, -3]}
-          scale={[0.5, 0.5, 0.5]}
-          onClick={this._onTap}
-        ></ViroButton>
-
         <ViroSpotLight
           innerAngle={5}
           outerAngle={25}
@@ -216,52 +144,6 @@ export default class HelloWorldSceneAR extends Component {
         <ViroAmbientLight color="#FFFFFF" />
       </ViroARScene>
     );
-  }
-
-  _onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text: "Welcome to Tamamon"
-      });
-    } else if (state == ViroConstants.TRACKING_NONE) {
-      this.setState({
-        text: "It's not working"
-      });
-    }
-  }
-  _onTap() {
-    // console.log("state", this.state.animecount);
-
-    this.props.arSceneNavigator.viroAppProps.fedCountUp();
-    console.log(this.props.arSceneNavigator.viroAppProps.fedCount);
-
-    if (this.props.arSceneNavigator.viroAppProps.fedCount === 1) {
-      // this.setState({
-      //   text: "Thank you for feeding me!",
-      //   animecount: this.props.arSceneNavigator.viroAppProps.fedCount
-      // });
-      this.props.arSceneNavigator.viroAppProps.updateText(
-        "Thank you for feeding me!"
-      );
-      this.props.arSceneNavigator.viroAppProps.feedTamamon();
-    } else if (this.props.arSceneNavigator.viroAppProps.fedCount === 2) {
-      this.setState({
-        text: "I could totally eat more...",
-        animecount: this.props.arSceneNavigator.viroAppProps.fedCount
-      });
-    } else if (
-      this.props.arSceneNavigator.viroAppProps.fedCount === 3 ||
-      this.props.arSceneNavigator.viroAppProps.fedCount === 4
-    ) {
-      this.setState({
-        text: "I'm really full!!",
-        animecount: this.props.arSceneNavigator.viroAppProps.fedCount
-      });
-    } else if (this.props.arSceneNavigator.viroAppProps.fedCount >= 5) {
-      this.setState({
-        text: "I can't eat anymore..!"
-      });
-    }
   }
 }
 

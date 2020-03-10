@@ -27,7 +27,7 @@ var sharedProps = {
 };
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require("./js/HelloWorldSceneAR");
+var InitialARScene = require("./js/Tamamon1st");
 var TamaMenu = require("./js/TamaMenu");
 
 var UNSET = "UNSET";

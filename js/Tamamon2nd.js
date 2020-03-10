@@ -150,12 +150,6 @@ export default class Tamamon2nd extends Component {
               }}
             />
           )}
-          <ViroButton
-            source={require("./res/foodIcon.png")}
-            position={[-0, -1, -0.8]}
-            scale={[0.5, 0.5, 0.5]}
-            onClick={this._onTap}
-          ></ViroButton>
         </ViroARImageMarker>
 
         <ViroAmbientLight color={"#aaaaaa"} />
