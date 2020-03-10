@@ -23,10 +23,15 @@ import {
 
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
+const InitialARSceneForTama3rd = require("./Tamamon3rd");
 
 const UNSET = "UNSET";
+//1. Pocchamon
 const AR_NAVIGATOR_TYPE = "AR";
+//2. Intelimon
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
+//3. Potemon
+const AR_NAVIGATOR_TYPE_3rd = "3rd";
 const defaultNavigatorType = UNSET;
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
 const axios = require("axios");
@@ -62,6 +67,7 @@ axios({
 }).then(result => {
   console.log(result.data);
 });
+//TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection.
 
 export default class TamaMenu extends Component {
   constructor() {
@@ -92,6 +98,12 @@ export default class TamaMenu extends Component {
             "I'm really full!!",
             "I can't eat anymore..!"
           ]
+        },
+        {
+          name: "Potemon",
+          fed: false,
+          fedCount: 0,
+          text: ["Food", "More food", "There's more food?", "...food"]
         }
       ]
     };
@@ -99,11 +111,13 @@ export default class TamaMenu extends Component {
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
     this._getARNavigator = this._getARNavigator.bind(this);
     this._getARNavigator2nd = this._getARNavigator2nd.bind(this);
+    this._getARNavigator3rd = this._getARNavigator3rd.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
   }
 
+  //Switch scenes based on Navigator Type
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -111,6 +125,8 @@ export default class TamaMenu extends Component {
       return this._getARNavigator();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE_2nd) {
       return this._getARNavigator2nd();
+    } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE_3rd) {
+      return this._getARNavigator3rd();
     }
   }
 
@@ -148,6 +164,17 @@ export default class TamaMenu extends Component {
                 style={localStyles.images}
               />
             </TouchableHighlight>
+            {/*Select Potemon*/}
+            <TouchableHighlight
+              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_3rd)}
+              style={localStyles.buttons}
+              underlayColor={"#68a0ff"}
+            >
+              <Image
+                source={require("./res/icons/menuIcons/potatoIcon.png")}
+                style={localStyles.images}
+              />
+            </TouchableHighlight>
           </View>
         </ImageBackground>
       </View>
@@ -156,8 +183,7 @@ export default class TamaMenu extends Component {
 
   _getARNavigator() {
     return (
-      //if we want to create a 2D UI stuck to the screen, we must define it here
-      //TODO: Add ViroAppProps.
+      //Pocchamon
       <View
         style={{
           position: "absolute",
@@ -169,7 +195,7 @@ export default class TamaMenu extends Component {
           height: "100%"
         }}
       >
-        {/* This is our AR Scene for fat cat.*/}
+        {/* This is our AR Scene for pocchamon.*/}
         <ViroARSceneNavigator
           viroAppProps={{
             fed: this.state.tamamon[0].fed,
@@ -231,6 +257,7 @@ export default class TamaMenu extends Component {
     );
   }
   _getARNavigator2nd() {
+    //Intelimon
     return (
       <View
         style={{
@@ -271,6 +298,82 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._feedButtonHandler("Intelimon");
+            }}
+          >
+            <Image
+              source={require("./res/icons/hamburgerIcon.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Clean button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
+          >
+            <Image
+              source={require("./res/icons/washIcon.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Play button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => console.log("BOO3")} //this is a placeholder for the play function
+          >
+            <Image
+              source={require("./res/icons/heartIcon3.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+  _getARNavigator3rd() {
+    //Potemon
+    return (
+      <View
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "100%",
+          height: "100%"
+        }}
+      >
+        {/* This is our AR Scene for smart cat.*/}
+        <ViroARSceneNavigator
+          viroAppProps={{
+            fed: this.state.tamamon[2].fed,
+            fedCount: this.state.tamamon[2].fedCount,
+            text: this.state.displayText
+          }}
+          initialScene={{ scene: InitialARSceneForTama3rd }}
+        />
+
+        {/*This is our bottom navbar*/}
+        <View style={localStyles.bottomNav}>
+          {/*Home button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={this._getExperienceButtonOnPress(UNSET)}
+          >
+            <Image
+              source={require("./res/icons/houseIcon2.png")}
+              style={localStyles.icons}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Feed button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => {
+              this._feedButtonHandler("Potemon");
             }}
           >
             <Image
@@ -352,6 +455,8 @@ export default class TamaMenu extends Component {
     this._feedTamamon(name);
   };
 }
+
+//Styles
 var localStyles = StyleSheet.create({
   images: {
     width: 80,
