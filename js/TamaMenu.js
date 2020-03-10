@@ -21,7 +21,7 @@ import {
   ViroScene
 } from "react-viro";
 
-const InitialARScene = require("./HelloWorldSceneAR");
+const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
 
 const UNSET = "UNSET";
