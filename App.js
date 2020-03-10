@@ -34,6 +34,43 @@ var UNSET = "UNSET";
 var AR_NAVIGATOR_TYPE = "AR";
 var TAMA_MENU_TYPE = "TAMA";
 
+const axios = require("axios");
+axios({
+  url: "https://tamomon.herokuapp.com/v1/graphql",
+  method: "post",
+  data: {
+    query: `
+    query {
+      Tamomon {
+        id
+        name
+        fed
+      }
+    }
+      `
+  }
+}).then(result => {
+  console.log(result.data);
+});
+
+// axios({
+//   url: "https://tamomon.herokuapp.com/v1/graphql",
+//   method: "post",
+//   data: {
+//     query: `
+//     query {
+//       Tamomon {
+//         id
+//         name
+//         fed
+//       }
+//     }
+//       `
+//   }
+// }).then(result => {
+//   console.log(result.data);
+// });
+
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
 var defaultNavigatorType = UNSET;
