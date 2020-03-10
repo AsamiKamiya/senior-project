@@ -36,38 +36,100 @@ const defaultNavigatorType = UNSET;
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
 const axios = require("axios");
 
-axios({
+const getFed = axios({
   url: "https://tamomon.herokuapp.com/v1/graphql",
   method: "post",
   data: {
     query: `
-    mutation insert_single_tamomon {
-    insert_Tamomon(
-      objects: {
-        id: 2,
-        name: "Pot",
-        fed: 67,
-        washed: 56,
-        played: 45,
-        modified: 87
+    query {
+      Tamomon {
+        id
+        name
+        fedCount
       }
-    ) {
-     returning {
-  id
-      name
-      washed
-      fed
-      played
-      modified
     }
-    }
-  }
       `
   }
 }).then(result => {
   console.log(result.data);
 });
+
+// const updateFed = axios({
+//   url: "https://tamomon.herokuapp.com/v1/graphql",
+//   method: "post",
+//   data: {
+//     query: `
+// mutation update_single_tamomon {
+//   update_Tamomon(
+//     where: {name: {_eq: "Pocchamon"}},
+//     _set: {
+//       fed: true,
+//       fedCount: 2,
+//     }
+//   ) {
+//     affected_rows
+//     returning {
+//       id
+//       name
+//       fedCount
+//     }
+//   }
+// }
+// `
+//   }
+// }).then(result => {
+//   console.log(result.data);
+// });
+
+// axios({
+//   url: "https://tamomon.herokuapp.com/v1/graphql",
+//   method: "post",
+//   data: {
+//     query: `
+//     mutation insert_single_tamomon {
+//     insert_Tamomon(
+//       objects: {
+//         id: 2,
+//         name: "Pot",
+//         fed: 67,
+//         washed: 56,
+//         played: 45,
+//         modified: 87
+//       }
+//     ) {
+//      returning {
+//   id
+//       name
+//       washed
+//       fed
+//       played
+//       modified
+//     }
+//     }
+//   }
+//       `
+//   }
+// }).then(result => {
+//   console.log(result.data);
+// });
+
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection.
+
+// on menu open --> get tam names and fedCount
+// we create object --> {
+//   name
+//   fed count
+// }
+
+/*
+1. When app loads (or when TamaMenu loads) we need to set the Tamamon states of fedCount(1, 2, 3, 4, 5) and fed (true or false) based on data from the database
+2. Whenever we pass a certain amount of time, we need to change fed to false, and fedCount needs to decrease. [LATER]
+3. Whenever we feed Tamamon using a function we need to do an axios call to the database to update the values.
+OR
+3.5. Whenever this.state CHANGES we need to do an axios call to the database to update the values
+4. Repeat. 
+
+*/
 
 export default class TamaMenu extends Component {
   constructor() {
@@ -421,6 +483,7 @@ export default class TamaMenu extends Component {
     let fedTamamon = this.state.tamamon.filter(obj => {
       return obj.name === name;
     });
+
     this.setState(
       prevState => ({
         tamamon: prevState.tamamon.map(obj =>
@@ -430,6 +493,74 @@ export default class TamaMenu extends Component {
         )
       }),
       () => {
+        // query db
+        // name = name of tamomon
+        // if fedCount > 5 -----> no
+
+        // add axios
+        // name = name of tamomon
+        // fedCount will increase by 1
+
+        const fedCountAxios = fedTamamon[0].fedCount;
+
+        /* const updateFed = async() => await axios({
+          url: "https://tamomon.herokuapp.com/v1/graphql",
+          method: "post",
+          data: {
+            query: `
+        mutation update_single_tamomon {
+          update_Tamomon(
+            where: {name: {_eq: "${name}"}},
+            _set: {
+              fed: true,
+              fedCount: ${fedCountAxios},
+            }
+          ) {
+            affected_rows
+            returning {
+              id
+              name
+              fedCount
+            }
+          }
+        }
+        `
+          }
+        }
+
+        */
+
+        const updateFed = async () => {
+          await axios({
+            url: "https://tamomon.herokuapp.com/v1/graphql",
+            method: "post",
+            data: {
+              query: `
+        mutation update_single_tamomon {
+          update_Tamomon(
+            where: {name: {_eq: "${name}"}},
+            _set: {
+              fed: true,
+              fedCount: ${fedCountAxios},
+            }
+          ) {
+            affected_rows
+            returning {
+              id
+              name
+              fedCount
+            }
+          }
+        }
+        `
+            }
+          }).then(result => {
+            console.log(result.data);
+          });
+        };
+
+        updateFed();
+
         if (fedTamamon[0].fedCount === 1) {
           this._updateText(fedTamamon[0].text[0]);
         }
