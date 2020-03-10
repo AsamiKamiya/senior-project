@@ -29,6 +29,39 @@ const AR_NAVIGATOR_TYPE = "AR";
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
 const defaultNavigatorType = UNSET;
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
+const axios = require("axios");
+
+axios({
+  url: "https://tamomon.herokuapp.com/v1/graphql",
+  method: "post",
+  data: {
+    query: `
+    mutation insert_single_tamomon {
+    insert_Tamomon(
+      objects: {
+        id: 2,
+        name: "Pot",
+        fed: 67,
+        washed: 56,
+        played: 45,
+        modified: 87
+      }
+    ) {
+     returning {
+  id
+      name
+      washed
+      fed
+      played
+      modified
+    }
+    }
+  }
+      `
+  }
+}).then(result => {
+  console.log(result.data);
+});
 
 export default class TamaMenu extends Component {
   constructor() {
