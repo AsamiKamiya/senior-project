@@ -381,7 +381,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
+            onPress={() => {
+              this._washTamamon("Intelimon");
+            }}
           >
             <Image
               source={require("./res/icons/washIcon.png")}
@@ -457,7 +459,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
+            onPress={() => {
+              this._washTamamon("Potemon");
+            }}
           >
             <Image
               source={require("./res/icons/washIcon.png")}
