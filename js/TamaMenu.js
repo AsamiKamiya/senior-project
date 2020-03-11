@@ -141,6 +141,7 @@ export default class TamaMenu extends Component {
       tamamon: [
         {
           name: "Pocchamon",
+          washed: false,
           fed: false,
           fedCount: 0,
           text: [
@@ -152,6 +153,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Intelimon",
+          washed: false,
           fed: false,
           fedCount: 0,
           text: [
@@ -163,6 +165,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Potemon",
+          washed: false,
           fed: false,
           fedCount: 0,
           text: ["Food", "More food", "There's more food?", "...food"]
@@ -205,6 +208,7 @@ export default class TamaMenu extends Component {
               style={localStyles.title}
             />
 
+            {/* Select Pocchamon*/}
             <TouchableHighlight
               onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
               style={localStyles.buttons}
@@ -215,6 +219,8 @@ export default class TamaMenu extends Component {
                 style={localStyles.images}
               />
             </TouchableHighlight>
+
+            {/* Select Intelimon*/}
 
             <TouchableHighlight
               onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
@@ -243,9 +249,9 @@ export default class TamaMenu extends Component {
     );
   }
 
+  //Pocchamon AR Scene
   _getARNavigator() {
     return (
-      //Pocchamon
       <View
         style={{
           position: "absolute",
@@ -262,7 +268,8 @@ export default class TamaMenu extends Component {
           viroAppProps={{
             fed: this.state.tamamon[0].fed,
             fedCount: this.state.tamamon[0].fedCount,
-            text: this.state.displayText
+            text: this.state.displayText,
+            washed: this.state.tamamon[0].washed
           }}
           initialScene={{ scene: InitialARScene }}
         />
@@ -285,7 +292,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._feedButtonHandler("Pocchamon");
-            }} //this is a placeholder for the actual feed function
+            }}
           >
             <Image
               source={require("./res/icons/hamburgerIcon.png")}
@@ -296,7 +303,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO2")} //this is a placeholder for the clean function
+            onPress={() => {
+              this._washTamamon("Pocchamon");
+            }} //this is a placeholder for the clean function
           >
             <Image
               source={require("./res/icons/washIcon.png")}
@@ -318,8 +327,9 @@ export default class TamaMenu extends Component {
       </View>
     );
   }
+
+  //Intelimon AR Scene
   _getARNavigator2nd() {
-    //Intelimon
     return (
       <View
         style={{
@@ -394,8 +404,8 @@ export default class TamaMenu extends Component {
     );
   }
 
+  //Potemon AR Scene
   _getARNavigator3rd() {
-    //Potemon
     return (
       <View
         style={{
@@ -493,43 +503,7 @@ export default class TamaMenu extends Component {
         )
       }),
       () => {
-        // query db
-        // name = name of tamomon
-        // if fedCount > 5 -----> no
-
-        // add axios
-        // name = name of tamomon
-        // fedCount will increase by 1
-
         const fedCountAxios = fedTamamon[0].fedCount;
-
-        /* const updateFed = async() => await axios({
-          url: "https://tamomon.herokuapp.com/v1/graphql",
-          method: "post",
-          data: {
-            query: `
-        mutation update_single_tamomon {
-          update_Tamomon(
-            where: {name: {_eq: "${name}"}},
-            _set: {
-              fed: true,
-              fedCount: ${fedCountAxios},
-            }
-          ) {
-            affected_rows
-            returning {
-              id
-              name
-              fedCount
-            }
-          }
-        }
-        `
-          }
-        }
-
-        */
-
         const updateFed = async () => {
           await axios({
             url: "https://tamomon.herokuapp.com/v1/graphql",
@@ -577,13 +551,31 @@ export default class TamaMenu extends Component {
     );
   };
 
+  _feedButtonHandler = name => {
+    this._feedTamamon(name);
+  };
+
   _updateText = text => {
     this.setState({
       displayText: text
     });
   };
-  _feedButtonHandler = name => {
-    this._feedTamamon(name);
+
+  _washTamamon = name => {
+    let washedTamamon = this.state.tamamon.filter(obj => {
+      return obj.name === name;
+    });
+
+    this.setState(
+      prevState => ({
+        tamamon: prevState.tamamon.map(obj =>
+          obj.name === name ? Object.assign(obj, { washed: true }) : obj
+        )
+      }),
+      () => {
+        console.log(washedTamamon[0].washed);
+      }
+    );
   };
 }
 
