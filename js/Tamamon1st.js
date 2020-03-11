@@ -22,7 +22,8 @@ import {
   ViroButton,
   ViroFlexView,
   ViroImage,
-  ViroParticleEmitter
+  ViroParticleEmitter,
+  ViroSound
 } from "react-viro";
 
 export default class HelloWorldSceneAR extends Component {
@@ -38,6 +39,11 @@ export default class HelloWorldSceneAR extends Component {
   }
 
   render() {
+    if (this.props.arSceneNavigator.viroAppProps.fedCount === 1) {
+      console.log("fedddd");
+    } else {
+      console.log("0");
+    }
     return (
       <ViroARScene>
         {/* This is the speech bubble and text */}
@@ -142,6 +148,48 @@ export default class HelloWorldSceneAR extends Component {
           shadowOpacity={0.7}
         />
         <ViroAmbientLight color="#FFFFFF" />
+
+        {/* for sound */}
+        {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
+          <ViroSound
+            paused={false}
+            muted={false}
+            source={require("./res/sounds/cat2-s1.mp3")}
+            loop={false}
+            volume={1.0}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
+        ) : this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
+          <ViroSound
+            paused={false}
+            muted={false}
+            source={require("./res/sounds/cat2-s2.mp3")}
+            loop={false}
+            volume={1.0}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
+        ) : this.props.arSceneNavigator.viroAppProps.fedCount === 3 ? (
+          <ViroSound
+            paused={false}
+            muted={false}
+            source={require("./res/sounds/cat2-s3.mp3")}
+            loop={false}
+            volume={1.0}
+            onFinish={this.onFinishSound}
+            onError={this.onErrorSound}
+          />
+        ) : (
+          <ViroText
+            text=""
+            scale={[0.3, 0.3, 0.3]}
+            width={2}
+            height={2}
+            position={[0.6, 0.08, -0.9]}
+            style={styles.helloWorldTextStyle}
+          />
+        )}
       </ViroARScene>
     );
   }
