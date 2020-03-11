@@ -142,6 +142,7 @@ export default class TamaMenu extends Component {
         {
           name: "Pocchamon",
           washed: false,
+          played: false,
           fed: false,
           fedCount: 0,
           text: [
@@ -154,6 +155,7 @@ export default class TamaMenu extends Component {
         {
           name: "Intelimon",
           washed: false,
+          played: false,
           fed: false,
           fedCount: 0,
           text: [
@@ -166,6 +168,7 @@ export default class TamaMenu extends Component {
         {
           name: "Potemon",
           washed: false,
+          played: false,
           fed: false,
           fedCount: 0,
           text: ["Food", "More food", "There's more food?", "...food"]
@@ -268,8 +271,9 @@ export default class TamaMenu extends Component {
           viroAppProps={{
             fed: this.state.tamamon[0].fed,
             fedCount: this.state.tamamon[0].fedCount,
-            text: this.state.displayText,
-            washed: this.state.tamamon[0].washed
+            washed: this.state.tamamon[0].washed,
+            played: this.state.tamamon[0].played,
+            text: this.state.displayText
           }}
           initialScene={{ scene: InitialARScene }}
         />
@@ -305,7 +309,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._washTamamon("Pocchamon");
-            }} //this is a placeholder for the clean function
+            }}
           >
             <Image
               source={require("./res/icons/washIcon.png")}
@@ -316,7 +320,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO3")} //this is a placeholder for the play function
+            onPress={() => {
+              this._playTamamon("Pocchamon");
+            }} //this is a placeholder for the play function
           >
             <Image
               source={require("./res/icons/heartIcon3.png")}
@@ -347,6 +353,8 @@ export default class TamaMenu extends Component {
           viroAppProps={{
             fed: this.state.tamamon[1].fed,
             fedCount: this.state.tamamon[1].fedCount,
+            washed: this.state.tamamon[1].washed,
+            played: this.state.tamamon[1].played,
             text: this.state.displayText
           }}
           initialScene={{ scene: InitialARSceneForTama2nd }}
@@ -394,7 +402,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO3")} //this is a placeholder for the play function
+            onPress={() => {
+              this._playTamamon("Intelimon");
+            }}
           >
             <Image
               source={require("./res/icons/heartIcon3.png")}
@@ -425,6 +435,8 @@ export default class TamaMenu extends Component {
           viroAppProps={{
             fed: this.state.tamamon[2].fed,
             fedCount: this.state.tamamon[2].fedCount,
+            washed: this.state.tamamon[2].washed,
+            played: this.state.tamamon[2].played,
             text: this.state.displayText
           }}
           initialScene={{ scene: InitialARSceneForTama3rd }}
@@ -472,7 +484,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => console.log("BOO3")} //this is a placeholder for the play function
+            onPress={() => {
+              this._playTamamon("Potemon");
+            }}
           >
             <Image
               source={require("./res/icons/heartIcon3.png")}
@@ -578,6 +592,23 @@ export default class TamaMenu extends Component {
       }),
       () => {
         console.log(washedTamamon[0].washed);
+      }
+    );
+  };
+
+  _playTamamon = name => {
+    let playedTamamon = this.state.tamamon.filter(obj => {
+      return obj.name === name;
+    });
+
+    this.setState(
+      prevState => ({
+        tamamon: prevState.tamamon.map(obj =>
+          obj.name === name ? Object.assign(obj, { played: true }) : obj
+        )
+      }),
+      () => {
+        console.log(playedTamamon[0].played);
       }
     );
   };
