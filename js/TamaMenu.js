@@ -138,9 +138,11 @@ export default class TamaMenu extends Component {
     this.state = {
       navigatorType: defaultNavigatorType,
       displayText: "Welcome to Tamamon!",
+      wallet: 0,
       tamamon: [
         {
           name: "Pocchamon",
+          owned: true,
           washed: false,
           played: false,
           fed: false,
@@ -154,6 +156,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Intelimon",
+          owned: true,
           washed: false,
           played: false,
           fed: false,
@@ -167,6 +170,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Potemon",
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -185,7 +189,7 @@ export default class TamaMenu extends Component {
     );
   }
 
-  //Switch scenes based on Navigator Type
+  //Switch AR scenes based on Navigator Type
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -199,6 +203,46 @@ export default class TamaMenu extends Component {
   }
 
   _getExperienceSelector() {
+    //Tamamon buttons
+    const pocchaButton = (
+      <TouchableHighlight
+        onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Image
+          source={require("./res/images/icons/cat-1.png")}
+          style={localStyles.images}
+        />
+      </TouchableHighlight>
+    );
+
+    const inteliButton = (
+      <TouchableHighlight
+        onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Image
+          source={require("./res/images/icons/cat-2.png")}
+          style={localStyles.images}
+        />
+      </TouchableHighlight>
+    );
+
+    const poteButton = (
+      <TouchableHighlight
+        onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_3rd)}
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Image
+          source={require("./res/icons/menuIcons/potatoIcon.png")}
+          style={localStyles.images}
+        />
+      </TouchableHighlight>
+    );
+
     return (
       <View>
         <ImageBackground
@@ -211,41 +255,15 @@ export default class TamaMenu extends Component {
               style={localStyles.title}
             />
 
-            {/* Select Pocchamon*/}
-            <TouchableHighlight
-              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
-              style={localStyles.buttons}
-              underlayColor={"#68a0ff"}
-            >
-              <Image
-                source={require("./res/images/icons/cat-1.png")}
-                style={localStyles.images}
-              />
-            </TouchableHighlight>
+            {/* Select Pocchamon */}
+
+            {this.state.tamamon[0].owned ? pocchaButton : null}
 
             {/* Select Intelimon*/}
+            {this.state.tamamon[1].owned ? inteliButton : null}
 
-            <TouchableHighlight
-              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
-              style={localStyles.buttons}
-              underlayColor={"#68a0ff"}
-            >
-              <Image
-                source={require("./res/images/icons/cat-2.png")}
-                style={localStyles.images}
-              />
-            </TouchableHighlight>
             {/*Select Potemon*/}
-            <TouchableHighlight
-              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_3rd)}
-              style={localStyles.buttons}
-              underlayColor={"#68a0ff"}
-            >
-              <Image
-                source={require("./res/icons/menuIcons/potatoIcon.png")}
-                style={localStyles.images}
-              />
-            </TouchableHighlight>
+            {this.state.tamamon[2].owned ? poteButton : null}
           </View>
         </ImageBackground>
       </View>
@@ -322,7 +340,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._playTamamon("Pocchamon");
-            }} //this is a placeholder for the play function
+            }}
           >
             <Image
               source={require("./res/icons/heartIcon3.png")}
