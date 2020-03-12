@@ -258,9 +258,9 @@ ViroAnimations.registerAnimations({
       "catBoundUpR",
       "catBoundDownR"
     ]
-  ],
+  ]
   // catBoundAngry: [["catBound"]],
-  heartAnimation: [["moveUp", "rotate"]]
+  // heartAnimation: [["moveUp", "rotate"]]
 });
 
 module.exports = TamamonThird;
