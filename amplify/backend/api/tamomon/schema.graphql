@@ -1,8 +1,0 @@
-type tamamon @model {
-  id: ID!
-  name: String!
-  fed: Int
-  played: Int
-  washed: Int
-  modified: String
-}

@@ -19,9 +19,14 @@ import {
 
 import { ViroARSceneNavigator } from "react-viro";
 
-/*
- TODO: Insert your API key below
- */
+// Device ID module --> to integrate see README
+
+// import DeviceInfo from "react-native-device-info";
+import makeNewUser from "./graphql/mutations";
+const axios = require("axios");
+
+// console.log("Unique Device ID", DeviceInfo.getUniqueId());
+
 var sharedProps = {
   apiKey: "API_KEY_HERE"
 };
@@ -34,41 +39,43 @@ var UNSET = "UNSET";
 var AR_NAVIGATOR_TYPE = "AR";
 var TAMA_MENU_TYPE = "TAMA";
 
-const axios = require("axios");
-axios({
-  url: "https://tamomon.herokuapp.com/v1/graphql",
-  method: "post",
-  data: {
-    query: `
-    query {
-      Tamomon {
-        id
-        name
-        fed
-      }
-    }
-      `
-  }
-}).then(result => {
-  console.log(result.data);
-});
-
 // axios({
 //   url: "https://tamomon.herokuapp.com/v1/graphql",
 //   method: "post",
 //   data: {
 //     query: `
 //     query {
-//       Tamomon {
-//         id
-//         name
-//         fed
+//       user_data {
+//        device_id
 //       }
 //     }
 //       `
 //   }
 // }).then(result => {
-//   console.log(result.data);
+//   const deviceList = result.data.data.user_data;
+
+//   const deviceArray = [];
+
+//   deviceList.forEach(device => {
+//     deviceArray.push(device.device_id);
+//   });
+
+//   const exists = deviceArray.includes(DeviceInfo.getUniqueId());
+
+//   if (exists) {
+//     console.log("I exist!");
+//   } else {
+//     console.log("Time for a new ID");
+//     axios({
+//       url: "https://tamomon.herokuapp.com/v1/graphql",
+//       method: "post",
+//       data: {
+//         query: makeNewUser(DeviceInfo.getUniqueId())
+//       }
+//     }).then(result => {
+//       console.log(result);
+//     });
+//   }
 // });
 
 // This determines which type of experience to launch in, or UNSET, if the user should
