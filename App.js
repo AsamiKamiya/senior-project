@@ -27,11 +27,10 @@ var sharedProps = {
 };
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require("./js/Tamamon1st");
+
 var TamaMenu = require("./js/TamaMenu");
 
 var UNSET = "UNSET";
-var AR_NAVIGATOR_TYPE = "AR";
 var TAMA_MENU_TYPE = "TAMA";
 
 const axios = require("axios");
@@ -83,22 +82,15 @@ export default class ViroSample extends Component {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps
     };
-    this._getExperienceSelector = this._getExperienceSelector.bind(this);
-    this._getARNavigator = this._getARNavigator.bind(this);
     this._getTamaNavigator = this._getTamaNavigator.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
-    this._exitViro = this._exitViro.bind(this);
   }
 
-  // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
-  // if you are building a specific type of experience.
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
-    } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
-      return this._getARNavigator();
     } else if (this.state.navigatorType == TAMA_MENU_TYPE) {
       return this._getTamaNavigator();
     }
@@ -130,37 +122,16 @@ export default class ViroSample extends Component {
     );
   }
 
-  // Returns the ViroARSceneNavigator which will start the AR experience
-  _getARNavigator() {
-    return (
-      <ViroARSceneNavigator
-        {...this.state.sharedProps}
-        initialScene={{ scene: InitialARScene }}
-      />
-    );
+  _getTamaNavigator() {
+    return <TamaMenu></TamaMenu>;
   }
 
-  _getTamaNavigator() {
-    return (
-      // <ViroVRSceneNavigator {...this.state.sharedProps} initialScene={{scene: TamaMenu}} onExitViro={this._exitViro} />
-      <TamaMenu></TamaMenu>
-    );
-  }
-  // This function returns an anonymous/lambda function to be used
-  // by the experience selector buttons
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
         navigatorType: navigatorType
       });
     };
-  }
-
-  // This function "exits" Viro by setting the navigatorType to UNSET.
-  _exitViro() {
-    this.setState({
-      navigatorType: UNSET
-    });
   }
 }
 
