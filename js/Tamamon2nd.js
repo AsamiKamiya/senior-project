@@ -15,7 +15,9 @@ import {
   ViroARTrackingTargets,
   ViroARImageMarker,
   ViroButton,
-  ViroImage
+  ViroImage,
+  ViroSound,
+  ViroScene
 } from "react-viro";
 
 export default class Tamamon2nd extends Component {
@@ -148,6 +150,61 @@ export default class Tamamon2nd extends Component {
                 name: "catBoundAngry",
                 run: this.props.arSceneNavigator.viroAppProps.fed
               }}
+            />
+          )}
+          {/* for sound */}
+          {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
+            <ViroSound
+              paused={false}
+              muted={false}
+              source={require("./res/sounds/cat-s1.mp3")}
+              loop={false}
+              volume={1.0}
+              onFinish={() => {
+                this.setState({ fedSound: false });
+              }}
+              onError={this.onErrorSound}
+            />
+          ) : this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
+            <ViroSound
+              paused={false}
+              muted={false}
+              source={require("./res/sounds/cat-s2.mp3")}
+              loop={false}
+              volume={1.0}
+              onFinish={() => {
+                this.setState({ soundFlg: true });
+              }}
+              onError={this.onErrorSound}
+            />
+          ) : this.props.arSceneNavigator.viroAppProps.fedCount === 3 ? (
+            <ViroSound
+              paused={false}
+              muted={false}
+              source={require("./res/sounds/cat-s3.mp3")}
+              loop={false}
+              volume={1.0}
+              onFinish={this.onFinishSound}
+              onError={this.onErrorSound}
+            />
+          ) : this.props.arSceneNavigator.viroAppProps.fedCount >= 5 ? (
+            <ViroSound
+              paused={false}
+              muted={false}
+              source={require("./res/sounds/cat-s4.mp3")}
+              loop={false}
+              volume={1.0}
+              onFinish={this.onFinishSound}
+              onError={this.onErrorSound}
+            />
+          ) : (
+            <ViroText
+              text=""
+              scale={[0.3, 0.3, 0.3]}
+              width={2}
+              height={2}
+              position={[0.6, 0.08, -0.9]}
+              style={styles.helloWorldTextStyle}
             />
           )}
         </ViroARImageMarker>
