@@ -14,10 +14,8 @@ import {
   ViroAnimations,
   ViroARTrackingTargets,
   ViroARImageMarker,
-  ViroButton,
   ViroImage,
   ViroSound,
-  ViroScene,
   ViroNode
 } from "react-viro";
 
@@ -38,7 +36,6 @@ export default class Tamamon2nd extends Component {
   }
 
   render() {
-    console.log(this.state);
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         <ViroText

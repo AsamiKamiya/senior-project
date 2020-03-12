@@ -40,16 +40,13 @@ export default class HelloWorldSceneAR extends Component {
     this.state = {
       text: "Initializing AR...",
       animate: false,
-      animecount: 0
+      animecount: 0,
+      forPlay: false
     };
+    this._onFinishAnimation4play = this._onFinishAnimation4play.bind(this);
   }
 
   render() {
-    if (this.props.arSceneNavigator.viroAppProps.fedCount === 1) {
-      console.log("fedddd");
-    } else {
-      console.log("0");
-    }
     return (
       <ViroARScene>
         {/* This is the speech bubble and text */}
@@ -206,8 +203,98 @@ export default class HelloWorldSceneAR extends Component {
             style={styles.helloWorldTextStyle}
           />
         )}
+        {/* for wash */}
+        <ViroNode>
+          <ViroImage
+            source={require("./res/bubbles.png")}
+            position={[0.2, 0.5, -2.8]}
+            scale={[0.5, 0.5, 0.5]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "washAnimation",
+              run: this.props.arSceneNavigator.viroAppProps.washed
+            }}
+          />
+          <ViroImage
+            source={require("./res/bubbles.png")}
+            position={[0.7, 0.05, -2.8]}
+            scale={[0.5, 0.5, 0.5]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "washAnimation",
+              run: this.props.arSceneNavigator.viroAppProps.washed
+            }}
+          />
+          <ViroImage
+            source={require("./res/star.png")}
+            position={[0.7, 0.05, -2.8]}
+            scale={[0.2, 0.2, 0.2]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "starAnimation",
+              run: this.props.arSceneNavigator.viroAppProps.washed,
+              delay: 1500
+            }}
+          />
+          <ViroImage
+            source={require("./res/star.png")}
+            position={[0.8, -0.1, -2.8]}
+            scale={[0.1, 0.1, 0.1]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "starAnimation",
+              run: this.props.arSceneNavigator.viroAppProps.washed,
+              delay: 1500
+            }}
+          />
+          <ViroImage
+            source={require("./res/star.png")}
+            position={[0.1, 0.5, -2.8]}
+            scale={[0.2, 0.2, 0.2]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "starAnimation",
+              run: this.props.arSceneNavigator.viroAppProps.washed,
+              delay: 1500
+            }}
+          />
+        </ViroNode>
+        {/* for play */}
+        <ViroImage
+          source={require("./res/hand.png")}
+          position={[0.3, 0.55, -2.8]}
+          scale={[0.3, 0.3, 0.3]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{
+            name: "playAnimation",
+            run: this.props.arSceneNavigator.viroAppProps.played,
+            onFinish: this._onFinishAnimation4play
+          }}
+        />
+        <ViroImage
+          source={require("./res/heart.png")}
+          position={[0.5, 0.8, -3]}
+          scale={[0.5, 0.5, 0.5]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{
+            name: "heartAnimationForPlay",
+            run: this.state.forPlay
+          }}
+        />
       </ViroARScene>
     );
+  }
+  _onFinishAnimation4play() {
+    if (!this.state.forPlay) {
+      this.setState({ forPlay: true });
+    }
   }
 }
 
