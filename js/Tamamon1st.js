@@ -2,7 +2,13 @@
 
 import React, { Component } from "react";
 
-import { StyleSheet, View, TouchableHighlight, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  TouchableHighlight,
+  Text,
+  TouchableWithoutFeedback
+} from "react-native";
 
 import {
   ViroARScene,
@@ -135,7 +141,15 @@ export default class HelloWorldSceneAR extends Component {
           />
         )}
 
-        <ViroText>Pocchamon</ViroText>
+        {/*Tamamon Name */}
+        <ViroText
+          text="Pocchamon"
+          width={2}
+          height={2}
+          style={styles.nameText}
+          position={[-0.1, 0.35, -3]}
+          //position={[1.2, -1.3, -3]}
+        ></ViroText>
 
         <ViroSpotLight
           innerAngle={5}
@@ -204,29 +218,12 @@ var styles = StyleSheet.create({
     color: "black",
     textAlignVertical: "center",
     textAlign: "center"
-  }
-});
-
-var localStyles = StyleSheet.create({
-  outer: {
-    flex: 1
   },
 
-  arView: {
-    flex: 1
-  },
-
-  buttons: {
-    height: 80,
-    width: 80,
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#00000000",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ffffff00"
+  nameText: {
+    fontFamily: "Arial",
+    fontSize: 15,
+    color: "black"
   }
 });
 
