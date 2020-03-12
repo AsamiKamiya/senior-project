@@ -170,7 +170,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Potemon",
-          owned: false,
+          owned: true,
           washed: false,
           played: false,
           fed: false,
@@ -304,8 +304,8 @@ export default class TamaMenu extends Component {
             onPress={this._getExperienceButtonOnPress(UNSET)}
           >
             <Image
-              source={require("./res/icons/houseIcon2.png")}
-              style={localStyles.icons}
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButton}
             ></Image>
           </TouchableOpacity>
 
@@ -317,9 +317,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/hamburgerIcon.png")}
+              source={require("./res/icons/hamburgerIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Feed</Text>
           </TouchableOpacity>
 
           {/*Clean button*/}
@@ -330,9 +331,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/washIcon.png")}
+              source={require("./res/icons/washIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Clean</Text>
           </TouchableOpacity>
 
           {/*Play button*/}
@@ -343,9 +345,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/heartIcon3.png")}
+              source={require("./res/icons/heartIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Hug</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -386,8 +389,8 @@ export default class TamaMenu extends Component {
             onPress={this._getExperienceButtonOnPress(UNSET)}
           >
             <Image
-              source={require("./res/icons/houseIcon2.png")}
-              style={localStyles.icons}
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButton}
             ></Image>
           </TouchableOpacity>
 
@@ -399,9 +402,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/hamburgerIcon.png")}
+              source={require("./res/icons/hamburgerIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Feed</Text>
           </TouchableOpacity>
 
           {/*Clean button*/}
@@ -412,9 +416,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/washIcon.png")}
+              source={require("./res/icons/washIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Clean</Text>
           </TouchableOpacity>
 
           {/*Play button*/}
@@ -425,9 +430,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/heartIcon3.png")}
+              source={require("./res/icons/heartIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Hug</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -468,8 +474,8 @@ export default class TamaMenu extends Component {
             onPress={this._getExperienceButtonOnPress(UNSET)}
           >
             <Image
-              source={require("./res/icons/houseIcon2.png")}
-              style={localStyles.icons}
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButton}
             ></Image>
           </TouchableOpacity>
 
@@ -481,9 +487,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/hamburgerIcon.png")}
+              source={require("./res/icons/hamburgerIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Feed</Text>
           </TouchableOpacity>
 
           {/*Clean button*/}
@@ -494,9 +501,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/washIcon.png")}
+              source={require("./res/icons/washIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Clean</Text>
           </TouchableOpacity>
 
           {/*Play button*/}
@@ -507,9 +515,10 @@ export default class TamaMenu extends Component {
             }}
           >
             <Image
-              source={require("./res/icons/heartIcon3.png")}
+              source={require("./res/icons/heartIconTEST.png")}
               style={localStyles.icons}
             ></Image>
+            <Text style={localStyles.tabTitle}>Hug</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -679,7 +688,7 @@ var localStyles = StyleSheet.create({
     borderColor: "#fff"
   },
   bottomNav: {
-    height: 60,
+    height: 75,
     borderTopWidth: 0.5,
     borderColor: "#E5E5E5",
     flexDirection: "row",
@@ -690,27 +699,21 @@ var localStyles = StyleSheet.create({
     justifyContent: "center"
   },
   tabTitle: {
-    fontSize: 11,
-    color: "#3c3c3c",
-    paddingTop: 4
+    fontSize: 15,
+    //color: "#3c3c3c",
+    color: "black",
+    marginBottom: 55
   },
   icons: {
-    height: 160, //looks good on iPad but might not on smaller screens. Will test.
-    width: 160, //looks good on iPad but might not on smaller screens. Will test.
-    marginBottom: 100,
+    height: 80, //looks good on iPad but might not on smaller screens. Will test.
+    width: 80, //looks good on iPad but might not on smaller screens. Will test.
+    marginBottom: 10,
     backgroundColor: "transparent"
   },
   backButton: {
-    height: 80,
-    width: 80,
-    paddingTop: 20,
-    paddingBottom: 20,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#00000000",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#ffffff00"
+    height: 40,
+    width: 40,
+    marginBottom: 10
   }
 });
 module.exports = TamaMenu;

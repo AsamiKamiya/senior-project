@@ -17,7 +17,8 @@ import {
   ViroButton,
   ViroImage,
   ViroSound,
-  ViroScene
+  ViroScene,
+  ViroNode
 } from "react-viro";
 
 export default class Tamamon2nd extends Component {
@@ -26,14 +27,18 @@ export default class Tamamon2nd extends Component {
 
     // Set initial state here
     this.state = {
-      text: "Initializing AR..."
+      text: "Initializing AR...",
+      forPlay: false
+      // imageUrl: require("./res/speechBubble.obj")
     };
 
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
+    this._onFinishAnimation4play = this._onFinishAnimation4play.bind(this);
   }
 
   render() {
+    console.log(this.state);
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         <ViroText
@@ -160,9 +165,6 @@ export default class Tamamon2nd extends Component {
               source={require("./res/sounds/cat-s1.mp3")}
               loop={false}
               volume={1.0}
-              onFinish={() => {
-                this.setState({ fedSound: false });
-              }}
               onError={this.onErrorSound}
             />
           ) : this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
@@ -172,9 +174,6 @@ export default class Tamamon2nd extends Component {
               source={require("./res/sounds/cat-s2.mp3")}
               loop={false}
               volume={1.0}
-              onFinish={() => {
-                this.setState({ soundFlg: true });
-              }}
               onError={this.onErrorSound}
             />
           ) : this.props.arSceneNavigator.viroAppProps.fedCount === 3 ? (
@@ -207,6 +206,91 @@ export default class Tamamon2nd extends Component {
               style={styles.helloWorldTextStyle}
             />
           )}
+          {/* for wash */}
+          <ViroNode>
+            <ViroImage
+              source={require("./res/bubbles.png")}
+              position={[0.33, -0.2, -0.8]}
+              scale={[0.15, 0.15, 0.15]}
+              opacity={0}
+              transformBehaviors={["billboard"]}
+              animation={{
+                name: "washAnimation",
+                run: this.props.arSceneNavigator.viroAppProps.washed
+              }}
+            />
+            <ViroImage
+              source={require("./res/bubbles.png")}
+              position={[0.2, -0.4, -0.8]}
+              scale={[0.15, 0.15, 0.15]}
+              opacity={0}
+              transformBehaviors={["billboard"]}
+              animation={{
+                name: "washAnimation",
+                run: this.props.arSceneNavigator.viroAppProps.washed
+              }}
+            />
+            <ViroImage
+              source={require("./res/star.png")}
+              position={[0.35, -0.15, -0.8]}
+              scale={[0.07, 0.07, 0.07]}
+              opacity={0}
+              transformBehaviors={["billboard"]}
+              animation={{
+                name: "starAnimation",
+                run: this.props.arSceneNavigator.viroAppProps.washed,
+                delay: 1500
+              }}
+            />
+            <ViroImage
+              source={require("./res/star.png")}
+              position={[0.4, -0.2, -0.8]}
+              scale={[0.05, 0.05, 0.05]}
+              opacity={0}
+              transformBehaviors={["billboard"]}
+              animation={{
+                name: "starAnimation",
+                run: this.props.arSceneNavigator.viroAppProps.washed,
+                delay: 1500
+              }}
+            />
+            <ViroImage
+              source={require("./res/star.png")}
+              position={[0.1, -0.4, -0.8]}
+              scale={[0.07, 0.07, 0.07]}
+              opacity={0}
+              transformBehaviors={["billboard"]}
+              animation={{
+                name: "starAnimation",
+                run: this.props.arSceneNavigator.viroAppProps.washed,
+                delay: 1500
+              }}
+            />
+          </ViroNode>
+          {/* for play */}
+          <ViroImage
+            source={require("./res/hand.png")}
+            position={[0.25, -0.16, -0.8]}
+            scale={[0.12, 0.12, 0.12]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "playAnimation",
+              run: this.props.arSceneNavigator.viroAppProps.played,
+              onFinish: this._onFinishAnimation4play
+            }}
+          />
+          <ViroImage
+            source={require("./res/heart.png")}
+            position={[0.3, -0.3, -0.8]}
+            scale={[0.2, 0.2, 0.2]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "heartAnimationForPlay",
+              run: this.state.forPlay
+            }}
+          />
         </ViroARImageMarker>
 
         <ViroAmbientLight color={"#aaaaaa"} />
@@ -231,6 +315,11 @@ export default class Tamamon2nd extends Component {
       this.setState({
         text: "It's not working"
       });
+    }
+  }
+  _onFinishAnimation4play() {
+    if (!this.state.forPlay) {
+      this.setState({ forPlay: true });
     }
   }
 }
@@ -295,10 +384,6 @@ ViroAnimations.registerAnimations({
     duration: 200,
     easing: "bounce"
   },
-  rotate: {
-    properties: { rotateY: "+=90", opacity: 1.0 },
-    duration: 250
-  },
   moveLeft: {
     properties: { positionX: "+=0.05" },
     duration: 100,
@@ -310,25 +395,74 @@ ViroAnimations.registerAnimations({
     easing: "bounce"
   },
   tapAnimation: [["scaleUp", "scaleDown"]],
-  catNormal: [
-    [
-      "moveLeft",
-      "moveLeft",
-      "moveLeft",
-      "moveLeft",
-      "moveRight",
-      "moveRight",
-      "moveRight",
-      "moveRight"
-    ]
-  ],
+  scaleUpForWash: {
+    properties: {
+      scaleX: "+=0.05",
+      scaleY: "+=0.05",
+      scaleZ: "+=0.05",
+      opacity: 1.0
+    },
+    duration: 200,
+    easing: "bounce"
+  },
+  scaleDownForWash: {
+    properties: {
+      scaleX: "-=0.05",
+      scaleY: "-=0.05",
+      scaleZ: "-=0.05",
+      opacity: 1.0
+    },
+    duration: 200,
+    easing: "bounce"
+  },
+  disappear: {
+    properties: {
+      opacity: 0
+    },
+    duration: 250,
+    easing: "bounce"
+  },
+  appear: {
+    properties: {
+      opacity: 1.0
+    },
+    duration: 250,
+    easing: "bounce"
+  },
   catBoundNo: [["moveLeft", "moveRight", "moveLeft", "moveRight"]],
   catBound: [
     ["boundUp", "boundDown", "boundUp", "boundDown", "boundUp", "boundDown"]
   ],
   catBoundAngry: [["catBound"]],
   heartAnimation: [["moveUp"]],
-  angryAnimation: [["scaleUp", "scaleDown"]]
+  angryAnimation: [["scaleUp", "scaleDown"]],
+  washAnimation: [
+    [
+      "scaleUpForWash",
+      "scaleDownForWash",
+      "scaleUpForWash",
+      "scaleDownForWash",
+      "scaleUpForWash",
+      "scaleDownForWash",
+      "disappear"
+    ]
+  ],
+  starAnimation: [
+    ["appear", "disappear", "appear", "disappear", "appear", "disappear"]
+  ],
+  playAnimation: [
+    [
+      "appear",
+      "moveLeft",
+      "moveRight",
+      "moveLeft",
+      "moveRight",
+      "moveLeft",
+      "moveRight",
+      "disappear"
+    ]
+  ],
+  heartAnimationForPlay: [["moveUp", "disappear"]]
 });
 
 module.exports = Tamamon2nd;
