@@ -59,7 +59,7 @@ yarn
 
 6. Modify the Podfile to have the correct ios version and pods.
 
-- Change platmform to ios 13.1
+- Change platform to ios 13.1
 - Comment out or delete `use frameworks!` and <br />
 - Replace `pod 'ViroKit', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/'` with <br />
   `pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'`
@@ -78,3 +78,17 @@ open <app-name>.xcworkspace
 1. [Xcode with ViroReact](https://docs.viromedia.com/docs/starting-a-new-viro-project-1) <br/>
 2. [ViroReact Quick Start](https://docs.viromedia.com/docs/quick-start) <br />
 3. [Ruby Installation for Macs](https://stackify.com/install-ruby-on-your-mac-everything-you-need-to-get-going/) <br/>
+
+In XCode, in the project navigator:
+
+Right click Libraries
+Add Files to [your project's name]
+Go to node_modules/react-native-device-info/ios
+Add the file RNDeviceInfo.xcodeproj
+In XCode, in the project navigator, select your project.
+
+Add the libRNDeviceInfo.a from the deviceinfo project to your project's Build Phases ➜ Link Binary With Libraries
+Click .xcodeproj file you added before in the project navigator and go the Build Settings tab. Make sure All is toggled on (instead of Basic).
+Look for Header Search Paths and make sure it contains both $(SRCROOT)/../react-native/React and $(SRCROOT)/../../React
+Mark both as recursive (should be OK by default).
+Run your project (Cmd+R)
