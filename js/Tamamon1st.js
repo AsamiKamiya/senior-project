@@ -129,6 +129,8 @@ export default class HelloWorldSceneAR extends Component {
           />
         )}
 
+        <ViroText>Pocchamon</ViroText>
+
         <ViroSpotLight
           innerAngle={5}
           outerAngle={25}
