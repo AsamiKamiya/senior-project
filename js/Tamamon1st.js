@@ -62,7 +62,7 @@ export default class HelloWorldSceneAR extends Component {
           animation={{
             name: "disappearForText",
             run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 3000
+            delay: 2000
           }}
         ></Viro3DObject>
         <ViroText
@@ -76,7 +76,7 @@ export default class HelloWorldSceneAR extends Component {
           animation={{
             name: "disappearForText",
             run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 3000
+            delay: 2000
           }}
         />
         {/* This is the heart that appears */}
@@ -161,7 +161,7 @@ export default class HelloWorldSceneAR extends Component {
           animation={{
             name: "disappearForText",
             run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 3000
+            delay: 2000
           }}
         ></ViroText>
 

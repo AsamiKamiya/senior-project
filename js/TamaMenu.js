@@ -187,7 +187,8 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
-          text: ["Food", "More food", "There's more food?", "...food"]
+          text: ["Food", "More food", "There's more food?", "...food"],
+          flgs: [0, 0, 0, 0] // feed, wash, play, speech
         }
       ]
     };
@@ -481,6 +482,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._washTamamon("Intelimon");
+              this._updateFlg("Intelimon", WASHED_FLG);
             }}
           >
             <Image
@@ -495,6 +497,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._playTamamon("Intelimon");
+              this._updateFlg("Intelimon", PLAYED_FLG);
             }}
           >
             <Image
@@ -529,7 +532,8 @@ export default class TamaMenu extends Component {
             fedCount: this.state.tamamon[2].fedCount,
             washed: this.state.tamamon[2].washed,
             played: this.state.tamamon[2].played,
-            text: this.state.displayText
+            text: this.state.displayText,
+            flgs: this.state.tamamon[2].flgs
           }}
           initialScene={{ scene: InitialARSceneForTama3rd }}
         />
@@ -566,6 +570,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._washTamamon("Potemon");
+              this._updateFlg("Potemon", WASHED_FLG);
             }}
           >
             <Image
@@ -580,6 +585,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._playTamamon("Potemon");
+              this._updateFlg("Potemon", PLAYED_FLG);
             }}
           >
             <Image
@@ -606,6 +612,9 @@ export default class TamaMenu extends Component {
         console.log("inteli");
         this._updateFlg("Intelimon", SPEECH_FLG);
       }
+      if (navigatorType === AR_NAVIGATOR_TYPE_3rd) {
+        this._updateFlg("Potemon", SPEECH_FLG);
+      }
     };
   }
 
@@ -613,6 +622,10 @@ export default class TamaMenu extends Component {
     let fedTamamon = this.state.tamamon.filter(obj => {
       return obj.name === name;
     });
+    // Prohibition of repeated hits
+    if (fedTamamon[0].flgs[3] === 1) {
+      return;
+    }
 
     this.setState(
       prevState => ({
@@ -712,7 +725,7 @@ export default class TamaMenu extends Component {
           }
         })
       }));
-    }, 4500);
+    }, 4000);
   };
 
   _washTamamon = name => {
