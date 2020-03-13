@@ -25,9 +25,9 @@ import { ViroARSceneNavigator } from "react-viro";
 
 // import DeviceInfo from "react-native-device-info";
 import makeNewUser from "./graphql/mutations";
+import { userData, devices } from "./graphql/queries";
+import clone from "./utils/clone";
 const axios = require("axios");
-
-// console.log("Unique Device ID", DeviceInfo.getUniqueId());
 
 var sharedProps = {
   apiKey: "API_KEY_HERE"
@@ -40,45 +40,6 @@ var TamaMenu = require("./js/TamaMenu");
 var UNSET = "UNSET";
 var TAMA_MENU_TYPE = "TAMA";
 
-// axios({
-//   url: "https://tamomon.herokuapp.com/v1/graphql",
-//   method: "post",
-//   data: {
-//     query: `
-//     query {
-//       user_data {
-//        device_id
-//       }
-//     }
-//       `
-//   }
-// }).then(result => {
-//   const deviceList = result.data.data.user_data;
-
-//   const deviceArray = [];
-
-//   deviceList.forEach(device => {
-//     deviceArray.push(device.device_id);
-//   });
-
-//   const exists = deviceArray.includes(DeviceInfo.getUniqueId());
-
-//   if (exists) {
-//     console.log("I exist!");
-//   } else {
-//     console.log("Time for a new ID");
-//     axios({
-//       url: "https://tamomon.herokuapp.com/v1/graphql",
-//       method: "post",
-//       data: {
-//         query: makeNewUser(DeviceInfo.getUniqueId())
-//       }
-//     }).then(result => {
-//       console.log(result);
-//     });
-//   }
-// });
-
 // This determines which type of experience to launch in, or UNSET, if the user should
 // be presented with a choice of AR or VR. By default, we offer the user a choice.
 var defaultNavigatorType = UNSET;
@@ -89,7 +50,10 @@ export default class ViroSample extends Component {
 
     this.state = {
       navigatorType: defaultNavigatorType,
-      sharedProps: sharedProps
+      sharedProps: sharedProps,
+      // deviceID: DeviceInfo.getUniqueId(),
+      wallet: 0,
+      serverData: []
     };
     this._getTamaNavigator = this._getTamaNavigator.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
@@ -97,6 +61,86 @@ export default class ViroSample extends Component {
     );
   }
 
+  // componentDidMount() {
+  //   const initalCall = async () => {
+  //     console.log("calling");
+  //     await axios({
+  //       url: "https://tamomon.herokuapp.com/v1/graphql",
+  //       method: "post",
+  //       data: {
+  //         query: devices()
+  //       }
+  //     }).then(result => {
+  //       const deviceList = result.data.data.user_data;
+
+  //       const deviceArray = [];
+
+  //       deviceList.forEach(device => {
+  //         deviceArray.push(device.device_id);
+  //       });
+
+  //       const exists = deviceArray.includes(this.state.deviceID);
+
+  //       console.log("checking id");
+  //       if (exists) {
+  //         console.log("I exist!");
+  //       } else {
+  //         console.log("Time for a new ID");
+  //         axios({
+  //           url: "https://tamomon.herokuapp.com/v1/graphql",
+  //           method: "post",
+  //           data: {
+  //             query: makeNewUser(this.state.deviceID)
+  //           }
+  //         }).then(result => {
+  //           console.log("new row in DB", result);
+  //         });
+  //       }
+  //     });
+  //   };
+
+  //   const updateCall = async () => {
+  //     console.log("calling again");
+  //     await axios({
+  //       url: "https://tamomon.herokuapp.com/v1/graphql",
+  //       method: "post",
+  //       data: {
+  //         query: userData(this.state.deviceID)
+  //       }
+  //     })
+  //       .then(result => {
+  //         const deviceData = clone(result.data.data.user_data_by_pk);
+  //         this.state.serverData = deviceData.tamamons;
+  //         this.state.wallet = deviceData.wallet;
+  //         console.log("pre-update", result.data.data.user_data_by_pk);
+  //       })
+  //       .then(res => {
+  //         const currentTime = new Date();
+  //         Object.keys(this.state.serverData).map(key => {
+  //           const lastModified = new Date(this.state.serverData[key].modified);
+  //           const diff = (currentTime - lastModified) / (1000 * 60);
+  //           if (diff > 60) {
+  //             this.state.serverData[key].washed = false;
+  //             this.state.serverData[key].played = false;
+  //           }
+  //           this.state.serverData[key].fedCount =
+  //             Math.floor(diff / 60) > this.state.serverData[key].fedCount
+  //               ? 0
+  //               : this.state.serverData[key].fedCount - Math.floor(diff / 60);
+  //           if (this.state.serverData[key].fedCount === 0) {
+  //             this.state.serverData[key].fed = false;
+  //           }
+  //         });
+  //         console.log("new state?", this.state.serverData);
+  //       });
+  //   };
+
+  //   initalCall();
+  //   updateCall();
+  // }
+
+  // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
+  // if you are building a specific type of experience.
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
