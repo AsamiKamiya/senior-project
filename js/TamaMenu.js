@@ -12,7 +12,8 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  Button
+  Button,
+  ScrollView
 } from "react-native";
 
 import {
@@ -828,7 +829,7 @@ var localStyles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     backgroundColor: "#fff",
-    flexGrow: 0.1,
+    flexGrow: 1,
     width: "30%"
   },
   bottomNav: {
