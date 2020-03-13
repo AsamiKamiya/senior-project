@@ -9,11 +9,13 @@
 
 import React, { Component } from "react";
 import {
+  Button,
   Text,
   View,
   StyleSheet,
   TouchableHighlight,
   ImageBackground,
+  TouchableOpacity,
   Image
 } from "react-native";
 
@@ -32,11 +34,10 @@ var sharedProps = {
 };
 
 // Sets the default scene you want for AR and VR
-var InitialARScene = require("./js/Tamamon1st");
+
 var TamaMenu = require("./js/TamaMenu");
 
 var UNSET = "UNSET";
-var AR_NAVIGATOR_TYPE = "AR";
 var TAMA_MENU_TYPE = "TAMA";
 
 // This determines which type of experience to launch in, or UNSET, if the user should
@@ -54,15 +55,13 @@ export default class ViroSample extends Component {
       wallet: 0,
       serverData: []
     };
-    this._getExperienceSelector = this._getExperienceSelector.bind(this);
-    this._getARNavigator = this._getARNavigator.bind(this);
     this._getTamaNavigator = this._getTamaNavigator.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
-    this._exitViro = this._exitViro.bind(this);
   }
 
+<<<<<<< HEAD
   // componentDidMount() {
   //   const initalCall = async () => {
   //     console.log("calling");
@@ -143,11 +142,11 @@ export default class ViroSample extends Component {
 
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
+=======
+>>>>>>> 2ec80f507595a81fc4fe3fbd4ce292063fcc94d1
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
-    } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
-      return this._getARNavigator();
     } else if (this.state.navigatorType == TAMA_MENU_TYPE) {
       return this._getTamaNavigator();
     }
@@ -156,7 +155,7 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
-      <View>
+      <View style={{ display: "flex" }}>
         <ImageBackground
           source={require("./js/res/images/Sprite-0001.gif")}
           style={{ width: "100%", height: "100%" }}
@@ -166,6 +165,7 @@ export default class ViroSample extends Component {
               source={require("./js/res/images/logo.png")}
               style={localStyles.images}
             />
+            {/*
             <TouchableHighlight
               style={localStyles.buttons}
               onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
@@ -173,43 +173,29 @@ export default class ViroSample extends Component {
             >
               <Text style={localStyles.buttonText}>START</Text>
             </TouchableHighlight>
+            */}
+            <TouchableOpacity
+              style={localStyles.buttonStyle}
+              onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
+            >
+              <Text style={localStyles.textStyle}>Start</Text>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </View>
     );
   }
 
-  // Returns the ViroARSceneNavigator which will start the AR experience
-  _getARNavigator() {
-    return (
-      <ViroARSceneNavigator
-        {...this.state.sharedProps}
-        initialScene={{ scene: InitialARScene }}
-      />
-    );
+  _getTamaNavigator() {
+    return <TamaMenu></TamaMenu>;
   }
 
-  _getTamaNavigator() {
-    return (
-      // <ViroVRSceneNavigator {...this.state.sharedProps} initialScene={{scene: TamaMenu}} onExitViro={this._exitViro} />
-      <TamaMenu></TamaMenu>
-    );
-  }
-  // This function returns an anonymous/lambda function to be used
-  // by the experience selector buttons
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
         navigatorType: navigatorType
       });
     };
-  }
-
-  // This function "exits" Viro by setting the navigatorType to UNSET.
-  _exitViro() {
-    this.setState({
-      navigatorType: UNSET
-    });
   }
 }
 
@@ -224,7 +210,8 @@ var localStyles = StyleSheet.create({
   inner: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
   titleText: {
     paddingTop: 100,
@@ -249,17 +236,25 @@ var localStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#fff"
   },
-  exitButton: {
-    height: 50,
-    width: 100,
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#68a0cf",
-    borderRadius: 10,
+
+  buttonStyle: {
+    height: 70,
+    width: 150,
+    backgroundColor: "#fff",
+    borderRadius: 100,
     borderWidth: 1,
-    borderColor: "#fff"
+    borderColor: "#007aff",
+    marginTop: 50,
+    justifyContent: "center"
+  },
+
+  textStyle: {
+    textAlign: "center",
+    color: "#007aff",
+    fontSize: 16,
+    fontWeight: "600",
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 
