@@ -14,10 +14,8 @@ import {
   ViroAnimations,
   ViroARTrackingTargets,
   ViroARImageMarker,
-  ViroButton,
   ViroImage,
   ViroSound,
-  ViroScene,
   ViroNode
 } from "react-viro";
 
@@ -38,7 +36,7 @@ export default class Tamamon2nd extends Component {
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.props.arSceneNavigator.viroAppProps.flgs[3]);
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         <ViroText
@@ -52,12 +50,6 @@ export default class Tamamon2nd extends Component {
           target={"targetOne"}
           pauseUpdates={this.state.pauseUpdates}
         >
-          <ViroText
-            text={this.props.arSceneNavigator.viroAppProps.text}
-            scale={[0.3, 0.3, 0.3]}
-            position={[0.6, 0.08, -0.9]}
-            style={styles.helloWorldTextStyle}
-          />
           <Viro3DObject
             source={require("./res/tamamon2nd/angrymark.obj")}
             resources={[
@@ -74,6 +66,19 @@ export default class Tamamon2nd extends Component {
               loop: true
             }}
           />
+          {/* for speech bubble */}
+          <ViroText
+            text={this.props.arSceneNavigator.viroAppProps.text}
+            scale={[0.3, 0.3, 0.3]}
+            position={[0.6, 0.08, -0.9]}
+            style={styles.helloWorldTextStyle}
+            opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            animation={{
+              name: "disappearForText",
+              run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              delay: 2000
+            }}
+          />
           <Viro3DObject
             source={require("./res/speechBubble.obj")}
             resources={[
@@ -83,7 +88,15 @@ export default class Tamamon2nd extends Component {
             type="OBJ"
             scale={[0.2, 0.2, 0.2]}
             position={[0.2, -0.8, -1]}
+            opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            animation={{
+              name: "disappearForText",
+              run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              delay: 2000
+            }}
           ></Viro3DObject>
+
+          {/* for feeding heart animation */}
           {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
             <ViroImage
               source={require("./res/heart.png")}
@@ -428,6 +441,13 @@ ViroAnimations.registerAnimations({
     },
     duration: 250,
     easing: "bounce"
+  },
+  disappearForText: {
+    properties: {
+      opacity: 0
+    },
+    duration: 500,
+    easing: "Linear"
   },
   catBoundNo: [["moveLeft", "moveRight", "moveLeft", "moveRight"]],
   catBound: [

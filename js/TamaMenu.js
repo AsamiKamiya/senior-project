@@ -39,6 +39,10 @@ const STORE_NAVIGATOR_TYPE = "STORE";
 //5. Menu Page
 const defaultNavigatorType = UNSET;
 
+// flg name
+const WASHED_FLG = 1;
+const PLAYED_FLG = 2;
+const SPEECH_FLG = 3;
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
 const axios = require("axios");
 
@@ -158,7 +162,8 @@ export default class TamaMenu extends Component {
             "I could totally eat more...",
             "I'm really full!!",
             "I can't eat anymore..!"
-          ]
+          ],
+          flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
         {
           name: "Intelimon",
@@ -172,7 +177,8 @@ export default class TamaMenu extends Component {
             "I could totally eat more...",
             "I'm really full!!",
             "I can't eat anymore..!"
-          ]
+          ],
+          flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
         {
           name: "Potemon",
@@ -314,7 +320,8 @@ export default class TamaMenu extends Component {
             fedCount: this.state.tamamon[0].fedCount,
             washed: this.state.tamamon[0].washed,
             played: this.state.tamamon[0].played,
-            text: this.state.displayText
+            text: this.state.displayText,
+            flgs: this.state.tamamon[0].flgs
           }}
           initialScene={{ scene: InitialARScene }}
         />
@@ -351,6 +358,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._washTamamon("Pocchamon");
+              this._updateFlg("Pocchamon", WASHED_FLG);
             }}
           >
             <Image
@@ -365,6 +373,7 @@ export default class TamaMenu extends Component {
             style={localStyles.tabItem}
             onPress={() => {
               this._playTamamon("Pocchamon");
+              this._updateFlg("Pocchamon", PLAYED_FLG);
             }}
           >
             <Image
@@ -399,7 +408,8 @@ export default class TamaMenu extends Component {
             fedCount: this.state.tamamon[1].fedCount,
             washed: this.state.tamamon[1].washed,
             played: this.state.tamamon[1].played,
-            text: this.state.displayText
+            text: this.state.displayText,
+            flgs: this.state.tamamon[1].flgs
           }}
           initialScene={{ scene: InitialARSceneForTama2nd }}
         />
@@ -554,6 +564,13 @@ export default class TamaMenu extends Component {
         navigatorType: navigatorType,
         displayText: "Welcome to Tamamon!"
       });
+      if (navigatorType === AR_NAVIGATOR_TYPE) {
+        this._updateFlg("Pocchamon", SPEECH_FLG);
+      }
+      if (navigatorType === AR_NAVIGATOR_TYPE_2nd) {
+        console.log("inteli");
+        this._updateFlg("Intelimon", SPEECH_FLG);
+      }
     };
   }
 
@@ -605,15 +622,19 @@ export default class TamaMenu extends Component {
 
         if (fedTamamon[0].fedCount === 1) {
           this._updateText(fedTamamon[0].text[0]);
+          this._updateFlg(name, SPEECH_FLG);
         }
         if (fedTamamon[0].fedCount === 2) {
           this._updateText(fedTamamon[0].text[1]);
+          this._updateFlg(name, SPEECH_FLG);
         }
         if (fedTamamon[0].fedCount === 3 || fedTamamon[0].fedCount === 4) {
           this._updateText(fedTamamon[0].text[2]);
+          this._updateFlg(name, SPEECH_FLG);
         }
         if (fedTamamon[0].fedCount >= 5) {
           this._updateText(fedTamamon[0].text[3]);
+          this._updateFlg(name, SPEECH_FLG);
         }
       }
     );
@@ -627,6 +648,36 @@ export default class TamaMenu extends Component {
     this.setState({
       displayText: text
     });
+  };
+
+  _updateFlg = async (name, index) => {
+    await this.setState(prevState => ({
+      tamamon: prevState.tamamon.map(obj => {
+        if (obj.name === name) {
+          console.log("flgs", obj.flgs);
+          obj.flgs[index] = 1;
+          console.log("flgs--", obj.flgs);
+          return Object.assign(obj, { flgs: obj.flgs });
+        } else {
+          return obj;
+        }
+      })
+    }));
+    await setTimeout(() => {
+      console.log("call SetTimeOut");
+      this.setState(prevState => ({
+        tamamon: prevState.tamamon.map(obj => {
+          if (obj.name === name) {
+            console.log("flgsback", obj.flgs);
+            obj.flgs[index] = 0;
+            console.log("flgsback--", obj.flgs);
+            return Object.assign(obj, { flgs: obj.flgs });
+          } else {
+            return obj;
+          }
+        })
+      }));
+    }, 4500);
   };
 
   _washTamamon = name => {
