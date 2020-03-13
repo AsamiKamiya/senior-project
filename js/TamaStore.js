@@ -25,68 +25,92 @@ export default class TamaStore extends Component {
     super();
 
     this.state = {
-      navigatorType: "blah"
+      navigatorType: "default",
+      pocchaPrice: 20,
+      inteliPrice: 1000,
+      potePrice: 999999
     };
-
-    this._returnToStore = this._returnToStore.bind(this);
   }
 
   render() {
-    if (this.state.navigatorType == MENU) {
-      return this._returnToStore();
-    }
+    /* Price Renders */
+    const pocchaBuy = (
+      <Text style={localStyles.textBox}>{this.state.pocchaPrice} dollas</Text>
+    );
+    const pocchaBought = <Text style={localStyles.textBox}>Already Owned</Text>;
+
+    const inteliBuy = (
+      <Text style={localStyles.textBox}>{this.state.inteliPrice} dollas</Text>
+    );
+    const inteliBought = <Text style={localStyles.textBox}>Already Owned</Text>;
+
+    const poteBuy = (
+      <Text style={localStyles.textBox}>{this.state.potePrice} dollas</Text>
+    );
+    const poteBought = <Text style={localStyles.textBox}>Already Owned</Text>;
+
+    const walletDisplay = (
+      <Text style={localStyles.heroText}>Wallet: {this.props.wallet}G</Text>
+    );
 
     return (
       <ScrollView>
+        {walletDisplay}
         {/* Hero Image */}
-        <View style={{ flex: 2, height: 350, backgroundColor: "powderblue" }}>
-          <TouchableOpacity
-            onPress={this._getExperienceButtonOnPress(MENU)}
-            underlayColor={"#68a0ff"}
-          >
-            <Image
-              source={require("./res/icons/icon_left.png")}
-              style={localStyles.backButton}
-            ></Image>
-            <Text
-              style={{
-                alignSelf: "center",
-                fontSize: 80
-              }}
-            >
-              STORE
-            </Text>
-          </TouchableOpacity>
+        <View style={localStyles.heroBox}>
+          <Text style={localStyles.heroTitle}>
+            Welcome to the Tamamon Store!
+          </Text>
         </View>
 
         {/*Store Cards */}
         <View style={localStyles.parent}>
-          <TouchableOpacity style={localStyles.blocks}>
+          {/*Pocchamon*/}
+          <TouchableOpacity
+            style={localStyles.blocks}
+            onPress={() => {
+              this._displayCostPoccha();
+            }}
+          >
             <Image
               source={require("./res/images/icons/cat-1.png")}
               style={localStyles.blockContent}
             ></Image>
             <Text style={localStyles.textBox}>Pocchamon</Text>
-            <Text style={localStyles.textBox}>Test</Text>
+            {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
           </TouchableOpacity>
-          <TouchableOpacity style={localStyles.blocks}>
+
+          {/*Intelimon*/}
+          <TouchableOpacity
+            style={localStyles.blocks}
+            onPress={() => {
+              this.props.buyTamamon("Intelimon", this.state.inteliPrice);
+            }}
+          >
             <Image
               source={require("./res/images/icons/cat-2.png")}
               style={localStyles.blockContent}
             ></Image>
             <Text style={localStyles.textBox}>Intelimon</Text>
-            <Text style={localStyles.textBox}>Test</Text>
+            {this.props.inteliOwned ? inteliBought : inteliBuy}
           </TouchableOpacity>
 
-          <TouchableOpacity style={localStyles.blocks}>
+          {/*potemon*/}
+          <TouchableOpacity
+            style={localStyles.blocks}
+            onPress={() => {
+              this.props.buyTamamon("Potemon", this.state.potePrice);
+            }}
+          >
             <Image
               source={require("./res/icons/menuIcons/potatoIcon.png")}
               style={localStyles.blockContent}
             ></Image>
 
-            <Text style={localStyles.textBox}>Parrot</Text>
-            <Text style={localStyles.textBox}>SIGH</Text>
+            <Text style={localStyles.textBox}>Potemon</Text>
+            {this.props.poteOwned ? poteBought : poteBuy}
           </TouchableOpacity>
+          {/*placeholder for new tamamon*/}
           <TouchableOpacity style={localStyles.blocks}>
             <Image
               source={require("./res/icons/heartIconTEST.png")}
@@ -100,9 +124,6 @@ export default class TamaStore extends Component {
       </ScrollView>
     );
   }
-  _returnToStore() {
-    return <TamaMenu></TamaMenu>;
-  }
 
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
@@ -111,8 +132,6 @@ export default class TamaStore extends Component {
       });
     };
   }
-
-  _displayCost() {}
 }
 
 const localStyles = StyleSheet.create({
@@ -129,28 +148,41 @@ const localStyles = StyleSheet.create({
   blocks: {
     flexGrow: 1,
     width: "75%",
-    //alignSelf: "center",
     margin: 10,
     padding: 10,
     backgroundColor: "powderblue"
   },
   blockContent: {
-    //margin: 10,
     alignSelf: "center",
     width: 150,
     height: 150,
     padding: 20
-  },
-  backButton: {
-    height: 50,
-    width: 50,
-    margin: 10
   },
   textBox: {
     fontSize: 30,
     marginBottom: 20,
     marginLeft: 20,
     alignSelf: "center"
+  },
+  heroBox: {
+    flex: 2,
+    height: 350,
+    backgroundColor: "powderblue",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  heroTitle: {
+    fontSize: 40,
+    color: "white"
+  },
+  heroText: {
+    width: "100%",
+    fontSize: 20,
+    backgroundColor: "powderblue",
+    alignSelf: "flex-start",
+    paddingLeft: 30,
+    paddingTop: 20,
+    color: "yellow"
   }
 });
 module.exports = TamaStore;
