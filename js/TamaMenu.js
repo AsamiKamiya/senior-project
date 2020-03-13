@@ -21,6 +21,8 @@ import {
   ViroScene
 } from "react-viro";
 
+import TamaStore from "./TamaStore";
+
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
 const InitialARSceneForTama3rd = require("./Tamamon3rd");
@@ -32,6 +34,9 @@ const AR_NAVIGATOR_TYPE = "AR";
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
 //3. Potemon
 const AR_NAVIGATOR_TYPE_3rd = "3rd";
+//4. TamaStore
+const STORE_NAVIGATOR_TYPE = "STORE";
+//5. Menu Page
 const defaultNavigatorType = UNSET;
 
 // flg name
@@ -143,7 +148,7 @@ export default class TamaMenu extends Component {
     this.state = {
       navigatorType: defaultNavigatorType,
       displayText: "Welcome to Tamamon!",
-      wallet: 0,
+      wallet: 2000,
       tamamon: [
         {
           name: "Pocchamon",
@@ -162,7 +167,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Intelimon",
-          owned: true,
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -177,7 +182,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Potemon",
-          owned: true,
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -191,9 +196,11 @@ export default class TamaMenu extends Component {
     this._getARNavigator = this._getARNavigator.bind(this);
     this._getARNavigator2nd = this._getARNavigator2nd.bind(this);
     this._getARNavigator3rd = this._getARNavigator3rd.bind(this);
+    this._getStore = this._getStore.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
+    this._buyTamamon = this._buyTamamon.bind(this);
   }
 
   //Switch AR scenes based on Navigator Type
@@ -206,6 +213,8 @@ export default class TamaMenu extends Component {
       return this._getARNavigator2nd();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE_3rd) {
       return this._getARNavigator3rd();
+    } else if (this.state.navigatorType == STORE_NAVIGATOR_TYPE) {
+      return this._getStore();
     }
   }
 
@@ -250,6 +259,16 @@ export default class TamaMenu extends Component {
       </TouchableHighlight>
     );
 
+    const storeButton = (
+      <TouchableHighlight
+        onPress={this._getExperienceButtonOnPress(STORE_NAVIGATOR_TYPE)}
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Text style={localStyles.storeButton}>STORE</Text>
+      </TouchableHighlight>
+    );
+
     return (
       <View>
         <ImageBackground
@@ -257,13 +276,13 @@ export default class TamaMenu extends Component {
           style={{ width: "100%", height: "100%" }}
         >
           <View style={localStyles.inner}>
+            {storeButton}
             <Image
               source={require("./res/images/logo.png")}
               style={localStyles.title}
             />
 
             {/* Select Pocchamon */}
-
             {this.state.tamamon[0].owned ? pocchaButton : null}
 
             {/* Select Intelimon*/}
@@ -273,6 +292,29 @@ export default class TamaMenu extends Component {
             {this.state.tamamon[2].owned ? poteButton : null}
           </View>
         </ImageBackground>
+      </View>
+    );
+  }
+
+  _getStore() {
+    return (
+      <View>
+        <TouchableOpacity
+          style={localStyles.tabItem}
+          onPress={this._getExperienceButtonOnPress(UNSET)}
+        >
+          <Image
+            source={require("./res/icons/icon_left.png")}
+            style={localStyles.backButtonStore}
+          ></Image>
+        </TouchableOpacity>
+        <TamaStore
+          pocchaOwned={this.state.tamamon[0].owned}
+          inteliOwned={this.state.tamamon[1].owned}
+          poteOwned={this.state.tamamon[2].owned}
+          wallet={this.state.wallet}
+          buyTamamon={this._buyTamamon}
+        ></TamaStore>
       </View>
     );
   }
@@ -691,6 +733,32 @@ export default class TamaMenu extends Component {
       }
     );
   };
+
+  _buyTamamon(name, price) {
+    let boughtTamamon = this.state.tamamon.filter(obj => {
+      return obj.name === name;
+    });
+
+    if (boughtTamamon[0].owned === true) {
+      console.log("you own this");
+      console.log(this.state.wallet);
+      return;
+    }
+
+    if (this.state.wallet >= price && boughtTamamon[0].owned === false) {
+      this.setState(
+        prevState => ({
+          wallet: (this.state.wallet -= price),
+          tamamon: prevState.tamamon.map(obj =>
+            obj.name === name ? Object.assign(obj, { owned: true }) : obj
+          )
+        }),
+        () => {
+          console.log(boughtTamamon);
+        }
+      );
+    }
+  }
 }
 
 //Styles
@@ -757,8 +825,8 @@ var localStyles = StyleSheet.create({
     marginBottom: 55
   },
   icons: {
-    height: 80, //looks good on iPad but might not on smaller screens. Will test.
-    width: 80, //looks good on iPad but might not on smaller screens. Will test.
+    height: 80,
+    width: 80,
     marginBottom: 10,
     backgroundColor: "transparent"
   },
@@ -766,6 +834,16 @@ var localStyles = StyleSheet.create({
     height: 40,
     width: 40,
     marginBottom: 10
+  },
+  backButtonStore: {
+    height: 40,
+    width: 40,
+    margin: 10,
+    alignSelf: "flex-start"
+  },
+  storeButton: {
+    textAlign: "center" //fix later...
+    //marginTop: 30,
   }
 });
 module.exports = TamaMenu;
