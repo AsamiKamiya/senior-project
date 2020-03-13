@@ -221,7 +221,7 @@ export default class TamaMenu extends Component {
   _getExperienceSelector() {
     //Tamamon buttons
     const pocchaButton = (
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
         style={localStyles.buttons}
         underlayColor={"#68a0ff"}
@@ -230,11 +230,15 @@ export default class TamaMenu extends Component {
           source={require("./res/images/icons/cat-1.png")}
           style={localStyles.images}
         />
-      </TouchableHighlight>
+        <Text style={localStyles.buttonText}>{this.state.tamamon[0].name}</Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Pocchamon {this.state.tamamon[0].fedCount} times.
+        </Text>
+      </TouchableOpacity>
     );
 
     const inteliButton = (
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
         style={localStyles.buttons}
         underlayColor={"#68a0ff"}
@@ -243,11 +247,15 @@ export default class TamaMenu extends Component {
           source={require("./res/images/icons/cat-2.png")}
           style={localStyles.images}
         />
-      </TouchableHighlight>
+        <Text style={localStyles.buttonText}>{this.state.tamamon[1].name}</Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Intelimon {this.state.tamamon[1].fedCount} times.
+        </Text>
+      </TouchableOpacity>
     );
 
     const poteButton = (
-      <TouchableHighlight
+      <TouchableOpacity
         onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_3rd)}
         style={localStyles.buttons}
         underlayColor={"#68a0ff"}
@@ -256,16 +264,20 @@ export default class TamaMenu extends Component {
           source={require("./res/icons/menuIcons/potatoIcon.png")}
           style={localStyles.images}
         />
-      </TouchableHighlight>
+        <Text style={localStyles.buttonText}>{this.state.tamamon[2].name}</Text>
+        <Text style={localStyles.buttonText}>
+          {this.state.tamamon[2].fedCount}
+        </Text>
+      </TouchableOpacity>
     );
 
     const storeButton = (
       <TouchableHighlight
         onPress={this._getExperienceButtonOnPress(STORE_NAVIGATOR_TYPE)}
-        style={localStyles.buttons}
+        style={localStyles.buttonStyle}
         underlayColor={"#68a0ff"}
       >
-        <Text style={localStyles.storeButton}>STORE</Text>
+        <Text style={localStyles.textStyle}>STORE</Text>
       </TouchableHighlight>
     );
 
@@ -276,20 +288,23 @@ export default class TamaMenu extends Component {
           style={{ width: "100%", height: "100%" }}
         >
           <View style={localStyles.inner}>
-            {storeButton}
             <Image
               source={require("./res/images/logo.png")}
               style={localStyles.title}
             />
 
-            {/* Select Pocchamon */}
-            {this.state.tamamon[0].owned ? pocchaButton : null}
+            {storeButton}
 
-            {/* Select Intelimon*/}
-            {this.state.tamamon[1].owned ? inteliButton : null}
+            <View style={localStyles.parent}>
+              {/* Select Pocchamon */}
+              {this.state.tamamon[0].owned ? pocchaButton : null}
 
-            {/*Select Potemon*/}
-            {this.state.tamamon[2].owned ? poteButton : null}
+              {/* Select Intelimon*/}
+              {this.state.tamamon[1].owned ? inteliButton : null}
+
+              {/*Select Potemon*/}
+              {this.state.tamamon[2].owned ? poteButton : null}
+            </View>
           </View>
         </ImageBackground>
       </View>
@@ -763,13 +778,19 @@ export default class TamaMenu extends Component {
 
 //Styles
 var localStyles = StyleSheet.create({
+  parent: {
+    padding: 20,
+    marginTop: 20,
+    width: "100%",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   images: {
     width: 80,
     height: 80
-  },
-  viroContainer: {
-    flex: 1,
-    backgroundColor: "black"
   },
   inner: {
     flex: 1,
@@ -781,31 +802,21 @@ var localStyles = StyleSheet.create({
     marginBottom: 20
   },
   buttonText: {
-    color: "#fff",
+    color: "#007aff",
     textAlign: "center",
-    fontSize: 20
+    fontSize: 20,
+    marginTop: 10
   },
   buttons: {
-    height: 90,
-    width: 150,
-    marginTop: 10,
-    marginBottom: 10,
+    margin: 20,
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#fff",
-    alignItems: "center"
-  },
-  exitButton: {
-    height: 50,
-    width: 100,
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#68a0cf",
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#fff"
+    borderWidth: 2,
+    borderColor: "#007aff",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#fff",
+    flexGrow: 0.1,
+    width: "30%"
   },
   bottomNav: {
     height: 75,
@@ -841,9 +852,24 @@ var localStyles = StyleSheet.create({
     margin: 10,
     alignSelf: "flex-start"
   },
-  storeButton: {
-    textAlign: "center" //fix later...
-    //marginTop: 30,
+  buttonStyle: {
+    height: 70,
+    width: 150,
+    backgroundColor: "#fff",
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#007aff",
+    marginTop: 50,
+    justifyContent: "center"
+  },
+
+  textStyle: {
+    textAlign: "center",
+    color: "#007aff",
+    fontSize: 16,
+    fontWeight: "600",
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 module.exports = TamaMenu;

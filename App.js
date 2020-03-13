@@ -9,11 +9,13 @@
 
 import React, { Component } from "react";
 import {
+  Button,
   Text,
   View,
   StyleSheet,
   TouchableHighlight,
   ImageBackground,
+  TouchableOpacity,
   Image
 } from "react-native";
 
@@ -106,7 +108,7 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
-      <View>
+      <View style={{ display: "flex" }}>
         <ImageBackground
           source={require("./js/res/images/Sprite-0001.gif")}
           style={{ width: "100%", height: "100%" }}
@@ -116,6 +118,7 @@ export default class ViroSample extends Component {
               source={require("./js/res/images/logo.png")}
               style={localStyles.images}
             />
+            {/*
             <TouchableHighlight
               style={localStyles.buttons}
               onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
@@ -123,6 +126,13 @@ export default class ViroSample extends Component {
             >
               <Text style={localStyles.buttonText}>START</Text>
             </TouchableHighlight>
+            */}
+            <TouchableOpacity
+              style={localStyles.buttonStyle}
+              onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
+            >
+              <Text style={localStyles.textStyle}>Start</Text>
+            </TouchableOpacity>
           </View>
         </ImageBackground>
       </View>
@@ -153,7 +163,8 @@ var localStyles = StyleSheet.create({
   inner: {
     flex: 1,
     flexDirection: "column",
-    alignItems: "center"
+    alignItems: "center",
+    justifyContent: "center"
   },
   titleText: {
     paddingTop: 100,
@@ -178,17 +189,25 @@ var localStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#fff"
   },
-  exitButton: {
-    height: 50,
-    width: 100,
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
-    marginBottom: 10,
-    backgroundColor: "#68a0cf",
-    borderRadius: 10,
+
+  buttonStyle: {
+    height: 70,
+    width: 150,
+    backgroundColor: "#fff",
+    borderRadius: 100,
     borderWidth: 1,
-    borderColor: "#fff"
+    borderColor: "#007aff",
+    marginTop: 50,
+    justifyContent: "center"
+  },
+
+  textStyle: {
+    textAlign: "center",
+    color: "#007aff",
+    fontSize: 16,
+    fontWeight: "600",
+    paddingTop: 10,
+    paddingBottom: 10
   }
 });
 
