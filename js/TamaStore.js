@@ -16,16 +16,7 @@ import {
   Button
 } from "react-native";
 
-import {
-  ViroARSceneNavigator,
-  ViroVRSceneNavigator,
-  ViroScene
-} from "react-viro";
 import TamaMenu from "./TamaMenu";
-
-const InitialARScene = require("./Tamamon1st");
-const InitialARSceneForTama2nd = require("./Tamamon2nd");
-const InitialARSceneForTama3rd = require("./Tamamon3rd");
 
 const MENU = "MENU";
 
@@ -46,72 +37,65 @@ export default class TamaStore extends Component {
     }
 
     return (
-      // Try setting `flexDirection` to `column`.
       <ScrollView>
-        <TouchableOpacity
-          onPress={this._getExperienceButtonOnPress(MENU)}
-          underlayColor={"#68a0ff"}
-        >
-          <Image source={require("./res/icons/icon_left.png")}></Image>
-        </TouchableOpacity>
-        <View
-          style={{
-            padding: 20,
-            marginTop: 20,
-            width: "100%",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-evenly"
-          }}
-        >
-          <View style={localStyles.blocks}>
-            <Text>Test</Text>
+        {/* Hero Image */}
+        <View style={{ flex: 2, height: 350, backgroundColor: "powderblue" }}>
+          <TouchableOpacity
+            onPress={this._getExperienceButtonOnPress(MENU)}
+            underlayColor={"#68a0ff"}
+          >
+            <Image
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButton}
+            ></Image>
+            <Text
+              style={{
+                alignSelf: "center",
+                fontSize: 80
+              }}
+            >
+              STORE
+            </Text>
+          </TouchableOpacity>
+        </View>
+
+        {/*Store Cards */}
+        <View style={localStyles.parent}>
+          <TouchableOpacity style={localStyles.blocks}>
+            <Image
+              source={require("./res/images/icons/cat-1.png")}
+              style={localStyles.blockContent}
+            ></Image>
+            <Text style={localStyles.textBox}>Pocchamon</Text>
+            <Text style={localStyles.textBox}>Test</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={localStyles.blocks}>
+            <Image
+              source={require("./res/images/icons/cat-2.png")}
+              style={localStyles.blockContent}
+            ></Image>
+            <Text style={localStyles.textBox}>Intelimon</Text>
+            <Text style={localStyles.textBox}>Test</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={localStyles.blocks}>
+            <Image
+              source={require("./res/icons/menuIcons/potatoIcon.png")}
+              style={localStyles.blockContent}
+            ></Image>
+
+            <Text style={localStyles.textBox}>Parrot</Text>
+            <Text style={localStyles.textBox}>SIGH</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={localStyles.blocks}>
             <Image
               source={require("./res/icons/heartIconTEST.png")}
-              style={{
-                margin: 10,
-                alignSelf: "center",
-                width: 100,
-                height: 100
-              }}
+              style={localStyles.blockContent}
             ></Image>
-          </View>
-          <View style={localStyles.blocks}>
-            <Text>Test</Text>
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={{
-                margin: 10,
-                alignSelf: "center",
-                width: 100,
-                height: 100
-              }}
-            ></Image>
-          </View>
-          <View style={localStyles.blocks}>
-            <Text>Test</Text>
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={{
-                margin: 10,
-                alignSelf: "center",
-                width: 100,
-                height: 100
-              }}
-            ></Image>
-          </View>
-          <View style={localStyles.blocks}>
-            <Text>Test</Text>
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={{
-                margin: 10,
-                alignSelf: "center",
-                width: 100,
-                height: 100
-              }}
-            ></Image>
-          </View>
+
+            <Text style={localStyles.textBox}>Test</Text>
+            <Text style={localStyles.textBox}>Cost</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     );
@@ -127,15 +111,46 @@ export default class TamaStore extends Component {
       });
     };
   }
+
+  _displayCost() {}
 }
 
 const localStyles = StyleSheet.create({
+  parent: {
+    padding: 20,
+    marginTop: 20,
+    //width: "100%",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   blocks: {
-    //flex: 1,
-    width: 500,
-    height: 200,
+    flexGrow: 1,
+    width: "75%",
+    //alignSelf: "center",
     margin: 10,
+    padding: 10,
     backgroundColor: "powderblue"
+  },
+  blockContent: {
+    //margin: 10,
+    alignSelf: "center",
+    width: 150,
+    height: 150,
+    padding: 20
+  },
+  backButton: {
+    height: 50,
+    width: 50,
+    margin: 10
+  },
+  textBox: {
+    fontSize: 30,
+    marginBottom: 20,
+    marginLeft: 20,
+    alignSelf: "center"
   }
 });
 module.exports = TamaStore;
