@@ -710,7 +710,7 @@ export default class TamaMenu extends Component {
           }
         })
       }));
-    }, 4500);
+    }, 4000);
   };
 
   _washTamamon = name => {

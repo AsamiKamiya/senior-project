@@ -246,6 +246,21 @@ export default class TamamonThird extends Component {
               }}
             />
           </ViroNode>
+          {/*Tamamon Name */}
+          <ViroText
+            text="Potemon"
+            width={2}
+            height={2}
+            style={styles.nameText}
+            position={[-0.1, 0.35, -3]}
+            //position={[1.2, -1.3, -3]}
+            opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            animation={{
+              name: "disappearForText",
+              run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              delay: 2000
+            }}
+          ></ViroText>
           {/* for play */}
           <ViroImage
             source={require("./res/hand.png")}
@@ -308,6 +323,11 @@ var styles = StyleSheet.create({
     color: "white",
     textAlignVertical: "center",
     textAlign: "center"
+  },
+  nameText: {
+    fontFamily: "Arial",
+    fontSize: 15,
+    color: "black"
   }
 });
 

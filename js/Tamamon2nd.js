@@ -46,7 +46,7 @@ export default class Tamamon2nd extends Component {
             require("./res/tamamon2nd/angrymark.png")
           ]}
           type="OBJ"
-          position={[0.2, -0.6, -0.8]}
+          position={[0.2, -0.6, -1.8]}
           scale={[0.1, 0.1, 0.1]}
           opacity={0}
           animation={{
@@ -59,7 +59,7 @@ export default class Tamamon2nd extends Component {
         <ViroText
           text={this.props.arSceneNavigator.viroAppProps.text}
           scale={[0.3, 0.3, 0.3]}
-          position={[0.6, 0.08, -0.9]}
+          position={[0.6, 0.08, -1.9]}
           style={styles.helloWorldTextStyle}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
           animation={{
@@ -76,7 +76,7 @@ export default class Tamamon2nd extends Component {
           ]}
           type="OBJ"
           scale={[0.2, 0.2, 0.2]}
-          position={[0.2, -0.8, -1]}
+          position={[0.2, -0.8, -2]}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
           animation={{
             name: "disappearForText",
@@ -89,7 +89,7 @@ export default class Tamamon2nd extends Component {
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
             source={require("./res/heart.png")}
-            position={[0.3, -0.3, -0.8]}
+            position={[0.3, -0.3, -1.8]}
             scale={[0.2, 0.2, 0.2]}
             opacity={0}
             transformBehaviors={["billboard"]}
@@ -104,7 +104,7 @@ export default class Tamamon2nd extends Component {
             scale={[0.3, 0.3, 0.3]}
             width={2}
             height={2}
-            position={[0.6, 0.08, -0.9]}
+            position={[0.6, 0.08, -1.9]}
             style={styles.helloWorldTextStyle}
           />
         )}
@@ -120,7 +120,7 @@ export default class Tamamon2nd extends Component {
             ]}
             type="OBJ"
             scale={[0.2, 0.2, 0.2]}
-            position={[0, -1.3, -1]}
+            position={[0, -1.3, -2]}
             animation={{
               name: "catBoundNo",
               run: this.props.arSceneNavigator.viroAppProps.fed
@@ -129,14 +129,14 @@ export default class Tamamon2nd extends Component {
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
             source={require("./res/tamamon2nd/cat-a1.obj")}
-            position={[-0.0, -5.5, -1.15]}
+            // position={[-0.0, -5.5, -2.15]}
             resources={[
               require("./res/tamamon2nd/cat-a1.mtl"),
               require("./res/tamamon2nd/cat-a1.png")
             ]}
             type="OBJ"
             scale={[0.2, 0.2, 0.2]}
-            position={[0, -1.3, -1]}
+            position={[0, -1.3, -2]}
             animation={{
               name: "catBound",
               run: this.props.arSceneNavigator.viroAppProps.fed
@@ -145,14 +145,14 @@ export default class Tamamon2nd extends Component {
         ) : (
           <Viro3DObject
             source={require("./res/tamamon2nd/cat-a2.obj")}
-            position={[-0.0, -5.5, -1.15]}
+            // position={[-0.0, -5.5, -1.15]}
             resources={[
               require("./res/tamamon2nd/cat-a2.mtl"),
               require("./res/tamamon2nd/cat-a2.png")
             ]}
             type="OBJ"
             scale={[0.2, 0.2, 0.2]}
-            position={[0, -1.3, -1]}
+            position={[0, -1.3, -2]}
             animation={{
               name: "catBoundAngry",
               run: this.props.arSceneNavigator.viroAppProps.fed
@@ -212,7 +212,7 @@ export default class Tamamon2nd extends Component {
         <ViroNode>
           <ViroImage
             source={require("./res/bubbles.png")}
-            position={[0.33, -0.2, -0.8]}
+            position={[0.33, -0.2, -1.8]}
             scale={[0.15, 0.15, 0.15]}
             opacity={0}
             transformBehaviors={["billboard"]}
@@ -225,7 +225,7 @@ export default class Tamamon2nd extends Component {
           />
           <ViroImage
             source={require("./res/bubbles.png")}
-            position={[0.2, -0.4, -0.8]}
+            position={[0.2, -0.4, -1.8]}
             scale={[0.15, 0.15, 0.15]}
             opacity={0}
             transformBehaviors={["billboard"]}
@@ -238,7 +238,7 @@ export default class Tamamon2nd extends Component {
           />
           <ViroImage
             source={require("./res/star.png")}
-            position={[0.35, -0.15, -0.8]}
+            position={[0.35, -0.15, -1.8]}
             scale={[0.07, 0.07, 0.07]}
             opacity={0}
             transformBehaviors={["billboard"]}
@@ -252,7 +252,7 @@ export default class Tamamon2nd extends Component {
           />
           <ViroImage
             source={require("./res/star.png")}
-            position={[0.4, -0.2, -0.8]}
+            position={[0.4, -0.2, -1.8]}
             scale={[0.05, 0.05, 0.05]}
             opacity={0}
             transformBehaviors={["billboard"]}
@@ -266,7 +266,7 @@ export default class Tamamon2nd extends Component {
           />
           <ViroImage
             source={require("./res/star.png")}
-            position={[0.1, -0.4, -0.8]}
+            position={[0.1, -0.4, -1.8]}
             scale={[0.07, 0.07, 0.07]}
             opacity={0}
             transformBehaviors={["billboard"]}
@@ -279,10 +279,11 @@ export default class Tamamon2nd extends Component {
             }}
           />
         </ViroNode>
+
         {/* for play */}
         <ViroImage
           source={require("./res/hand.png")}
-          position={[0.25, -0.16, -0.8]}
+          position={[0.25, -0.16, -1.8]}
           scale={[0.12, 0.12, 0.12]}
           opacity={0}
           transformBehaviors={["billboard"]}
@@ -296,7 +297,7 @@ export default class Tamamon2nd extends Component {
         />
         <ViroImage
           source={require("./res/heart.png")}
-          position={[0.3, -0.3, -0.8]}
+          position={[0.3, -0.3, -1.8]}
           scale={[0.2, 0.2, 0.2]}
           opacity={0}
           transformBehaviors={["billboard"]}
@@ -305,8 +306,21 @@ export default class Tamamon2nd extends Component {
             run: this.state.forPlay
           }}
         />
-        {/* </ViroARImageMarker> */}
-
+        {/*Tamamon Name */}
+        <ViroText
+          text="Intelimon"
+          width={2}
+          height={2}
+          style={styles.nameText}
+          position={[1.4, -0.6, -2]}
+          opacity={1}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+          animation={{
+            name: "disappearForText",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+            delay: 2000
+          }}
+        ></ViroText>
         <ViroAmbientLight color={"#aaaaaa"} />
         <ViroSpotLight
           innerAngle={5}
@@ -339,19 +353,17 @@ export default class Tamamon2nd extends Component {
 }
 
 var styles = StyleSheet.create({
-  announceTextStyle: {
-    fontFamily: "Arial",
-    fontSize: 30,
-    color: "white",
-    textAlignVertical: "center",
-    textAlign: "center"
-  },
   helloWorldTextStyle: {
     fontFamily: "Arial",
     fontSize: 20,
     color: "black",
     textAlignVertical: "center",
     textAlign: "center"
+  },
+  nameText: {
+    fontFamily: "Arial",
+    fontSize: 10,
+    color: "black"
   }
 });
 
