@@ -12,6 +12,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
+  ScrollView,
   Button
 } from "react-native";
 
@@ -20,38 +21,121 @@ import {
   ViroVRSceneNavigator,
   ViroScene
 } from "react-viro";
+import TamaMenu from "./TamaMenu";
 
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
 const InitialARSceneForTama3rd = require("./Tamamon3rd");
 
-const UNSET = "UNSET";
-//1. Pocchamon
-const AR_NAVIGATOR_TYPE = "AR";
-//2. Intelimon
-const AR_NAVIGATOR_TYPE_2nd = "2nd";
-//3. Potemon
-const AR_NAVIGATOR_TYPE_3rd = "3rd";
-const defaultNavigatorType = UNSET;
-//TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
-const axios = require("axios");
+const MENU = "MENU";
 
 export default class TamaStore extends Component {
   constructor() {
     super();
+
+    this.state = {
+      navigatorType: "blah"
+    };
+
+    this._returnToStore = this._returnToStore.bind(this);
   }
 
   render() {
+    if (this.state.navigatorType == MENU) {
+      return this._returnToStore();
+    }
+
     return (
       // Try setting `flexDirection` to `column`.
-      <View style={{ flex: 1, flexDirection: "row" }}>
+      <ScrollView>
+        <TouchableOpacity
+          onPress={this._getExperienceButtonOnPress(MENU)}
+          underlayColor={"#68a0ff"}
+        >
+          <Image source={require("./res/icons/icon_left.png")}></Image>
+        </TouchableOpacity>
         <View
-          style={{ width: 50, height: 50, backgroundColor: "powderblue" }}
-        />
-        <View style={{ width: 50, height: 50, backgroundColor: "skyblue" }} />
-        <View style={{ width: 50, height: 50, backgroundColor: "steelblue" }} />
-      </View>
+          style={{
+            padding: 20,
+            marginTop: 20,
+            width: "100%",
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-evenly"
+          }}
+        >
+          <View style={localStyles.blocks}>
+            <Text>Test</Text>
+            <Image
+              source={require("./res/icons/heartIconTEST.png")}
+              style={{
+                margin: 10,
+                alignSelf: "center",
+                width: 100,
+                height: 100
+              }}
+            ></Image>
+          </View>
+          <View style={localStyles.blocks}>
+            <Text>Test</Text>
+            <Image
+              source={require("./res/icons/heartIconTEST.png")}
+              style={{
+                margin: 10,
+                alignSelf: "center",
+                width: 100,
+                height: 100
+              }}
+            ></Image>
+          </View>
+          <View style={localStyles.blocks}>
+            <Text>Test</Text>
+            <Image
+              source={require("./res/icons/heartIconTEST.png")}
+              style={{
+                margin: 10,
+                alignSelf: "center",
+                width: 100,
+                height: 100
+              }}
+            ></Image>
+          </View>
+          <View style={localStyles.blocks}>
+            <Text>Test</Text>
+            <Image
+              source={require("./res/icons/heartIconTEST.png")}
+              style={{
+                margin: 10,
+                alignSelf: "center",
+                width: 100,
+                height: 100
+              }}
+            ></Image>
+          </View>
+        </View>
+      </ScrollView>
     );
   }
+  _returnToStore() {
+    return <TamaMenu></TamaMenu>;
+  }
+
+  _getExperienceButtonOnPress(navigatorType) {
+    return () => {
+      this.setState({
+        navigatorType: navigatorType
+      });
+    };
+  }
 }
+
+const localStyles = StyleSheet.create({
+  blocks: {
+    //flex: 1,
+    width: 500,
+    height: 200,
+    margin: 10,
+    backgroundColor: "powderblue"
+  }
+});
 module.exports = TamaStore;

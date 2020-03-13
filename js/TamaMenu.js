@@ -21,6 +21,8 @@ import {
   ViroScene
 } from "react-viro";
 
+import TamaStore from "./TamaStore";
+
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
 const InitialARSceneForTama3rd = require("./Tamamon3rd");
@@ -32,7 +34,11 @@ const AR_NAVIGATOR_TYPE = "AR";
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
 //3. Potemon
 const AR_NAVIGATOR_TYPE_3rd = "3rd";
+//4. TamaStore
+const STORE_NAVIGATOR_TYPE = "STORE";
+//5. Menu Page
 const defaultNavigatorType = UNSET;
+
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
 const axios = require("axios");
 
@@ -184,6 +190,7 @@ export default class TamaMenu extends Component {
     this._getARNavigator = this._getARNavigator.bind(this);
     this._getARNavigator2nd = this._getARNavigator2nd.bind(this);
     this._getARNavigator3rd = this._getARNavigator3rd.bind(this);
+    this._getStore = this._getStore.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
@@ -199,6 +206,8 @@ export default class TamaMenu extends Component {
       return this._getARNavigator2nd();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE_3rd) {
       return this._getARNavigator3rd();
+    } else if (this.state.navigatorType == STORE_NAVIGATOR_TYPE) {
+      return this._getStore();
     }
   }
 
@@ -243,6 +252,16 @@ export default class TamaMenu extends Component {
       </TouchableHighlight>
     );
 
+    const storeButton = (
+      <TouchableHighlight
+        onPress={this._getExperienceButtonOnPress(STORE_NAVIGATOR_TYPE)}
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Text>STORE</Text>
+      </TouchableHighlight>
+    );
+
     return (
       <View>
         <ImageBackground
@@ -250,13 +269,13 @@ export default class TamaMenu extends Component {
           style={{ width: "100%", height: "100%" }}
         >
           <View style={localStyles.inner}>
+            {storeButton}
             <Image
               source={require("./res/images/logo.png")}
               style={localStyles.title}
             />
 
             {/* Select Pocchamon */}
-
             {this.state.tamamon[0].owned ? pocchaButton : null}
 
             {/* Select Intelimon*/}
@@ -268,6 +287,10 @@ export default class TamaMenu extends Component {
         </ImageBackground>
       </View>
     );
+  }
+
+  _getStore() {
+    return <TamaStore></TamaStore>;
   }
 
   //Pocchamon AR Scene
