@@ -39,14 +39,13 @@ export default class HelloWorldSceneAR extends Component {
     // Set initial state here
     this.state = {
       text: "Initializing AR...",
-      animate: false,
-      animecount: 0,
       forPlay: false
     };
     this._onFinishAnimation4play = this._onFinishAnimation4play.bind(this);
   }
 
   render() {
+    console.log(this.props.arSceneNavigator.viroAppProps.flgs);
     return (
       <ViroARScene>
         {/* This is the speech bubble and text */}
@@ -59,6 +58,12 @@ export default class HelloWorldSceneAR extends Component {
           type="OBJ"
           scale={[-0.4, 0.4, 0.4]}
           position={[0.1, -0.95, -3]}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+          animation={{
+            name: "disappearForText",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+            delay: 3000
+          }}
         ></Viro3DObject>
         <ViroText
           text={this.props.arSceneNavigator.viroAppProps.text}
@@ -67,6 +72,12 @@ export default class HelloWorldSceneAR extends Component {
           style={styles.helloWorldTextStyle}
           width={2}
           height={2}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+          animation={{
+            name: "disappearForText",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+            delay: 3000
+          }}
         />
         {/* This is the heart that appears */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
@@ -146,6 +157,12 @@ export default class HelloWorldSceneAR extends Component {
           style={styles.nameText}
           position={[-0.1, 0.35, -3]}
           //position={[1.2, -1.3, -3]}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+          animation={{
+            name: "disappearForText",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+            delay: 3000
+          }}
         ></ViroText>
 
         <ViroSpotLight
@@ -213,7 +230,9 @@ export default class HelloWorldSceneAR extends Component {
             transformBehaviors={["billboard"]}
             animation={{
               name: "washAnimation",
-              run: this.props.arSceneNavigator.viroAppProps.washed
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1
             }}
           />
           <ViroImage
@@ -224,7 +243,9 @@ export default class HelloWorldSceneAR extends Component {
             transformBehaviors={["billboard"]}
             animation={{
               name: "washAnimation",
-              run: this.props.arSceneNavigator.viroAppProps.washed
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1
             }}
           />
           <ViroImage
@@ -235,7 +256,9 @@ export default class HelloWorldSceneAR extends Component {
             transformBehaviors={["billboard"]}
             animation={{
               name: "starAnimation",
-              run: this.props.arSceneNavigator.viroAppProps.washed,
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
               delay: 1500
             }}
           />
@@ -247,7 +270,9 @@ export default class HelloWorldSceneAR extends Component {
             transformBehaviors={["billboard"]}
             animation={{
               name: "starAnimation",
-              run: this.props.arSceneNavigator.viroAppProps.washed,
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
               delay: 1500
             }}
           />
@@ -259,7 +284,9 @@ export default class HelloWorldSceneAR extends Component {
             transformBehaviors={["billboard"]}
             animation={{
               name: "starAnimation",
-              run: this.props.arSceneNavigator.viroAppProps.washed,
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
               delay: 1500
             }}
           />
@@ -273,7 +300,9 @@ export default class HelloWorldSceneAR extends Component {
           transformBehaviors={["billboard"]}
           animation={{
             name: "playAnimation",
-            run: this.props.arSceneNavigator.viroAppProps.played,
+            run:
+              this.props.arSceneNavigator.viroAppProps.played &&
+              this.props.arSceneNavigator.viroAppProps.flgs[2] === 1,
             onFinish: this._onFinishAnimation4play
           }}
         />
