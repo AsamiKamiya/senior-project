@@ -61,7 +61,6 @@ export default class ViroSample extends Component {
     );
   }
 
-<<<<<<< HEAD
   // componentDidMount() {
   //   const initalCall = async () => {
   //     console.log("calling");
@@ -142,8 +141,6 @@ export default class ViroSample extends Component {
 
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
-=======
->>>>>>> 2ec80f507595a81fc4fe3fbd4ce292063fcc94d1
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
