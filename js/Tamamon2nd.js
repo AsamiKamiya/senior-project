@@ -308,7 +308,7 @@ export default class Tamamon2nd extends Component {
         />
         {/*Tamamon Name */}
         <ViroText
-          text="Intelimon"
+          text="Intellimon"
           width={2}
           height={2}
           style={styles.nameText}

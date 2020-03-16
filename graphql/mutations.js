@@ -1,43 +1,76 @@
 const makeNewUser = input => {
-  return `
-    mutation make_new_user {
-      insert_user_data(
-        objects: {
-          device_id: "${input}",
-          wallet: 300,
-          tamamons: {
-            Intellimon: {
-              owned: true,
-              fed: true,
-              fedCount: 3,
-              washed: true,
-              played: true,
-              modified: "${new Date("Fri Mar 13 2020 15:54:21 GMT+0900 (JST)")}"
-            },
-            Potemon: {
-              owned: false,
-              fed: false,
-              fedCount: 0,
-              washed: false,
-              played: false,
-              modified: "${new Date("Fri Mar 13 2020 15:54:21 GMT+0900 (JST)")}"
-            },
-            Pocchamon: {    
-              owned: true,
-              fed: true,
-              fedCount: 4,
-              washed: true,
-              played: true,
-              modified: "${new Date("Fri Mar 13 2020 15:54:21 GMT+0900 (JST)")}"
-            }
+  const data = {};
+  data.device_id = input.id;
+  data.wallet = 2000;
+  data.tamamons = {
+    Intellimon: {
+      owned: false,
+      fed: false,
+      fedCount: 0,
+      washed: false,
+      played: false,
+      modified: input.time
+    },
+    Potemon: {
+      owned: false,
+      fed: false,
+      fedCount: 0,
+      washed: false,
+      played: false,
+      modified: input.time
+    },
+    Pocchamon: {
+      owned: true,
+      fed: false,
+      fedCount: 0,
+      washed: false,
+      played: false,
+      modified: input.time
+    }
+  };
+
+  return {
+    query: `
+      mutation insert_user_data($objects: user_data_insert_input!) {
+        insert_user_data(objects: [$objects]) {
+          returning {
+            device_id
           }
-        }) 
-      {
-        returning {
-          device_id
         }
       }
-    }`;
+    `,
+    variables: {
+      objects: {
+        device_id: data.device_id,
+        wallet: data.wallet,
+        tamamons: JSON.stringify(data.tamamons)
+      }
+    }
+  };
 };
 
-module.exports = makeNewUser;
+const updateUserData = newData => {
+  return {
+    query: `
+      mutation update_user_data($where:user_data_bool_exp!, $set: user_data_set_input) {
+        update_user_data(
+          where: $where, 
+          _set: $set) 
+            {
+            returning {
+              tamamons
+            }
+          }
+      }
+  `,
+    variables: {
+      where: { device_id: { _eq: newData.id } },
+      set: {
+        tamamons: JSON.stringify(newData.tamamons),
+        wallet: newData.wallet
+      }
+    }
+  };
+};
+
+module.exports = { makeNewUser, updateUserData };

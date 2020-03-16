@@ -80,18 +80,18 @@ export default class TamaStore extends Component {
             {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
           </TouchableOpacity>
 
-          {/*Intelimon*/}
+          {/*Intellimon*/}
           <TouchableOpacity
             style={localStyles.blocks}
             onPress={() => {
-              this.props.buyTamamon("Intelimon", this.state.inteliPrice);
+              this.props.buyTamamon("Intellimon", this.state.inteliPrice);
             }}
           >
             <Image
               source={require("./res/images/icons/cat-2.png")}
               style={localStyles.blockContent}
             ></Image>
-            <Text style={localStyles.textBox}>Intelimon</Text>
+            <Text style={localStyles.textBox}>Intellimon</Text>
             {this.props.inteliOwned ? inteliBought : inteliBuy}
           </TouchableOpacity>
 
