@@ -224,7 +224,7 @@ export default class TamaMenu extends Component {
     );
 
     return (
-      <View>
+      <ScrollView>
         <ImageBackground
           source={require("./res/images/Sprite-0002.gif")}
           style={{ width: "100%", height: "100%" }}
@@ -250,7 +250,7 @@ export default class TamaMenu extends Component {
             </View>
           </View>
         </ImageBackground>
-      </View>
+      </ScrollView>
     );
   }
 
@@ -815,6 +815,7 @@ var localStyles = StyleSheet.create({
   },
   buttons: {
     margin: 20,
+    marginBottom: 20,
     borderRadius: 20,
     borderWidth: 2,
     borderColor: "#007aff",
