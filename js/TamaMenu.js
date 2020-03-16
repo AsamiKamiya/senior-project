@@ -84,6 +84,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: false,
           text: [
             "Thank you for feeding me!",
             "I could totally eat more...",
@@ -131,6 +132,7 @@ export default class TamaMenu extends Component {
     );
     this._buyTamamon = this._buyTamamon.bind(this);
     this._addARTamamon = this._addARTamamon.bind(this);
+    this._updateNeglected = this._updateNeglected.bind(this);
   }
 
   //Switch AR scenes based on Navigator Type
@@ -299,7 +301,9 @@ export default class TamaMenu extends Component {
             washed: this.state.tamamon[0].washed,
             played: this.state.tamamon[0].played,
             text: this.state.displayText,
-            flgs: this.state.tamamon[0].flgs
+            flgs: this.state.tamamon[0].flgs,
+            neglected: this.state.tamamon[0].neglected,
+            updateNeglected: this._updateNeglected
           }}
           initialScene={{ scene: InitialARScene }}
         />
@@ -705,6 +709,14 @@ export default class TamaMenu extends Component {
         })
       }));
     }, 4000);
+  };
+
+  _updateNeglected = async name => {
+    this.setState(prevState => ({
+      tamamon: prevState.tamamon.map(obj =>
+        obj.name === name ? Object.assign(obj, { neglected: false }) : obj
+      )
+    }));
   };
 
   _washTamamon = name => {
