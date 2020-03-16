@@ -28,6 +28,7 @@ const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
 const InitialARSceneForTama3rd = require("./Tamamon3rd");
 const InitialARSceneForTama4th = require("./Tamamon4th");
+const InitialARSceneForTama5th = require("./Tamamon5th");
 const InitialARSceneForAddFromAR = require("./AddFromAR");
 
 const UNSET = "UNSET";
@@ -39,11 +40,13 @@ const AR_NAVIGATOR_TYPE_2nd = "2nd";
 const AR_NAVIGATOR_TYPE_3rd = "3rd";
 //4. Higemon
 const AR_NAVIGATOR_TYPE_4th = "4th";
-//5. TamaStore
+//5. Birdmon
+const AR_NAVIGATOR_TYPE_5th = "5th";
+//6. TamaStore
 const STORE_NAVIGATOR_TYPE = "STORE";
-//6. Menu Page
+//7. Menu Page
 const defaultNavigatorType = UNSET;
-// 7. Add AR page
+//8. Add AR page
 const ADD_AR_NAVIGATOR_TYPE = "ADD_AR";
 
 // flg name
@@ -130,6 +133,17 @@ export default class TamaMenu extends Component {
           fedCount: 0,
           text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
+        },
+
+        {
+          name: "Birdmon",
+          owned: true,
+          washed: false,
+          played: false,
+          fed: false,
+          fedCount: 0,
+          text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
+          flgs: [0, 0, 0, 0] // feed, wash, play, speech
         }
       ]
     };
@@ -139,6 +153,7 @@ export default class TamaMenu extends Component {
     this._getARNavigator2nd = this._getARNavigator2nd.bind(this);
     this._getARNavigator3rd = this._getARNavigator3rd.bind(this);
     this._getARNavigator4th = this._getARNavigator4th.bind(this);
+    this._getARNavigator5th = this._getARNavigator5th.bind(this);
     this._getStore = this._getStore.bind(this);
     this._getAddAR = this._getAddAR.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
@@ -160,6 +175,8 @@ export default class TamaMenu extends Component {
       return this._getARNavigator3rd();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE_4th) {
       return this._getARNavigator4th();
+    } else if (this.state.navigatorType === AR_NAVIGATOR_TYPE_5th) {
+      return this._getARNavigator5th();
     } else if (this.state.navigatorType == STORE_NAVIGATOR_TYPE) {
       return this._getStore();
     } else if (this.state.navigatorType == ADD_AR_NAVIGATOR_TYPE) {
@@ -227,12 +244,29 @@ export default class TamaMenu extends Component {
         underlayColor={"#68a0ff"}
       >
         <Image
-          source={require("./res/icons/menuIcons/potatoIcon.png")}
+          source={require("./res/icons/menuIcons/hige_sprite.png")}
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[3].name}</Text>
         <Text style={localStyles.buttonText}>
           You've fed Higemon {this.state.tamamon[3].fedCount} times.
+        </Text>
+      </TouchableOpacity>
+    );
+
+    const birdButton = (
+      <TouchableOpacity
+        onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_5th)}
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Image
+          source={require("./res/icons/menuIcons/hige_sprite.png")}
+          style={localStyles.images}
+        />
+        <Text style={localStyles.buttonText}>{this.state.tamamon[4].name}</Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Birdmon {this.state.tamamon[4].fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -284,6 +318,9 @@ export default class TamaMenu extends Component {
 
               {/*Select Higemon*/}
               {this.state.tamamon[3].owned ? higeButton : null}
+
+              {/*Select Birdmon */}
+              {this.state.tamamon[4].owned ? birdButton : null}
             </View>
           </View>
         </ImageBackground>
@@ -652,6 +689,95 @@ export default class TamaMenu extends Component {
             onPress={() => {
               this._playTamamon("Higemon");
               this._updateFlg("Higemon", PLAYED_FLG);
+            }}
+          >
+            <Image
+              source={require("./res/icons/heartIconTEST.png")}
+              style={localStyles.icons}
+            ></Image>
+            <Text style={localStyles.tabTitle}>Hug</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+  //Birdmon AR Scene
+
+  _getARNavigator5th() {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "100%",
+          height: "100%"
+        }}
+      >
+        {/* This is our AR Scene for birdmon*/}
+        <ViroARSceneNavigator
+          viroAppProps={{
+            fed: this.state.tamamon[4].fed,
+            fedCount: this.state.tamamon[4].fedCount,
+            washed: this.state.tamamon[4].washed,
+            played: this.state.tamamon[4].played,
+            text: this.state.displayText,
+            flgs: this.state.tamamon[4].flgs
+          }}
+          initialScene={{ scene: InitialARSceneForTama5th }}
+        />
+
+        {/*This is our bottom navbar*/}
+        <View style={localStyles.bottomNav}>
+          {/*Home button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={this._getExperienceButtonOnPress(UNSET)}
+          >
+            <Image
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButton}
+            ></Image>
+          </TouchableOpacity>
+
+          {/*Feed button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => {
+              this._feedButtonHandler("Birdmon");
+            }}
+          >
+            <Image
+              source={require("./res/icons/hamburgerIconTEST.png")}
+              style={localStyles.icons}
+            ></Image>
+            <Text style={localStyles.tabTitle}>Feed</Text>
+          </TouchableOpacity>
+
+          {/*Clean button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => {
+              this._washTamamon("Birdmon");
+              this._updateFlg("Birdmon", WASHED_FLG);
+            }}
+          >
+            <Image
+              source={require("./res/icons/washIconTEST.png")}
+              style={localStyles.icons}
+            ></Image>
+            <Text style={localStyles.tabTitle}>Clean</Text>
+          </TouchableOpacity>
+
+          {/*Play button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={() => {
+              this._playTamamon("Birdmon");
+              this._updateFlg("Birdmon", PLAYED_FLG);
             }}
           >
             <Image

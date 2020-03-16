@@ -32,7 +32,7 @@ import {
   ViroSound
 } from "react-viro";
 
-export default class HelloWorldSceneAR extends Component {
+export default class TamamonFifth extends Component {
   constructor() {
     super();
 
@@ -59,11 +59,11 @@ export default class HelloWorldSceneAR extends Component {
           scale={[-0.4, 0.4, 0.4]}
           position={[0.1, -0.95, -3]}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          //animation={{
-          //name: "disappearForText",
-          //run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-          //delay: 2000
-          //}}
+          animation={{
+            name: "disappearForText",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+            delay: 2000
+          }}
         ></Viro3DObject>
         <ViroText
           text={this.props.arSceneNavigator.viroAppProps.text}
@@ -73,11 +73,11 @@ export default class HelloWorldSceneAR extends Component {
           width={2}
           height={2}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          /*animation={{
+          animation={{
             name: "disappearForText",
             run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
             delay: 2000
-          }}*/
+          }}
         />
         {/* This is the heart that appears */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
@@ -107,9 +107,12 @@ export default class HelloWorldSceneAR extends Component {
         {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
         this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
-            source={require("./res/cat2.obj")}
+            source={require("./res/bird/tinybird.obj")}
             position={[-0.0, -1, -3]}
-            resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+            resources={[
+              require("./res/bird/tinybird.mtl"),
+              require("./res/bird/tinybird.png")
+            ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
             animation={{
@@ -119,11 +122,11 @@ export default class HelloWorldSceneAR extends Component {
           />
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
-            source={require("./res/cat2-a1.obj")}
+            source={require("./res/bird/tinybird2.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/cat2-a1.mtl"),
-              require("./res/cat2-a1.png")
+              require("./res/bird/tinybird2.mtl"),
+              require("./res/bird/tinybird2.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -134,11 +137,11 @@ export default class HelloWorldSceneAR extends Component {
           />
         ) : (
           <Viro3DObject
-            source={require("./res/cat2-a2.obj")}
+            source={require("./res/bird/tinybird.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/cat2-a2.mtl"),
-              require("./res/cat2-a2.png")
+              require("./res/bird/tinybird.mtl"),
+              require("./res/bird/tinybird.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -151,7 +154,7 @@ export default class HelloWorldSceneAR extends Component {
 
         {/*Tamamon Name */}
         <ViroText
-          text="Pocchamon"
+          text="Birdmon"
           width={2}
           height={2}
           style={styles.nameText}
@@ -423,4 +426,4 @@ ViroAnimations.registerAnimations({
   // heartAnimation: [["moveUp", "rotate"]]
 });
 
-module.exports = HelloWorldSceneAR;
+module.exports = TamamonFifth;
