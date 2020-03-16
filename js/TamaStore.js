@@ -59,7 +59,8 @@ export default class TamaStore extends Component {
       <ScrollView style={localStyles.scrollview}>
         <ImageBackground
           source={require("./res/images/Sprite-0004.gif")}
-          style={{ width: "100%", height: 400, flex: 1, resizeMode: "contain" }}
+          style={{ width: "100%", height: 400, flex: 1 }}
+          resizeMode="stretch"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
           {walletDisplay}
@@ -133,9 +134,9 @@ export default class TamaStore extends Component {
           style={{
             width: "100%",
             height: 210,
-            flex: 1,
-            resizeMode: "contain"
+            flex: 1
           }}
+          resizeMode="stretch"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         ></ImageBackground>
       </ScrollView>

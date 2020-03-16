@@ -300,10 +300,9 @@ export default class TamaMenu extends Component {
           source={require("./res/images/Sprite-0004.gif")}
           style={{
             width: "100%",
-            height: 350,
-            flex: 1,
-            resizeMode: "contain"
+            height: 300
           }}
+          resizeMode="stretch"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
           <View style={localStyles.inner}>
@@ -341,9 +340,9 @@ export default class TamaMenu extends Component {
           style={{
             width: "100%",
             height: 210,
-            flex: 1,
-            resizeMode: "contain"
+            flex: 1
           }}
+          resizeMode="stretch"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         ></ImageBackground>
       </ScrollView>
