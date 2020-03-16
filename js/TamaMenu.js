@@ -27,6 +27,7 @@ import TamaStore from "./TamaStore";
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
 const InitialARSceneForTama3rd = require("./Tamamon3rd");
+const InitialARSceneForAddFromAR = require("./AddFromAR");
 
 const UNSET = "UNSET";
 //1. Pocchamon
@@ -39,6 +40,8 @@ const AR_NAVIGATOR_TYPE_3rd = "3rd";
 const STORE_NAVIGATOR_TYPE = "STORE";
 //5. Menu Page
 const defaultNavigatorType = UNSET;
+// 6. Add AR page
+const ADD_AR_NAVIGATOR_TYPE = "ADD_AR";
 
 // flg name
 const WASHED_FLG = 1;
@@ -46,83 +49,6 @@ const PLAYED_FLG = 2;
 const SPEECH_FLG = 3;
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
 const axios = require("axios");
-
-const getFed = axios({
-  url: "https://tamomon.herokuapp.com/v1/graphql",
-  method: "post",
-  data: {
-    query: `
-    query {
-      Tamomon {
-        id
-        name
-        fedCount
-      }
-    }
-      `
-  }
-}).then(result => {
-  console.log(result.data);
-});
-
-// const updateFed = axios({
-//   url: "https://tamomon.herokuapp.com/v1/graphql",
-//   method: "post",
-//   data: {
-//     query: `
-// mutation update_single_tamomon {
-//   update_Tamomon(
-//     where: {name: {_eq: "Pocchamon"}},
-//     _set: {
-//       fed: true,
-//       fedCount: 2,
-//     }
-//   ) {
-//     affected_rows
-//     returning {
-//       id
-//       name
-//       fedCount
-//     }
-//   }
-// }
-// `
-//   }
-// }).then(result => {
-//   console.log(result.data);
-// });
-
-// axios({
-//   url: "https://tamomon.herokuapp.com/v1/graphql",
-//   method: "post",
-//   data: {
-//     query: `
-//     mutation insert_single_tamomon {
-//     insert_Tamomon(
-//       objects: {
-//         id: 2,
-//         name: "Pot",
-//         fed: 67,
-//         washed: 56,
-//         played: 45,
-//         modified: 87
-//       }
-//     ) {
-//      returning {
-//   id
-//       name
-//       washed
-//       fed
-//       played
-//       modified
-//     }
-//     }
-//   }
-//       `
-//   }
-// }).then(result => {
-//   console.log(result.data);
-// });
 
 //TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection.
 
@@ -199,10 +125,12 @@ export default class TamaMenu extends Component {
     this._getARNavigator2nd = this._getARNavigator2nd.bind(this);
     this._getARNavigator3rd = this._getARNavigator3rd.bind(this);
     this._getStore = this._getStore.bind(this);
+    this._getAddAR = this._getAddAR.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
       this
     );
     this._buyTamamon = this._buyTamamon.bind(this);
+    this._addARTamamon = this._addARTamamon.bind(this);
   }
 
   //Switch AR scenes based on Navigator Type
@@ -217,6 +145,8 @@ export default class TamaMenu extends Component {
       return this._getARNavigator3rd();
     } else if (this.state.navigatorType == STORE_NAVIGATOR_TYPE) {
       return this._getStore();
+    } else if (this.state.navigatorType == ADD_AR_NAVIGATOR_TYPE) {
+      return this._getAddAR();
     }
   }
 
@@ -282,6 +212,16 @@ export default class TamaMenu extends Component {
         <Text style={localStyles.textStyle}>STORE</Text>
       </TouchableHighlight>
     );
+    // TODO change
+    const addButton = (
+      <TouchableHighlight
+        onPress={this._getExperienceButtonOnPress(ADD_AR_NAVIGATOR_TYPE)}
+        style={localStyles.buttonStyle}
+        underlayColor={"#68a0ff"}
+      >
+        <Text style={localStyles.textStyle}>AR</Text>
+      </TouchableHighlight>
+    );
 
     return (
       <ScrollView>
@@ -296,6 +236,7 @@ export default class TamaMenu extends Component {
             />
 
             {storeButton}
+            {addButton}
 
             <View style={localStyles.parent}>
               {/* Select Pocchamon */}
@@ -599,7 +540,44 @@ export default class TamaMenu extends Component {
       </View>
     );
   }
+  _getAddAR() {
+    return (
+      <View
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "100%",
+          height: "100%"
+        }}
+      >
+        {/* This is our AR Scene for Add tamamon from AR.*/}
+        <ViroARSceneNavigator
+          viroAppProps={{
+            addTamamon: this._addARTamamon,
+            tamamonList: this.state.tamamon
+          }}
+          initialScene={{ scene: InitialARSceneForAddFromAR }}
+        />
 
+        {/*This is our bottom navbar*/}
+        <View style={localStyles.bottomNav}>
+          {/*Home button*/}
+          <TouchableOpacity
+            style={localStyles.tabItem}
+            onPress={this._getExperienceButtonOnPress(UNSET)}
+          >
+            <Image
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButton}
+            ></Image>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
   _getExperienceButtonOnPress(navigatorType) {
     return () => {
       this.setState({
@@ -787,6 +765,20 @@ export default class TamaMenu extends Component {
         }
       );
     }
+  }
+  _addARTamamon(name) {
+    let addTamamon = this.state.tamamon.filter(obj => {
+      return obj.name === name;
+    });
+
+    if (addTamamon[0].owned === true) {
+      return;
+    }
+    this.setState(prevState => ({
+      tamamon: prevState.tamamon.map(obj =>
+        obj.name === name ? Object.assign(obj, { owned: true }) : obj
+      )
+    }));
   }
 }
 
