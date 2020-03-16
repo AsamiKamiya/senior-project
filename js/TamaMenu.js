@@ -13,7 +13,8 @@ import {
   ImageBackground,
   Image,
   Button,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from "react-native";
 
 import {
@@ -182,9 +183,9 @@ export default class TamaMenu extends Component {
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[0].name}</Text>
-        <Text style={localStyles.buttonText}>
+        {/* <Text style={localStyles.buttonText}>
           You've fed Pocchamon {this.state.tamamon[0].fedCount} times.
-        </Text>
+        </Text> */}
       </TouchableOpacity>
     );
 
@@ -199,9 +200,9 @@ export default class TamaMenu extends Component {
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[1].name}</Text>
-        <Text style={localStyles.buttonText}>
+        {/* <Text style={localStyles.buttonText}>
           You've fed Intelimon {this.state.tamamon[1].fedCount} times.
-        </Text>
+        </Text> */}
       </TouchableOpacity>
     );
 
@@ -216,9 +217,9 @@ export default class TamaMenu extends Component {
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[2].name}</Text>
-        <Text style={localStyles.buttonText}>
+        {/* <Text style={localStyles.buttonText}>
           {this.state.tamamon[2].fedCount}
-        </Text>
+        </Text> */}
       </TouchableOpacity>
     );
 
@@ -233,9 +234,9 @@ export default class TamaMenu extends Component {
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[3].name}</Text>
-        <Text style={localStyles.buttonText}>
+        {/* <Text style={localStyles.buttonText}>
           You've fed Higemon {this.state.tamamon[3].fedCount} times.
-        </Text>
+        </Text> */}
       </TouchableOpacity>
     );
 
@@ -260,10 +261,11 @@ export default class TamaMenu extends Component {
     );
 
     return (
-      <ScrollView>
+      <ScrollView style={[localStyles.scrollview]}>
         <ImageBackground
           source={require("./res/images/Sprite-0002.gif")}
-          style={{ width: "100%", height: "100%" }}
+          // style={{ width: "100%", height: "100%" }}
+          style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
           <View style={localStyles.inner}>
             <Image
@@ -271,9 +273,10 @@ export default class TamaMenu extends Component {
               style={localStyles.title}
             />
 
-            {storeButton}
-            {addButton}
-
+            <View style={{ flexDirection: "row" }}>
+              {storeButton}
+              {addButton}
+            </View>
             <View style={localStyles.parent}>
               {/* Select Pocchamon */}
               {this.state.tamamon[0].owned ? pocchaButton : null}
@@ -933,7 +936,8 @@ var localStyles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-evenly",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    flexDirection: "row"
   },
   images: {
     width: 80,
@@ -964,7 +968,9 @@ var localStyles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#fff",
     flexGrow: 1,
-    width: "30%"
+    width: "30%",
+    minWidth: "30%"
+    // flex: 1
   },
   bottomNav: {
     height: 75,
@@ -1008,6 +1014,7 @@ var localStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#007aff",
     marginTop: 50,
+    margin: 10,
     justifyContent: "center"
   },
 
@@ -1018,6 +1025,20 @@ var localStyles = StyleSheet.create({
     fontWeight: "600",
     paddingTop: 10,
     paddingBottom: 10
+  },
+  containter: {
+    width: Dimensions.get("window").width, //for full screen
+    height: Dimensions.get("window").height //for full screen
+  },
+  fixed: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
+  scrollview: {
+    backgroundColor: "transparent"
   }
 });
 module.exports = TamaMenu;

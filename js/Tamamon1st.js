@@ -96,11 +96,11 @@ export default class HelloWorldSceneAR extends Component {
               scale={[-0.4, 0.4, 0.4]}
               position={[0.1, -0.95, -3]}
               opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-              animation={{
-                name: "disappearForText",
-                run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-                delay: 2000
-              }}
+              // animation={{
+              //   name: "disappearForText",
+              //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              //   delay: 2000
+              // }}
             ></Viro3DObject>
             <ViroText
               text={this.props.arSceneNavigator.viroAppProps.text}
@@ -110,11 +110,11 @@ export default class HelloWorldSceneAR extends Component {
               width={2}
               height={2}
               opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-              animation={{
-                name: "disappearForText",
-                run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-                delay: 2000
-              }}
+              // animation={{
+              //   name: "disappearForText",
+              //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              //   delay: 2000
+              // }}
             />
           </ViroNode>
         )}
@@ -215,13 +215,12 @@ export default class HelloWorldSceneAR extends Component {
           height={2}
           style={styles.nameText}
           position={[-0.1, 0.35, -3]}
-          //position={[1.2, -1.3, -3]}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          animation={{
-            name: "disappearForText",
-            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 2000
-          }}
+          // animation={{
+          //   name: "disappearForText",
+          //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+          //   delay: 2000
+          // }}
         ></ViroText>
 
         <ViroSpotLight
