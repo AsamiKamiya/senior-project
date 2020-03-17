@@ -136,14 +136,25 @@ export default class TamaMenu extends Component {
           text: [
             "I usually expect higher quality food...",
             "But what about third breakfast?",
-            "Third breakfast was fine, I guess. It's not like I'm happy or anything.",
-            "Okay maybe five breakfasts was a bit much."
+            "Breakfast was fine, I guess. It's not like I'm happy or anything.",
+            "Okay maybe five breakfasts was too much."
           ],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
 
         {
           name: "Birdmon",
+          owned: false,
+          washed: false,
+          played: false,
+          fed: false,
+          fedCount: 0,
+          text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
+          flgs: [0, 0, 0, 0] // feed, wash, play, speech
+        },
+
+        {
+          name: "Keromon",
           owned: false,
           washed: false,
           played: false,
@@ -252,7 +263,7 @@ export default class TamaMenu extends Component {
         underlayColor={"#68a0ff"}
       >
         <Image
-          source={require("./res/icons/menuIcons/hige_sprite.png")}
+          source={require("./res/icons/menuIcons/hige_sprite2.png")}
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[3].name}</Text>
@@ -269,12 +280,29 @@ export default class TamaMenu extends Component {
         underlayColor={"#68a0ff"}
       >
         <Image
-          source={require("./res/icons/menuIcons/hige_sprite.png")}
+          source={require("./res/icons/menuIcons/tinybird2d.png")}
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[4].name}</Text>
         <Text style={localStyles.buttonText}>
           You've fed Birdmon {this.state.tamamon[4].fedCount} times.
+        </Text>
+      </TouchableOpacity>
+    );
+
+    const keroButton = (
+      <TouchableOpacity
+        onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_5th)} //needs update
+        style={localStyles.buttons}
+        underlayColor={"#68a0ff"}
+      >
+        <Image
+          source={require("./res/icons/menuIcons/greenfrog.png")}
+          style={localStyles.images}
+        />
+        <Text style={localStyles.buttonText}>{this.state.tamamon[5].name}</Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Birdmon {this.state.tamamon[5].fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -370,6 +398,9 @@ export default class TamaMenu extends Component {
           pocchaOwned={this.state.tamamon[0].owned}
           inteliOwned={this.state.tamamon[1].owned}
           poteOwned={this.state.tamamon[2].owned}
+          higeOwned={this.state.tamamon[3].owned}
+          birdOwned={this.state.tamamon[4].owned}
+          keroOwned={this.state.tamamon[5].owned}
           wallet={this.state.wallet}
           buyTamamon={this._buyTamamon}
         ></TamaStore>
