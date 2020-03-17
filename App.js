@@ -53,7 +53,8 @@ export default class ViroSample extends Component {
       sharedProps: sharedProps,
       deviceID: DeviceInfo.getUniqueId(),
       wallet: 0,
-      serverData: []
+      serverData: [],
+      loaded: false
     };
     this._getTamaNavigator = this._getTamaNavigator.bind(this);
     this._getExperienceButtonOnPress = this._getExperienceButtonOnPress.bind(
@@ -145,7 +146,7 @@ export default class ViroSample extends Component {
             }
           });
           console.log("new state?", clonedState);
-          this.setState({ serverData: clonedState });
+          this.setState({ serverData: clonedState, loaded: true });
           console.log("updated state", this.state.serverData);
         });
     };
@@ -166,6 +167,15 @@ export default class ViroSample extends Component {
 
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
+    const startButton = (
+      <TouchableOpacity
+        style={localStyles.buttonStyle}
+        onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
+      >
+        <Text style={localStyles.textStyle}>Start</Text>
+      </TouchableOpacity>
+    );
+
     return (
       <View style={{ display: "flex" }}>
         <ImageBackground
@@ -186,12 +196,7 @@ export default class ViroSample extends Component {
               <Text style={localStyles.buttonText}>START</Text>
             </TouchableHighlight>
             */}
-            <TouchableOpacity
-              style={localStyles.buttonStyle}
-              onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
-            >
-              <Text style={localStyles.textStyle}>Start</Text>
-            </TouchableOpacity>
+            {this.state.loaded ? startButton : null}
           </View>
         </ImageBackground>
       </View>
