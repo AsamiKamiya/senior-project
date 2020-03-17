@@ -193,7 +193,6 @@ export default class TamaStore extends Component {
             flex: 1
           }}
           resizeMode="stretch"
-          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         ></ImageBackground>
       </ScrollView>
     );

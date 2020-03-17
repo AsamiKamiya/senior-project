@@ -27,7 +27,6 @@ export default class TamamonThird extends Component {
       forPlay: false
     };
     // bind 'this' to functions
-    this._onInitialized = this._onInitialized.bind(this);
     this._onFinishAnimation4play = this._onFinishAnimation4play.bind(this);
   }
 
@@ -250,17 +249,7 @@ export default class TamamonThird extends Component {
       </ViroARScene>
     );
   }
-  _onInitialized(state, reason) {
-    if (state == ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text: "Please scan the marker."
-      });
-    } else if (state == ViroConstants.TRACKING_NONE) {
-      this.setState({
-        text: "It's not working"
-      });
-    }
-  }
+
   _onFinishAnimation4play() {
     if (!this.state.forPlay) {
       this.setState({ forPlay: true });
