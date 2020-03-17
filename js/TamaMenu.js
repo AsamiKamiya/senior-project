@@ -133,7 +133,12 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
-          text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
+          text: [
+            "I usually expect higher quality food...",
+            "But what about third breakfast?",
+            "Third breakfast was fine, I guess. It's not like I'm happy or anything.",
+            "Okay maybe five breakfasts was a bit much."
+          ],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
 
