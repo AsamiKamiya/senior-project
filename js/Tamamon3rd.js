@@ -8,21 +8,13 @@ import {
   ViroARScene,
   ViroText,
   ViroConstants,
-  ViroBox,
-  ViroMaterials,
   Viro3DObject,
   ViroAmbientLight,
   ViroSpotLight,
-  ViroARPlaneSelector,
   ViroNode,
   ViroAnimations,
   ViroARTrackingTargets,
-  ViroARImageMarker,
-  ViroARTrackingTarget,
-  ViroButton,
-  ViroFlexView,
-  ViroImage,
-  ViroParticleEmitter
+  ViroImage
 } from "react-viro";
 
 export default class TamamonThird extends Component {
@@ -42,240 +34,29 @@ export default class TamamonThird extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
+        {/* This is the speech bubble and text */}
+        <Viro3DObject
+          source={require("./res/speechBubble.obj")}
+          resources={[
+            require("./res/speechBubble.mtl"),
+            require("./res/speechBubble.png")
+          ]}
+          type="OBJ"
+          scale={[-0.4, 0.4, 0.4]}
+          position={[0.1, -0.95, -3]}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+        ></Viro3DObject>
         <ViroText
-          text={this.state.text}
-          position={[0, 0, -5]}
-          style={styles.announceTextStyle}
+          text={this.props.arSceneNavigator.viroAppProps.text}
+          scale={[0.4, 0.4, 0.4]}
+          position={[-0.7, 0.8, -2.9]}
+          style={styles.helloWorldTextStyle}
           width={2}
           height={2}
-          animation={{
-            name: "disappearForText",
-            run: true,
-            delay: 5000
-          }}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
         />
-        <ViroARImageMarker
-          target={"targetOne"}
-          pauseUpdates={this.state.pauseUpdates}
-        >
-          {/* This is the speech bubble and text */}
-          <Viro3DObject
-            source={require("./res/speechBubble.obj")}
-            resources={[
-              require("./res/speechBubble.mtl"),
-              require("./res/speechBubble.png")
-            ]}
-            type="OBJ"
-            scale={[-0.4, 0.4, 0.4]}
-            position={[0.1, -0.95, -3]}
-            opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-            animation={{
-              name: "disappearForText",
-              run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-              delay: 2000
-            }}
-          ></Viro3DObject>
-          <ViroText
-            text={this.props.arSceneNavigator.viroAppProps.text}
-            scale={[0.4, 0.4, 0.4]}
-            position={[-0.7, 0.8, -2.9]}
-            style={styles.helloWorldTextStyle}
-            width={2}
-            height={2}
-            opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-            animation={{
-              name: "disappearForText",
-              run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-              delay: 2000
-            }}
-          />
-          {/* This is the heart that appears */}
-          {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
-            <ViroImage
-              source={require("./res/heart.png")}
-              position={[0.5, 0.8, -3]}
-              scale={[0.5, 0.5, 0.5]}
-              opacity={0}
-              transformBehaviors={["billboard"]}
-              animation={{
-                name: "moveUp",
-                run: this.props.arSceneNavigator.viroAppProps.fedCount === 1
-              }}
-            />
-          ) : (
-            // for empty
-            <ViroText
-              text=""
-              scale={[0.3, 0.3, 0.3]}
-              Ï
-              position={[0.6, 0.08, -0.9]}
-              style={styles.helloWorldTextStyle}
-            />
-          )}
-
-          {/* This is the Pocchamon animation */}
-          {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
-          this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
-            <Viro3DObject
-              source={require("./res/potatoFolder/potatoIcon2.obj")}
-              position={[-0.0, -1, -3]}
-              resources={[
-                require("./res/potatoFolder/potatoIcon2.mtl"),
-                require("./res/potatoFolder/potatoIcon2.png")
-              ]}
-              type="OBJ"
-              scale={[0.3, 0.3, 0.3]}
-              animation={{
-                name: "catBoundNo1st",
-                run: this.props.arSceneNavigator.viroAppProps.fed
-              }}
-            />
-          ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
-            <Viro3DObject
-              source={require("./res/potatoFolder/potatoIcon2.obj")}
-              position={[-0.0, -1, -3]}
-              resources={[
-                require("./res/potatoFolder/potatoIcon2.mtl"),
-                require("./res/potatoFolder/potatoIcon2.png")
-              ]}
-              type="OBJ"
-              scale={[0.3, 0.3, 0.3]}
-              animation={{
-                name: "catBound1st",
-                run: this.props.arSceneNavigator.viroAppProps.fed
-              }}
-            />
-          ) : (
-            <Viro3DObject
-              source={require("./res/potatoFolder/potatoIcon3.obj")}
-              position={[-0.0, -1, -3]}
-              resources={[
-                require("./res/potatoFolder/potatoIcon3.mtl"),
-                require("./res/potatoFolder/potatoIcon3.png")
-              ]}
-              type="OBJ"
-              scale={[0.3, 0.3, 0.3]}
-              animation={{
-                name: "catBoundAngry",
-                run: this.props.arSceneNavigator.viroAppProps.fed
-              }}
-            />
-          )}
-
-          <ViroSpotLight
-            innerAngle={5}
-            outerAngle={25}
-            direction={[0, -1, 0]}
-            position={[0, 5, 1]}
-            color="#ffffff"
-            castsShadow={true}
-            shadowMapSize={2048}
-            shadowNearZ={2}
-            shadowFarZ={7}
-            shadowOpacity={0.7}
-          />
-          <ViroAmbientLight color="#FFFFFF" />
-          {/* for wash */}
-          <ViroNode>
-            <ViroImage
-              source={require("./res/bubbles.png")}
-              position={[0.2, 0.5, -2.8]}
-              scale={[0.5, 0.5, 0.5]}
-              opacity={0}
-              transformBehaviors={["billboard"]}
-              animation={{
-                name: "washAnimation",
-                run:
-                  this.props.arSceneNavigator.viroAppProps.washed &&
-                  this.props.arSceneNavigator.viroAppProps.flgs[1] === 1
-              }}
-            />
-            <ViroImage
-              source={require("./res/bubbles.png")}
-              position={[0.7, 0.05, -2.8]}
-              scale={[0.5, 0.5, 0.5]}
-              opacity={0}
-              transformBehaviors={["billboard"]}
-              animation={{
-                name: "washAnimation",
-                run:
-                  this.props.arSceneNavigator.viroAppProps.washed &&
-                  this.props.arSceneNavigator.viroAppProps.flgs[1] === 1
-              }}
-            />
-            <ViroImage
-              source={require("./res/star.png")}
-              position={[0.7, 0.05, -2.8]}
-              scale={[0.2, 0.2, 0.2]}
-              opacity={0}
-              transformBehaviors={["billboard"]}
-              animation={{
-                name: "starAnimation",
-                run:
-                  this.props.arSceneNavigator.viroAppProps.washed &&
-                  this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
-                delay: 1500
-              }}
-            />
-            <ViroImage
-              source={require("./res/star.png")}
-              position={[0.8, -0.1, -2.8]}
-              scale={[0.1, 0.1, 0.1]}
-              opacity={0}
-              transformBehaviors={["billboard"]}
-              animation={{
-                name: "starAnimation",
-                run:
-                  this.props.arSceneNavigator.viroAppProps.washed &&
-                  this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
-                delay: 1500
-              }}
-            />
-            <ViroImage
-              source={require("./res/star.png")}
-              position={[0.1, 0.5, -2.8]}
-              scale={[0.2, 0.2, 0.2]}
-              opacity={0}
-              transformBehaviors={["billboard"]}
-              animation={{
-                name: "starAnimation",
-                run:
-                  this.props.arSceneNavigator.viroAppProps.washed &&
-                  this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
-                delay: 1500
-              }}
-            />
-          </ViroNode>
-          {/*Tamamon Name */}
-          <ViroText
-            text="Potemon"
-            width={2}
-            height={2}
-            style={styles.nameText}
-            position={[-0.1, 0.35, -3]}
-            //position={[1.2, -1.3, -3]}
-            opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-            animation={{
-              name: "disappearForText",
-              run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-              delay: 2000
-            }}
-          ></ViroText>
-          {/* for play */}
-          <ViroImage
-            source={require("./res/hand.png")}
-            position={[0.3, 0.55, -2.8]}
-            scale={[0.3, 0.3, 0.3]}
-            opacity={0}
-            transformBehaviors={["billboard"]}
-            animation={{
-              name: "playAnimation",
-              run:
-                this.props.arSceneNavigator.viroAppProps.played &&
-                this.props.arSceneNavigator.viroAppProps.flgs[2] === 1,
-              onFinish: this._onFinishAnimation4play
-            }}
-          />
+        {/* This is the heart that appears */}
+        {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
             source={require("./res/heart.png")}
             position={[0.5, 0.8, -3]}
@@ -283,11 +64,189 @@ export default class TamamonThird extends Component {
             opacity={0}
             transformBehaviors={["billboard"]}
             animation={{
-              name: "heartAnimationForPlay",
-              run: this.state.forPlay
+              name: "moveUp",
+              run: this.props.arSceneNavigator.viroAppProps.fedCount === 1
             }}
           />
-        </ViroARImageMarker>
+        ) : (
+          // for empty
+          <ViroText
+            text=""
+            scale={[0.3, 0.3, 0.3]}
+            Ï
+            position={[0.6, 0.08, -0.9]}
+            style={styles.helloWorldTextStyle}
+          />
+        )}
+
+        {/* This is the Pocchamon animation */}
+        {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
+        this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
+          <Viro3DObject
+            source={require("./res/potatoFolder/potatoIcon2.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[
+              require("./res/potatoFolder/potatoIcon2.mtl"),
+              require("./res/potatoFolder/potatoIcon2.png")
+            ]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            animation={{
+              name: "catBoundNo1st",
+              run: this.props.arSceneNavigator.viroAppProps.fed
+            }}
+          />
+        ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
+          <Viro3DObject
+            source={require("./res/potatoFolder/potatoIcon2.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[
+              require("./res/potatoFolder/potatoIcon2.mtl"),
+              require("./res/potatoFolder/potatoIcon2.png")
+            ]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            animation={{
+              name: "catBound1st",
+              run: this.props.arSceneNavigator.viroAppProps.fed
+            }}
+          />
+        ) : (
+          <Viro3DObject
+            source={require("./res/potatoFolder/potatoIcon3.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[
+              require("./res/potatoFolder/potatoIcon3.mtl"),
+              require("./res/potatoFolder/potatoIcon3.png")
+            ]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            animation={{
+              name: "catBoundAngry",
+              run: this.props.arSceneNavigator.viroAppProps.fed
+            }}
+          />
+        )}
+
+        <ViroSpotLight
+          innerAngle={5}
+          outerAngle={25}
+          direction={[0, -1, 0]}
+          position={[0, 5, 1]}
+          color="#ffffff"
+          castsShadow={true}
+          shadowMapSize={2048}
+          shadowNearZ={2}
+          shadowFarZ={7}
+          shadowOpacity={0.7}
+        />
+        <ViroAmbientLight color="#FFFFFF" />
+        {/* for wash */}
+        <ViroNode>
+          <ViroImage
+            source={require("./res/bubbles.png")}
+            position={[0.2, 0.5, -2.8]}
+            scale={[0.5, 0.5, 0.5]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "washAnimation",
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1
+            }}
+          />
+          <ViroImage
+            source={require("./res/bubbles.png")}
+            position={[0.7, 0.05, -2.8]}
+            scale={[0.5, 0.5, 0.5]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "washAnimation",
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1
+            }}
+          />
+          <ViroImage
+            source={require("./res/star.png")}
+            position={[0.7, 0.05, -2.8]}
+            scale={[0.2, 0.2, 0.2]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "starAnimation",
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
+              delay: 1500
+            }}
+          />
+          <ViroImage
+            source={require("./res/star.png")}
+            position={[0.8, -0.1, -2.8]}
+            scale={[0.1, 0.1, 0.1]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "starAnimation",
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
+              delay: 1500
+            }}
+          />
+          <ViroImage
+            source={require("./res/star.png")}
+            position={[0.1, 0.5, -2.8]}
+            scale={[0.2, 0.2, 0.2]}
+            opacity={0}
+            transformBehaviors={["billboard"]}
+            animation={{
+              name: "starAnimation",
+              run:
+                this.props.arSceneNavigator.viroAppProps.washed &&
+                this.props.arSceneNavigator.viroAppProps.flgs[1] === 1,
+              delay: 1500
+            }}
+          />
+        </ViroNode>
+        {/*Tamamon Name */}
+        <ViroText
+          text="Potemon"
+          width={2}
+          height={2}
+          style={styles.nameText}
+          position={[-0.1, 0.35, -3]}
+          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+        ></ViroText>
+        {/* for play */}
+        <ViroImage
+          source={require("./res/hand.png")}
+          position={[0.3, 0.55, -2.8]}
+          scale={[0.3, 0.3, 0.3]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{
+            name: "playAnimation",
+            run:
+              this.props.arSceneNavigator.viroAppProps.played &&
+              this.props.arSceneNavigator.viroAppProps.flgs[2] === 1,
+            onFinish: this._onFinishAnimation4play
+          }}
+        />
+        <ViroImage
+          source={require("./res/heart.png")}
+          position={[0.5, 0.8, -3]}
+          scale={[0.5, 0.5, 0.5]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{
+            name: "heartAnimationForPlay",
+            run: this.state.forPlay
+          }}
+        />
       </ViroARScene>
     );
   }
