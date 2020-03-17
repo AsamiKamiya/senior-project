@@ -41,17 +41,17 @@ export default class TamaStore extends Component {
     const bought = <Text style={localStyles.textBox}>Already Owned</Text>;
     //Pocchamon
     const pocchaBuy = (
-      <Text style={localStyles.textBox}>{this.state.pocchaPrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.pocchaPrice} G</Text>
     );
 
     //Intelimon
     const inteliBuy = (
-      <Text style={localStyles.textBox}>{this.state.inteliPrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.inteliPrice} G</Text>
     );
 
     //Potemon
     const poteBuy = (
-      <Text style={localStyles.textBox}>{this.state.potePrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.potePrice} G</Text>
     );
 
     //Higemon

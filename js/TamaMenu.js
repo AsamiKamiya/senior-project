@@ -24,6 +24,8 @@ import {
 } from "react-viro";
 
 import TamaStore from "./TamaStore";
+import { updateUserData } from "../graphql/mutations";
+import clone from "../utils/clone";
 
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
@@ -35,7 +37,7 @@ const InitialARSceneForAddFromAR = require("./AddFromAR");
 const UNSET = "UNSET";
 //1. Pocchamon
 const AR_NAVIGATOR_TYPE = "AR";
-//2. Intelimon
+//2. Intellimon
 const AR_NAVIGATOR_TYPE_2nd = "2nd";
 //3. Potemon
 const AR_NAVIGATOR_TYPE_3rd = "3rd";
@@ -54,26 +56,8 @@ const ADD_AR_NAVIGATOR_TYPE = "ADD_AR";
 const WASHED_FLG = 1;
 const PLAYED_FLG = 2;
 const SPEECH_FLG = 3;
-//TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection. 2. Implement Home button functionality
+
 const axios = require("axios");
-
-//TODO: 1. Make code DRY. Rather than returning different AR_NAVIGATOR_TYPES we can try to conditionally render based on selection.
-
-// on menu open --> get tam names and fedCount
-// we create object --> {
-//   name
-//   fed count
-// }
-
-/*
-1. When app loads (or when TamaMenu loads) we need to set the Tamamon states of fedCount(1, 2, 3, 4, 5) and fed (true or false) based on data from the database
-2. Whenever we pass a certain amount of time, we need to change fed to false, and fedCount needs to decrease. [LATER]
-3. Whenever we feed Tamamon using a function we need to do an axios call to the database to update the values.
-OR
-3.5. Whenever this.state CHANGES we need to do an axios call to the database to update the values
-4. Repeat. 
-
-*/
 
 export default class TamaMenu extends Component {
   constructor() {
@@ -101,7 +85,7 @@ export default class TamaMenu extends Component {
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
         {
-          name: "Intelimon",
+          name: "Intellimon",
           owned: false,
           washed: false,
           played: false,
@@ -163,7 +147,9 @@ export default class TamaMenu extends Component {
           text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         }
-      ]
+      ],
+      server: {},
+      load: {}
     };
 
     this._getExperienceSelector = this._getExperienceSelector.bind(this);
@@ -182,8 +168,44 @@ export default class TamaMenu extends Component {
     this._updateNeglected = this._updateNeglected.bind(this);
   }
 
+  static getDerivedStateFromProps(props, state) {
+    //Component lifecycle fn to update state with props before render() **Always runs when state changes
+    if (props.data !== state.load) {
+      //Condition to execute state update with new props
+      console.log("getting derived", props);
+      const data = props.data;
+      const temp = [];
+      const serverData = {};
+      Object.keys(data).map(tamamon => {
+        let obj = {};
+        state.tamamon.forEach(item => {
+          if (item.name === tamamon) {
+            obj = { ...item };
+            serverData[tamamon] = { ...item };
+          }
+        });
+        for (const key in data[tamamon]) {
+          if (obj[key] !== undefined) {
+            obj[key] = data[tamamon][key];
+          }
+        }
+        temp.push(obj);
+        serverData[tamamon] = { ...obj };
+      });
+      return {
+        load: props.data,
+        tamamon: temp,
+        wallet: props.wallet,
+        deviceID: props.deviceID,
+        server: serverData
+      };
+    }
+    return null; //Condition when props equals component of current state
+  }
+
   //Switch AR scenes based on Navigator Type
   render() {
+    console.log("render state", this.state);
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
     } else if (this.state.navigatorType == AR_NAVIGATOR_TYPE) {
@@ -205,6 +227,7 @@ export default class TamaMenu extends Component {
 
   _getExperienceSelector() {
     //Tamamon buttons
+
     const pocchaButton = (
       <TouchableOpacity
         onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
@@ -215,14 +238,16 @@ export default class TamaMenu extends Component {
           source={require("./res/images/icons/cat-1.png")}
           style={localStyles.images}
         />
-        <Text style={localStyles.buttonText}>{this.state.tamamon[0].name}</Text>
         <Text style={localStyles.buttonText}>
-          You've fed Pocchamon {this.state.tamamon[0].fedCount} times.
+          {this.state.server.Pocchamon.name}
+        </Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Pocchamon {this.state.server.Pocchamon.fedCount} times.
         </Text>
       </TouchableOpacity>
     );
 
-    const inteliButton = (
+    const intelliButton = (
       <TouchableOpacity
         onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE_2nd)}
         style={localStyles.buttons}
@@ -232,9 +257,11 @@ export default class TamaMenu extends Component {
           source={require("./res/images/icons/cat-2.png")}
           style={localStyles.images}
         />
-        <Text style={localStyles.buttonText}>{this.state.tamamon[1].name}</Text>
         <Text style={localStyles.buttonText}>
-          You've fed Intelimon {this.state.tamamon[1].fedCount} times.
+          {this.state.server.Intellimon.name}
+        </Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Intellimon {this.state.server.Intellimon.fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -249,9 +276,11 @@ export default class TamaMenu extends Component {
           source={require("./res/icons/menuIcons/potatoIcon.png")}
           style={localStyles.images}
         />
-        <Text style={localStyles.buttonText}>{this.state.tamamon[2].name}</Text>
         <Text style={localStyles.buttonText}>
-          {this.state.tamamon[2].fedCount}
+          {this.state.server.Potemon.name}
+        </Text>
+        <Text style={localStyles.buttonText}>
+          {this.state.server.Potemon.fedCount}
         </Text>
       </TouchableOpacity>
     );
@@ -266,9 +295,11 @@ export default class TamaMenu extends Component {
           source={require("./res/icons/menuIcons/hige_sprite2.png")}
           style={localStyles.images}
         />
-        <Text style={localStyles.buttonText}>{this.state.tamamon[3].name}</Text>
         <Text style={localStyles.buttonText}>
-          You've fed Higemon {this.state.tamamon[3].fedCount} times.
+          {this.state.server.Higemon.name}
+        </Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Higemon {this.state.server.Higemon.fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -283,9 +314,11 @@ export default class TamaMenu extends Component {
           source={require("./res/icons/menuIcons/tinybird2d.png")}
           style={localStyles.images}
         />
-        <Text style={localStyles.buttonText}>{this.state.tamamon[4].name}</Text>
         <Text style={localStyles.buttonText}>
-          You've fed Birdmon {this.state.tamamon[4].fedCount} times.
+          {this.state.server.Birdmon.name}
+        </Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Birdmon {this.state.server.Birdmon.fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -300,9 +333,11 @@ export default class TamaMenu extends Component {
           source={require("./res/icons/menuIcons/greenfrog.png")}
           style={localStyles.images}
         />
-        <Text style={localStyles.buttonText}>{this.state.tamamon[5].name}</Text>
         <Text style={localStyles.buttonText}>
-          You've fed Birdmon {this.state.tamamon[5].fedCount} times.
+          {this.state.server.Keromon.name}
+        </Text>
+        <Text style={localStyles.buttonText}>
+          You've fed Birdmon {this.state.server.Keromon.fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -353,19 +388,17 @@ export default class TamaMenu extends Component {
         <View style={localStyles.inner}>
           <View style={localStyles.parent}>
             {/* Select Pocchamon */}
-            {this.state.tamamon[0].owned ? pocchaButton : null}
-
-            {/* Select Intelimon*/}
-            {this.state.tamamon[1].owned ? inteliButton : null}
-
+            {this.state.server.Pocchamon.owned ? pocchaButton : null}
+            {/* Select Intellimon*/}
+            {this.state.server.Intellimon.owned ? intelliButton : null}
             {/*Select Potemon*/}
-            {this.state.tamamon[2].owned ? poteButton : null}
-
+            {this.state.server.Potemon.owned ? poteButton : null}
             {/*Select Higemon*/}
-            {this.state.tamamon[3].owned ? higeButton : null}
-
+            {this.state.server.Higemon.owned ? higeButton : null}
             {/*Select Birdmon */}
-            {this.state.tamamon[4].owned ? birdButton : null}
+            {this.state.server.Birdmon.owned ? birdButton : null}
+            {/*Select Keromon */}
+            {this.state.server.Keromon.owned ? keroButton : null}
           </View>
         </View>
         <ImageBackground
@@ -395,12 +428,12 @@ export default class TamaMenu extends Component {
           ></Image>
         </TouchableOpacity>
         <TamaStore
-          pocchaOwned={this.state.tamamon[0].owned}
-          inteliOwned={this.state.tamamon[1].owned}
-          poteOwned={this.state.tamamon[2].owned}
-          higeOwned={this.state.tamamon[3].owned}
-          birdOwned={this.state.tamamon[4].owned}
-          keroOwned={this.state.tamamon[5].owned}
+          pocchaOwned={this.state.server.Pocchamon.owned}
+          intelliOwned={this.state.server.Intellimon.owned}
+          poteOwned={this.state.server.Potemon.owned}
+          higeOwned={this.state.server.Higemon.owned}
+          birdOwned={this.state.server.Birdmon.owned}
+          keroOwned={this.state.server.Keromon.owned}
           wallet={this.state.wallet}
           buyTamamon={this._buyTamamon}
         ></TamaStore>
@@ -425,13 +458,13 @@ export default class TamaMenu extends Component {
         {/* This is our AR Scene for pocchamon.*/}
         <ViroARSceneNavigator
           viroAppProps={{
-            fed: this.state.tamamon[0].fed,
-            fedCount: this.state.tamamon[0].fedCount,
-            washed: this.state.tamamon[0].washed,
-            played: this.state.tamamon[0].played,
+            fed: this.state.server.Pocchamon.fed,
+            fedCount: this.state.server.Pocchamon.fedCount,
+            washed: this.state.server.Pocchamon.washed,
+            played: this.state.server.Pocchamon.played,
             text: this.state.displayText,
-            flgs: this.state.tamamon[0].flgs,
-            neglected: this.state.tamamon[0].neglected,
+            flgs: this.state.server.Pocchamon.flgs,
+            neglected: this.state.server.Pocchamon.neglected,
             updateNeglected: this._updateNeglected
           }}
           initialScene={{ scene: InitialARScene }}
@@ -498,7 +531,7 @@ export default class TamaMenu extends Component {
     );
   }
 
-  //Intelimon AR Scene
+  //Intellimon AR Scene
   _getARNavigator2nd() {
     return (
       <View
@@ -515,12 +548,12 @@ export default class TamaMenu extends Component {
         {/* This is our AR Scene for smart cat.*/}
         <ViroARSceneNavigator
           viroAppProps={{
-            fed: this.state.tamamon[1].fed,
-            fedCount: this.state.tamamon[1].fedCount,
-            washed: this.state.tamamon[1].washed,
-            played: this.state.tamamon[1].played,
+            fed: this.state.server.Intellimon.fed,
+            fedCount: this.state.server.Intellimon.fedCount,
+            washed: this.state.server.Intellimon.washed,
+            played: this.state.server.Intellimon.played,
             text: this.state.displayText,
-            flgs: this.state.tamamon[1].flgs
+            flgs: this.state.server.Intellimon.flgs
           }}
           initialScene={{ scene: InitialARSceneForTama2nd }}
         />
@@ -542,7 +575,7 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={() => {
-              this._feedButtonHandler("Intelimon");
+              this._feedButtonHandler("Intellimon");
             }}
           >
             <Image
@@ -556,8 +589,8 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={() => {
-              this._washTamamon("Intelimon");
-              this._updateFlg("Intelimon", WASHED_FLG);
+              this._washTamamon("Intellimon");
+              this._updateFlg("Intellimon", WASHED_FLG);
             }}
           >
             <Image
@@ -571,8 +604,8 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={() => {
-              this._playTamamon("Intelimon");
-              this._updateFlg("Intelimon", PLAYED_FLG);
+              this._playTamamon("Intellimon");
+              this._updateFlg("Intellimon", PLAYED_FLG);
             }}
           >
             <Image
@@ -603,12 +636,12 @@ export default class TamaMenu extends Component {
         {/* This is our AR Scene for smart cat.*/}
         <ViroARSceneNavigator
           viroAppProps={{
-            fed: this.state.tamamon[2].fed,
-            fedCount: this.state.tamamon[2].fedCount,
-            washed: this.state.tamamon[2].washed,
-            played: this.state.tamamon[2].played,
+            fed: this.state.server.Potemon.fed,
+            fedCount: this.state.server.Potemon.fedCount,
+            washed: this.state.server.Potemon.washed,
+            played: this.state.server.Potemon.played,
             text: this.state.displayText,
-            flgs: this.state.tamamon[2].flgs
+            flgs: this.state.server.Potemon.flgs
           }}
           initialScene={{ scene: InitialARSceneForTama3rd }}
         />
@@ -868,7 +901,7 @@ export default class TamaMenu extends Component {
         <ViroARSceneNavigator
           viroAppProps={{
             addTamamon: this._addARTamamon,
-            tamamonList: this.state.tamamon
+            tamamonList: this.state.server
           }}
           initialScene={{ scene: InitialARSceneForAddFromAR }}
         />
@@ -899,8 +932,7 @@ export default class TamaMenu extends Component {
         this._updateFlg("Pocchamon", SPEECH_FLG);
       }
       if (navigatorType === AR_NAVIGATOR_TYPE_2nd) {
-        console.log("inteli");
-        this._updateFlg("Intelimon", SPEECH_FLG);
+        this._updateFlg("Intellimon", SPEECH_FLG);
       }
       if (navigatorType === AR_NAVIGATOR_TYPE_3rd) {
         this._updateFlg("Potemon", SPEECH_FLG);
@@ -911,74 +943,75 @@ export default class TamaMenu extends Component {
     };
   }
 
+  _formatState(name, time) {
+    const newState = {};
+    newState.id = this.state.deviceID;
+    newState.wallet = this.state.wallet;
+    const tamamonState = { ...this.props.data };
+
+    for (const key in tamamonState[name]) {
+      if (key === "modified") {
+        tamamonState[name][key] = time.toString();
+      } else {
+        tamamonState[name][key] = this.state.server[name][key];
+      }
+    }
+    newState.tamamons = { ...tamamonState };
+    return newState;
+  }
+
   _feedTamamon = name => {
-    let fedTamamon = this.state.tamamon.filter(obj => {
-      return obj.name === name;
-    });
     // Prohibition of repeated hits
-    if (fedTamamon[0].flgs[3] === 1) {
+    if (this.state.server[name].flgs[3] === 1) {
       return;
     }
 
-    this.setState(
-      prevState => ({
-        tamamon: prevState.tamamon.map(obj =>
-          obj.name === name
-            ? Object.assign(obj, { fed: true, fedCount: ++obj.fedCount })
-            : obj
-        )
-      }),
-      () => {
-        const fedCountAxios = fedTamamon[0].fedCount;
-        const updateFed = async () => {
-          await axios({
-            url: "https://tamomon.herokuapp.com/v1/graphql",
-            method: "post",
-            data: {
-              query: `
-        mutation update_single_tamomon {
-          update_Tamomon(
-            where: {name: {_eq: "${name}"}},
-            _set: {
-              fed: true,
-              fedCount: ${fedCountAxios},
-            }
-          ) {
-            affected_rows
-            returning {
-              id
-              name
-              fedCount
-            }
-          }
-        }
-        `
-            }
-          }).then(result => {
-            console.log(result.data);
-          });
-        };
+    const newFeed = clone(this.state.server); //Deep clone state
+    newFeed[name].fed = true;
+    if (newFeed[name].fedCount === 0) {
+      this.setState({ wallet: (this.state.wallet += 10) }); //Update state of wallet if Tamamon is initally fed
+    }
+    newFeed[name].fedCount > 5
+      ? newFeed[name].fedCount
+      : ++newFeed[name].fedCount;
+    this.setState({ server: newFeed }, () => {
+      //Update state of tamamon plus callback fn to execute API call
+      const time = new Date();
+      const newData = this._formatState(name, time); //Format affected data
 
-        updateFed();
+      const updateFed = async newData => {
+        //Fn to make API call
+        await axios({
+          url: "https://tamomon.herokuapp.com/v1/graphql",
+          method: "post",
+          data: updateUserData(newData)
+        }).then(result => {
+          console.log(result);
+        });
+      };
 
-        if (fedTamamon[0].fedCount === 1) {
-          this._updateText(fedTamamon[0].text[0]);
-          this._updateFlg(name, SPEECH_FLG);
-        }
-        if (fedTamamon[0].fedCount === 2) {
-          this._updateText(fedTamamon[0].text[1]);
-          this._updateFlg(name, SPEECH_FLG);
-        }
-        if (fedTamamon[0].fedCount === 3 || fedTamamon[0].fedCount === 4) {
-          this._updateText(fedTamamon[0].text[2]);
-          this._updateFlg(name, SPEECH_FLG);
-        }
-        if (fedTamamon[0].fedCount >= 5) {
-          this._updateText(fedTamamon[0].text[3]);
-          this._updateFlg(name, SPEECH_FLG);
-        }
+      updateFed(newData); // Execute API call
+
+      if (this.state.server[name].fedCount === 1) {
+        this._updateText(this.state.server[name].text[0]);
+        this._updateFlg(name, SPEECH_FLG);
       }
-    );
+      if (this.state.server[name].fedCount === 2) {
+        this._updateText(this.state.server[name].text[1]);
+        this._updateFlg(name, SPEECH_FLG);
+      }
+      if (
+        this.state.server[name].fedCount === 3 ||
+        this.state.server[name].fedCount === 4
+      ) {
+        this._updateText(this.state.server[name].text[2]);
+        this._updateFlg(name, SPEECH_FLG);
+      }
+      if (this.state.server[name].fedCount >= 5) {
+        this._updateText(this.state.server[name].text[3]);
+        this._updateFlg(name, SPEECH_FLG);
+      }
+    });
   };
 
   _feedButtonHandler = name => {
@@ -1022,85 +1055,97 @@ export default class TamaMenu extends Component {
   };
 
   _updateNeglected = async name => {
-    this.setState(prevState => ({
-      tamamon: prevState.tamamon.map(obj =>
-        obj.name === name ? Object.assign(obj, { neglected: false }) : obj
-      )
-    }));
+    const newNeglect = clone(this.state.server);
+    newNeglect[name].neglected = false;
+    this.setState({
+      server: newNeglect
+    });
   };
 
   _washTamamon = name => {
-    let washedTamamon = this.state.tamamon.filter(obj => {
-      return obj.name === name;
-    });
-
+    const newWash = clone(this.state.server); //Deep clone state
+    newWash[name].washed = true;
     this.setState(
-      prevState => ({
-        tamamon: prevState.tamamon.map(obj =>
-          obj.name === name ? Object.assign(obj, { washed: true }) : obj
-        )
-      }),
+      //Set state with callback fn to call API
+      {
+        server: newWash,
+        wallet: (this.state.wallet += 10)
+      },
       () => {
-        console.log(washedTamamon[0].washed);
+        const time = new Date();
+        const newData = this._formatState(name, time); //Format data to send
+
+        const updateWashed = async newData => {
+          //API call fn
+          await axios({
+            url: "https://tamomon.herokuapp.com/v1/graphql",
+            method: "post",
+            data: updateUserData(newData)
+          }).then(result => {
+            console.log(result);
+          });
+        };
+
+        updateWashed(newData); //Execute API call
       }
     );
   };
 
   _playTamamon = name => {
-    let playedTamamon = this.state.tamamon.filter(obj => {
-      return obj.name === name;
-    });
+    const newPlay = clone(this.state.server); //Deep clone state
+    newPlay[name].played = true;
 
     this.setState(
-      prevState => ({
-        tamamon: prevState.tamamon.map(obj =>
-          obj.name === name ? Object.assign(obj, { played: true }) : obj
-        )
-      }),
+      //Set state with callback fn to call API
+      {
+        server: newPlay,
+        wallet: (this.state.wallet += 10)
+      },
       () => {
-        console.log(playedTamamon[0].played);
+        const time = new Date();
+        const newData = this._formatState(name, time); //Format data to send
+
+        const updatePlayed = async newData => {
+          //API call fn
+          await axios({
+            url: "https://tamomon.herokuapp.com/v1/graphql",
+            method: "post",
+            data: updateUserData(newData)
+          }).then(result => {
+            console.log(result);
+          });
+        };
+
+        updatePlayed(newData); //Execute API call
       }
     );
   };
 
   _buyTamamon(name, price) {
-    let boughtTamamon = this.state.tamamon.filter(obj => {
-      return obj.name === name;
-    });
-
-    if (boughtTamamon[0].owned === true) {
+    if (this.state.server[name].owned === true) {
       console.log("you own this");
       console.log(this.state.wallet);
       return;
     }
 
-    if (this.state.wallet >= price && boughtTamamon[0].owned === false) {
-      this.setState(
-        prevState => ({
-          wallet: (this.state.wallet -= price),
-          tamamon: prevState.tamamon.map(obj =>
-            obj.name === name ? Object.assign(obj, { owned: true }) : obj
-          )
-        }),
-        () => {
-          console.log(boughtTamamon);
-        }
-      );
+    if (this.state.wallet >= price && this.state.server[name].owned === false) {
+      const newOwn = clone(this.state.server);
+      newOwn[name].owned = true;
+
+      this.setState({
+        wallet: (this.state.wallet -= price),
+        server: newOwn
+      });
     }
   }
   _addARTamamon(name) {
-    let addTamamon = this.state.tamamon.filter(obj => {
-      return obj.name === name;
-    });
-
-    if (addTamamon[0].owned === true) {
+    const newOwn = clone(this.state.server);
+    if (this.state.server[name].owned === true) {
       return;
     }
-    this.setState(prevState => ({
-      tamamon: prevState.tamamon.map(obj =>
-        obj.name === name ? Object.assign(obj, { owned: true }) : obj
-      )
-    }));
+    this.setState({
+      server: newOwn
+    });
   }
 }
 

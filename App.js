@@ -23,8 +23,8 @@ import { ViroARSceneNavigator } from "react-viro";
 
 // Device ID module --> to integrate see README
 
-// import DeviceInfo from "react-native-device-info";
-import makeNewUser from "./graphql/mutations";
+import DeviceInfo from "react-native-device-info";
+import { makeNewUser } from "./graphql/mutations";
 import { userData, devices } from "./graphql/queries";
 import clone from "./utils/clone";
 const axios = require("axios");
@@ -51,7 +51,7 @@ export default class ViroSample extends Component {
     this.state = {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
-      // deviceID: DeviceInfo.getUniqueId(),
+      deviceID: DeviceInfo.getUniqueId(),
       wallet: 0,
       serverData: []
     };
@@ -61,83 +61,98 @@ export default class ViroSample extends Component {
     );
   }
 
-  // componentDidMount() {
-  //   const initalCall = async () => {
-  //     console.log("calling");
-  //     await axios({
-  //       url: "https://tamomon.herokuapp.com/v1/graphql",
-  //       method: "post",
-  //       data: {
-  //         query: devices()
-  //       }
-  //     }).then(result => {
-  //       const deviceList = result.data.data.user_data;
+  componentDidMount() {
+    const initalCall = async () => {
+      console.log("calling");
+      await axios({
+        url: "https://tamomon.herokuapp.com/v1/graphql",
+        method: "post",
+        data: {
+          query: devices()
+        }
+      }).then(result => {
+        const deviceList = result.data.data.user_data;
 
-  //       const deviceArray = [];
+        const deviceArray = [];
 
-  //       deviceList.forEach(device => {
-  //         deviceArray.push(device.device_id);
-  //       });
+        deviceList.forEach(device => {
+          deviceArray.push(device.device_id);
+        });
 
-  //       const exists = deviceArray.includes(this.state.deviceID);
+        const exists = deviceArray.includes(this.state.deviceID);
 
-  //       console.log("checking id");
-  //       if (exists) {
-  //         console.log("I exist!");
-  //       } else {
-  //         console.log("Time for a new ID");
-  //         axios({
-  //           url: "https://tamomon.herokuapp.com/v1/graphql",
-  //           method: "post",
-  //           data: {
-  //             query: makeNewUser(this.state.deviceID)
-  //           }
-  //         }).then(result => {
-  //           console.log("new row in DB", result);
-  //         });
-  //       }
-  //     });
-  //   };
+        console.log("checking id");
+        if (exists) {
+          console.log("I exist!");
+        } else {
+          console.log("Time for a new ID");
+          const input = {};
+          input.id = this.state.deviceID;
+          input.time = new Date();
 
-  //   const updateCall = async () => {
-  //     console.log("calling again");
-  //     await axios({
-  //       url: "https://tamomon.herokuapp.com/v1/graphql",
-  //       method: "post",
-  //       data: {
-  //         query: userData(this.state.deviceID)
-  //       }
-  //     })
-  //       .then(result => {
-  //         const deviceData = clone(result.data.data.user_data_by_pk);
-  //         this.state.serverData = deviceData.tamamons;
-  //         this.state.wallet = deviceData.wallet;
-  //         console.log("pre-update", result.data.data.user_data_by_pk);
-  //       })
-  //       .then(res => {
-  //         const currentTime = new Date();
-  //         Object.keys(this.state.serverData).map(key => {
-  //           const lastModified = new Date(this.state.serverData[key].modified);
-  //           const diff = (currentTime - lastModified) / (1000 * 60);
-  //           if (diff > 60) {
-  //             this.state.serverData[key].washed = false;
-  //             this.state.serverData[key].played = false;
-  //           }
-  //           this.state.serverData[key].fedCount =
-  //             Math.floor(diff / 60) > this.state.serverData[key].fedCount
-  //               ? 0
-  //               : this.state.serverData[key].fedCount - Math.floor(diff / 60);
-  //           if (this.state.serverData[key].fedCount === 0) {
-  //             this.state.serverData[key].fed = false;
-  //           }
-  //         });
-  //         console.log("new state?", this.state.serverData);
-  //       });
-  //   };
+          axios({
+            url: "https://tamomon.herokuapp.com/v1/graphql",
+            method: "post",
+            data: makeNewUser(input)
+          }).then(result => {
+            console.log("new row in DB", result);
+          });
+        }
+      });
+    };
 
-  //   initalCall();
-  //   updateCall();
-  // }
+    const updateCall = async () => {
+      console.log("calling again");
+      await axios({
+        url: "https://tamomon.herokuapp.com/v1/graphql",
+        method: "post",
+        data: {
+          query: userData(this.state.deviceID)
+        }
+      })
+        .then(result => {
+          result.data.data.user_data_by_pk.tamamons = JSON.parse(
+            result.data.data.user_data_by_pk.tamamons
+          );
+          const deviceData = clone(result.data.data.user_data_by_pk);
+          this.setState({
+            serverData: deviceData.tamamons,
+            wallet: deviceData.wallet
+          });
+        })
+        .then(res => {
+          const currentTime = new Date();
+          const clonedState = clone(this.state.serverData);
+          console.log("clone", this.state.serverData);
+
+          Object.keys(clonedState).map(key => {
+            const lastModified = new Date(clonedState[key].modified);
+            const diff = (currentTime - lastModified) / (1000 * 60);
+            if (diff > 60) {
+              clonedState[key].washed = false;
+              clonedState[key].played = false;
+            }
+            diff > 48 * 60
+              ? (clonedState[key].neglected = true)
+              : (clonedState[key].neglected = false);
+
+            clonedState[key].fedCount =
+              Math.floor(diff / 60) > clonedState[key].fedCount
+                ? 0
+                : clonedState[key].fedCount - Math.floor(diff / 60);
+            if (clonedState[key].fedCount === 0) {
+              clonedState[key].fed = false;
+            }
+          });
+          console.log("new state?", clonedState);
+          this.setState({ serverData: clonedState });
+          console.log("updated state", this.state.serverData);
+        });
+    };
+
+    initalCall();
+    updateCall();
+  }
 
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
@@ -184,7 +199,13 @@ export default class ViroSample extends Component {
   }
 
   _getTamaNavigator() {
-    return <TamaMenu></TamaMenu>;
+    return (
+      <TamaMenu
+        data={this.state.serverData}
+        wallet={this.state.wallet}
+        deviceID={this.state.deviceID}
+      ></TamaMenu>
+    );
   }
 
   _getExperienceButtonOnPress(navigatorType) {
