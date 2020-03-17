@@ -27,27 +27,51 @@ export default class TamaStore extends Component {
     this.state = {
       navigatorType: "default",
       pocchaPrice: 20,
-      inteliPrice: 1000,
-      potePrice: 999999
+      inteliPrice: 150,
+      higePrice: 250,
+      birdPrice: 300,
+      keroPrice: 320,
+      potePrice: 9999999
     };
   }
 
   render() {
     /* Price Renders */
+    //Pocchamon
     const pocchaBuy = (
       <Text style={localStyles.textBox}>{this.state.pocchaPrice} dollas</Text>
     );
     const pocchaBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
+    //Intelimon
     const inteliBuy = (
       <Text style={localStyles.textBox}>{this.state.inteliPrice} dollas</Text>
     );
     const inteliBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
+    //Potemon
     const poteBuy = (
       <Text style={localStyles.textBox}>{this.state.potePrice} dollas</Text>
     );
     const poteBought = <Text style={localStyles.textBox}>Already Owned</Text>;
+
+    //Higemon
+    const higeBuy = (
+      <Text style={localStyles.textBox}>{this.state.higePrice} dollas</Text>
+    );
+    const higeBought = <Text style={localStyles.textBox}>Already Owned</Text>;
+
+    //Birdmon
+    const birdBuy = (
+      <Text style={localStyles.textBox}>{this.state.birdPrice} dollas</Text>
+    );
+    const birdBought = <Text style={localStyles.textBox}>Already Owned</Text>;
+
+    //Keromon
+    const keroBuy = (
+      <Text style={localStyles.textBox}>{this.state.keroPrice} dollas</Text>
+    );
+    const keroBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     const walletDisplay = (
       <View style={localStyles.walletBack}>
@@ -62,12 +86,8 @@ export default class TamaStore extends Component {
           source={require("./res/images/roof.gif")}
           style={{ width: "100%", height: 250 }}
           resizeMode="stretch"
-          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         ></ImageBackground>
-        {/* Hero Image */}
-        {/* <View style={localStyles.heroBox}>
-          <Text style={localStyles.heroTitle}>Tamamon Store!</Text>
-        </View> */}
+
         {/*Store Cards */}
         <ImageBackground
           source={require("./res/images/wall.gif")}
@@ -124,7 +144,7 @@ export default class TamaStore extends Component {
               {/*placeholder for new tamamon*/}
               <TouchableOpacity style={localStyles.blocks}>
                 <Image
-                  source={require("./res/icons/heartIconTEST.png")}
+                  source={require("./res/icons/menuIcons/hige_sprite.png")}
                   style={localStyles.blockContent}
                 ></Image>
 

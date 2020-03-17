@@ -252,7 +252,7 @@ export default class TamaMenu extends Component {
         underlayColor={"#68a0ff"}
       >
         <Image
-          source={require("./res/icons/menuIcons/hige_sprite2.png")}
+          source={require("./res/icons/menuIcons/hige_sprite.png")}
           style={localStyles.images}
         />
         <Text style={localStyles.buttonText}>{this.state.tamamon[3].name}</Text>
