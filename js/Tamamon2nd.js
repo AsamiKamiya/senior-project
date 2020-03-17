@@ -12,8 +12,6 @@ import {
   ViroAmbientLight,
   ViroSpotLight,
   ViroAnimations,
-  ViroARTrackingTargets,
-  ViroARImageMarker,
   ViroImage,
   ViroSound,
   ViroNode
@@ -27,7 +25,6 @@ export default class Tamamon2nd extends Component {
     this.state = {
       text: "Initializing AR...",
       forPlay: false
-      // imageUrl: require("./res/speechBubble.obj")
     };
 
     // bind 'this' to functions
@@ -36,7 +33,6 @@ export default class Tamamon2nd extends Component {
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps.flgs[3]);
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         <Viro3DObject
@@ -62,11 +58,6 @@ export default class Tamamon2nd extends Component {
           position={[0.6, 0.08, -1.9]}
           style={styles.helloWorldTextStyle}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          animation={{
-            name: "disappearForText",
-            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 2000
-          }}
         />
         <Viro3DObject
           source={require("./res/speechBubble.obj")}
@@ -78,11 +69,6 @@ export default class Tamamon2nd extends Component {
           scale={[0.2, 0.2, 0.2]}
           position={[0.2, -0.8, -2]}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          animation={{
-            name: "disappearForText",
-            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 2000
-          }}
         ></Viro3DObject>
 
         {/* for feeding heart animation */}
@@ -129,7 +115,6 @@ export default class Tamamon2nd extends Component {
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
             source={require("./res/tamamon2nd/cat-a1.obj")}
-            // position={[-0.0, -5.5, -2.15]}
             resources={[
               require("./res/tamamon2nd/cat-a1.mtl"),
               require("./res/tamamon2nd/cat-a1.png")
@@ -145,7 +130,6 @@ export default class Tamamon2nd extends Component {
         ) : (
           <Viro3DObject
             source={require("./res/tamamon2nd/cat-a2.obj")}
-            // position={[-0.0, -5.5, -1.15]}
             resources={[
               require("./res/tamamon2nd/cat-a2.mtl"),
               require("./res/tamamon2nd/cat-a2.png")
@@ -315,11 +299,6 @@ export default class Tamamon2nd extends Component {
           position={[1.4, -0.6, -2]}
           opacity={1}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          animation={{
-            name: "disappearForText",
-            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 2000
-          }}
         ></ViroText>
         <ViroAmbientLight color={"#aaaaaa"} />
         <ViroSpotLight

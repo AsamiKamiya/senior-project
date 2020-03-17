@@ -132,6 +132,10 @@ export default class ViroSample extends Component {
               clonedState[key].washed = false;
               clonedState[key].played = false;
             }
+            diff > 48 * 60
+              ? (clonedState[key].neglected = true)
+              : (clonedState[key].neglected = false);
+
             clonedState[key].fedCount =
               Math.floor(diff / 60) > clonedState[key].fedCount
                 ? 0

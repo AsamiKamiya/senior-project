@@ -26,6 +26,30 @@ const makeNewUser = input => {
       washed: false,
       played: false,
       modified: input.time
+    },
+    Higemon: {
+      owned: false,
+      fed: false,
+      fedCount: 0,
+      washed: false,
+      played: false,
+      modified: input.time
+    },
+    Birdmon: {
+      owned: false,
+      fed: false,
+      fedCount: 0,
+      washed: false,
+      played: false,
+      modified: input.time
+    },
+    Keromon: {
+      owned: false,
+      fed: false,
+      fedCount: 0,
+      washed: false,
+      played: false,
+      modified: input.time
     }
   };
 
