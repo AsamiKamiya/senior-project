@@ -96,11 +96,11 @@ export default class TamamonFourth extends Component {
           />
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
-            source={require("./res/higemon/hige_happy.obj")}
+            source={require("./res/higemon/hige_happyUpdate.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/higemon/hige_happy.mtl"),
-              require("./res/higemon/hige_happy.png")
+              require("./res/higemon/hige_happyUpdate.mtl"),
+              require("./res/higemon/hige_happyUpdate.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
