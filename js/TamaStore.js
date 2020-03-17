@@ -91,7 +91,7 @@ export default class TamaStore extends Component {
         {/*Store Cards */}
         <ImageBackground
           source={require("./res/images/wall.gif")}
-          style={{ width: "100%", height: 1000 }}
+          style={{ width: "100%", height: 1500 }}
           resizeMode="stretch"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
