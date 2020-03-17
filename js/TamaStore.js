@@ -37,41 +37,37 @@ export default class TamaStore extends Component {
 
   render() {
     /* Price Renders */
+    //Universal
+    const bought = <Text style={localStyles.textBox}>Already Owned</Text>;
     //Pocchamon
     const pocchaBuy = (
       <Text style={localStyles.textBox}>{this.state.pocchaPrice} dollas</Text>
     );
-    const pocchaBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     //Intelimon
     const inteliBuy = (
       <Text style={localStyles.textBox}>{this.state.inteliPrice} dollas</Text>
     );
-    const inteliBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     //Potemon
     const poteBuy = (
       <Text style={localStyles.textBox}>{this.state.potePrice} dollas</Text>
     );
-    const poteBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     //Higemon
     const higeBuy = (
       <Text style={localStyles.textBox}>{this.state.higePrice} dollas</Text>
     );
-    const higeBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     //Birdmon
     const birdBuy = (
       <Text style={localStyles.textBox}>{this.state.birdPrice} dollas</Text>
     );
-    const birdBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     //Keromon
     const keroBuy = (
       <Text style={localStyles.textBox}>{this.state.keroPrice} dollas</Text>
     );
-    const keroBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     const walletDisplay = (
       <View style={localStyles.walletBack}>
@@ -93,7 +89,6 @@ export default class TamaStore extends Component {
           source={require("./res/images/wall.gif")}
           style={{ width: "100%", height: 1500 }}
           resizeMode="stretch"
-          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
           <View style={localStyles.inner}>
             <View style={localStyles.parent}>
@@ -109,7 +104,7 @@ export default class TamaStore extends Component {
                   style={localStyles.blockContent}
                 ></Image>
                 <Text style={localStyles.textBox}>Pocchamon</Text>
-                {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
+                {this.props.pocchaOwned ? bought : pocchaBuy}
               </TouchableOpacity>
               {/*Intelimon*/}
               <TouchableOpacity
@@ -123,7 +118,7 @@ export default class TamaStore extends Component {
                   style={localStyles.blockContent}
                 ></Image>
                 <Text style={localStyles.textBox}>Intelimon</Text>
-                {this.props.inteliOwned ? inteliBought : inteliBuy}
+                {this.props.inteliOwned ? bought : inteliBuy}
               </TouchableOpacity>
 
               {/*potemon*/}
@@ -139,7 +134,7 @@ export default class TamaStore extends Component {
                 ></Image>
 
                 <Text style={localStyles.textBox}>Potemon</Text>
-                {this.props.poteOwned ? poteBought : poteBuy}
+                {this.props.poteOwned ? bought : poteBuy}
               </TouchableOpacity>
               {/*higemon*/}
               <TouchableOpacity
@@ -154,7 +149,7 @@ export default class TamaStore extends Component {
                 ></Image>
 
                 <Text style={localStyles.textBox}>Higemon</Text>
-                {this.props.higeOwned ? higeBought : higeBuy}
+                {this.props.higeOwned ? bought : higeBuy}
               </TouchableOpacity>
               {/*birdmon*/}
               <TouchableOpacity
@@ -169,7 +164,7 @@ export default class TamaStore extends Component {
                 ></Image>
 
                 <Text style={localStyles.textBox}>Birdmon</Text>
-                {this.props.birdOwned ? birdBought : birdBuy}
+                {this.props.birdOwned ? bought : birdBuy}
               </TouchableOpacity>
               {/*keromon*/}
               <TouchableOpacity
@@ -184,7 +179,7 @@ export default class TamaStore extends Component {
                 ></Image>
 
                 <Text style={localStyles.textBox}>Keromon</Text>
-                {this.props.keroOwned ? keroBought : keroBuy}
+                {this.props.keroOwned ? bought : keroBuy}
               </TouchableOpacity>
             </View>
           </View>
