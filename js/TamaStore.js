@@ -27,7 +27,7 @@ export default class TamaStore extends Component {
     this.state = {
       navigatorType: "default",
       pocchaPrice: 20,
-      inteliPrice: 150,
+      intelliPrice: 150,
       higePrice: 250,
       birdPrice: 300,
       keroPrice: 320,
@@ -44,9 +44,9 @@ export default class TamaStore extends Component {
       <Text style={localStyles.textBox}>{this.state.pocchaPrice} G</Text>
     );
 
-    //Intelimon
-    const inteliBuy = (
-      <Text style={localStyles.textBox}>{this.state.inteliPrice} G</Text>
+    //Intellimon
+    const intelliBuy = (
+      <Text style={localStyles.textBox}>{this.state.intelliPrice} G</Text>
     );
 
     //Potemon
@@ -56,17 +56,17 @@ export default class TamaStore extends Component {
 
     //Higemon
     const higeBuy = (
-      <Text style={localStyles.textBox}>{this.state.higePrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.higePrice} G</Text>
     );
 
     //Birdmon
     const birdBuy = (
-      <Text style={localStyles.textBox}>{this.state.birdPrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.birdPrice} G</Text>
     );
 
     //Keromon
     const keroBuy = (
-      <Text style={localStyles.textBox}>{this.state.keroPrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.keroPrice} G</Text>
     );
 
     const walletDisplay = (
@@ -106,19 +106,19 @@ export default class TamaStore extends Component {
                 <Text style={localStyles.textBox}>Pocchamon</Text>
                 {this.props.pocchaOwned ? bought : pocchaBuy}
               </TouchableOpacity>
-              {/*Intelimon*/}
+              {/*Intellimon*/}
               <TouchableOpacity
                 style={localStyles.blocks}
                 onPress={() => {
-                  this.props.buyTamamon("Intelimon", this.state.inteliPrice);
+                  this.props.buyTamamon("Intellimon", this.state.intelliPrice);
                 }}
               >
                 <Image
                   source={require("./res/images/icons/cat-2.png")}
                   style={localStyles.blockContent}
                 ></Image>
-                <Text style={localStyles.textBox}>Intelimon</Text>
-                {this.props.inteliOwned ? bought : inteliBuy}
+                <Text style={localStyles.textBox}>Intellimon</Text>
+                {this.props.intelliOwned ? bought : intelliBuy}
               </TouchableOpacity>
 
               {/*potemon*/}

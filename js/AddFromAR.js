@@ -43,7 +43,7 @@ export default class AddARTamamon extends Component {
   render() {
     console.log(
       "HHH",
-      this.props.arSceneNavigator.viroAppProps.tamamonList[2].owned
+      this.props.arSceneNavigator.viroAppProps.tamamonList.Potemon.owned
     );
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
@@ -65,7 +65,8 @@ export default class AddARTamamon extends Component {
           target={"potemon"}
           pauseUpdates={this.state.pauseUpdates}
         >
-          {this.props.arSceneNavigator.viroAppProps.tamamonList[2].owned ? (
+          {this.props.arSceneNavigator.viroAppProps.tamamonList.Potemon
+            .owned ? (
             <ViroNode>
               <Viro3DObject
                 source={require("./res/speechBubble.obj")}
