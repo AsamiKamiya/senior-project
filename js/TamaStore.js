@@ -57,80 +57,86 @@ export default class TamaStore extends Component {
 
     return (
       <ScrollView style={localStyles.scrollview}>
+        {walletDisplay}
         <ImageBackground
-          source={require("./res/images/Sprite-0004.gif")}
-          style={{ width: "100%", height: 400, flex: 1 }}
+          source={require("./res/images/roof.gif")}
+          style={{ width: "100%", height: 250 }}
+          resizeMode="stretch"
+          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
+        ></ImageBackground>
+        {/* Hero Image */}
+        {/* <View style={localStyles.heroBox}>
+          <Text style={localStyles.heroTitle}>Tamamon Store!</Text>
+        </View> */}
+        {/*Store Cards */}
+        <ImageBackground
+          source={require("./res/images/wall.gif")}
+          style={{ width: "100%", height: 1000 }}
           resizeMode="stretch"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
-          {walletDisplay}
-          {/* Hero Image */}
-          <View style={localStyles.heroBox}>
-            <Text style={localStyles.heroTitle}>Tamamon Store!</Text>
-          </View>
-          {/*Store Cards */}
-          <View style={localStyles.parent1st}>
-            {/*Pocchamon*/}
-            <TouchableOpacity
-              style={localStyles.blocks}
-              onPress={() => {
-                this._displayCostPoccha();
-              }}
-            >
-              <Image
-                source={require("./res/images/icons/cat-1.png")}
-                style={localStyles.blockContent}
-              ></Image>
-              <Text style={localStyles.textBox}>Pocchamon</Text>
-              {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
-            </TouchableOpacity>
+          <View style={localStyles.inner}>
+            <View style={localStyles.parent}>
+              {/*Pocchamon*/}
+              <TouchableOpacity
+                style={localStyles.blocks}
+                onPress={() => {
+                  this._displayCostPoccha();
+                }}
+              >
+                <Image
+                  source={require("./res/images/icons/cat-1.png")}
+                  style={localStyles.blockContent}
+                ></Image>
+                <Text style={localStyles.textBox}>Pocchamon</Text>
+                {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
+              </TouchableOpacity>
+              {/*Intelimon*/}
+              <TouchableOpacity
+                style={localStyles.blocks}
+                onPress={() => {
+                  this.props.buyTamamon("Intelimon", this.state.inteliPrice);
+                }}
+              >
+                <Image
+                  source={require("./res/images/icons/cat-2.png")}
+                  style={localStyles.blockContent}
+                ></Image>
+                <Text style={localStyles.textBox}>Intelimon</Text>
+                {this.props.inteliOwned ? inteliBought : inteliBuy}
+              </TouchableOpacity>
+
+              {/*potemon*/}
+              <TouchableOpacity
+                style={localStyles.blocks}
+                onPress={() => {
+                  this.props.buyTamamon("Potemon", this.state.potePrice);
+                }}
+              >
+                <Image
+                  source={require("./res/icons/menuIcons/potatoIcon.png")}
+                  style={localStyles.blockContent}
+                ></Image>
+
+                <Text style={localStyles.textBox}>Potemon</Text>
+                {this.props.poteOwned ? poteBought : poteBuy}
+              </TouchableOpacity>
+              {/*placeholder for new tamamon*/}
+              <TouchableOpacity style={localStyles.blocks}>
+                <Image
+                  source={require("./res/icons/heartIconTEST.png")}
+                  style={localStyles.blockContent}
+                ></Image>
+
+                <Text style={localStyles.textBox}>Test</Text>
+                <Text style={localStyles.textBox}>Cost</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ImageBackground>
-        <View style={localStyles.parent}>
-          {/*Intelimon*/}
-          <TouchableOpacity
-            style={localStyles.blocks}
-            onPress={() => {
-              this.props.buyTamamon("Intelimon", this.state.inteliPrice);
-            }}
-          >
-            <Image
-              source={require("./res/images/icons/cat-2.png")}
-              style={localStyles.blockContent}
-            ></Image>
-            <Text style={localStyles.textBox}>Intelimon</Text>
-            {this.props.inteliOwned ? inteliBought : inteliBuy}
-          </TouchableOpacity>
-
-          {/*potemon*/}
-          <TouchableOpacity
-            style={localStyles.blocks}
-            onPress={() => {
-              this.props.buyTamamon("Potemon", this.state.potePrice);
-            }}
-          >
-            <Image
-              source={require("./res/icons/menuIcons/potatoIcon.png")}
-              style={localStyles.blockContent}
-            ></Image>
-
-            <Text style={localStyles.textBox}>Potemon</Text>
-            {this.props.poteOwned ? poteBought : poteBuy}
-          </TouchableOpacity>
-          {/*placeholder for new tamamon*/}
-          <TouchableOpacity style={localStyles.blocks}>
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.blockContent}
-            ></Image>
-
-            <Text style={localStyles.textBox}>Test</Text>
-            <Text style={localStyles.textBox}>Cost</Text>
-          </TouchableOpacity>
-        </View>
         {/* </ImageBackground> */}
         <ImageBackground
-          source={require("./res/images/Sprite-0003.gif")}
+          source={require("./res/images/ground.gif")}
           style={{
             width: "100%",
             height: 210,
@@ -153,39 +159,28 @@ export default class TamaStore extends Component {
 }
 
 const localStyles = StyleSheet.create({
-  parent1st: {
-    // paddingBottom: 20,
-    // marginTop: 20,
-    //width: "100%",
-    flexDirection: "column",
-    flexWrap: "wrap",
-    justifyContent: "space-evenly",
-    justifyContent: "center",
-    alignItems: "center"
-  },
   parent: {
     paddingBottom: 20,
-    // marginTop: 20,
-    //width: "100%",
+    marginTop: 10,
+    width: "100%",
     flexDirection: "column",
-    flexWrap: "wrap",
+    // flexWrap: "wrap",
     justifyContent: "space-evenly",
     justifyContent: "center",
     alignItems: "center"
   },
   blocks: {
-    // margin: 20,
+    margin: 20,
     marginBottom: 20,
     borderRadius: 20,
     borderWidth: 2,
-    borderColor: "#839BE4",
+    borderColor: "#FFAB3F",
     alignItems: "center",
     padding: 10,
     backgroundColor: "#fff",
     flexGrow: 1,
     width: "80%",
     minWidth: "30%"
-    // backgroundColor: "#839BE4"
   },
   blockContent: {
     alignSelf: "center",
@@ -194,11 +189,11 @@ const localStyles = StyleSheet.create({
     // padding: 20
   },
   textBox: {
-    color: "#007aff",
+    // color: "#007aff",
     textAlign: "center",
     fontSize: 20,
     marginTop: 10,
-    color: "#839BE4"
+    color: "brown"
   },
   heroBox: {
     flex: 2,
@@ -225,6 +220,11 @@ const localStyles = StyleSheet.create({
   },
   walletBack: {
     // backgroundColor: "#839BE4"
+  },
+  inner: {
+    // flex: 1,
+    // flexDirection: "column",
+    alignItems: "center"
   }
 });
 module.exports = TamaStore;
