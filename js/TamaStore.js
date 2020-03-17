@@ -141,15 +141,50 @@ export default class TamaStore extends Component {
                 <Text style={localStyles.textBox}>Potemon</Text>
                 {this.props.poteOwned ? poteBought : poteBuy}
               </TouchableOpacity>
-              {/*placeholder for new tamamon*/}
-              <TouchableOpacity style={localStyles.blocks}>
+              {/*higemon*/}
+              <TouchableOpacity
+                style={localStyles.blocks}
+                onPress={() => {
+                  this.props.buyTamamon("Higemon", this.state.higePrice);
+                }}
+              >
                 <Image
-                  source={require("./res/icons/menuIcons/hige_sprite.png")}
+                  source={require("./res/icons/menuIcons/hige_sprite2.png")}
                   style={localStyles.blockContent}
                 ></Image>
 
-                <Text style={localStyles.textBox}>Test</Text>
-                <Text style={localStyles.textBox}>Cost</Text>
+                <Text style={localStyles.textBox}>Higemon</Text>
+                {this.props.higeOwned ? higeBought : higeBuy}
+              </TouchableOpacity>
+              {/*birdmon*/}
+              <TouchableOpacity
+                style={localStyles.blocks}
+                onPress={() => {
+                  this.props.buyTamamon("Birdmon", this.state.birdPrice);
+                }}
+              >
+                <Image
+                  source={require("./res/icons/menuIcons/tinybird2d.png")}
+                  style={localStyles.blockContent}
+                ></Image>
+
+                <Text style={localStyles.textBox}>Birdmon</Text>
+                {this.props.birdOwned ? birdBought : birdBuy}
+              </TouchableOpacity>
+              {/*keromon*/}
+              <TouchableOpacity
+                style={localStyles.blocks}
+                onPress={() => {
+                  this.props.buyTamamon("Keromon", this.state.keroPrice);
+                }}
+              >
+                <Image
+                  source={require("./res/icons/menuIcons/greenfrog.png")}
+                  style={localStyles.blockContent}
+                ></Image>
+
+                <Text style={localStyles.textBox}>Keromon</Text>
+                {this.props.keroOwned ? keroBought : keroBuy}
               </TouchableOpacity>
             </View>
           </View>
