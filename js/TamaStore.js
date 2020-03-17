@@ -35,17 +35,17 @@ export default class TamaStore extends Component {
   render() {
     /* Price Renders */
     const pocchaBuy = (
-      <Text style={localStyles.textBox}>{this.state.pocchaPrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.pocchaPrice} G</Text>
     );
     const pocchaBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     const inteliBuy = (
-      <Text style={localStyles.textBox}>{this.state.inteliPrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.inteliPrice} G</Text>
     );
     const inteliBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     const poteBuy = (
-      <Text style={localStyles.textBox}>{this.state.potePrice} dollas</Text>
+      <Text style={localStyles.textBox}>{this.state.potePrice} G</Text>
     );
     const poteBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
