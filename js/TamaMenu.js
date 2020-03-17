@@ -102,7 +102,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Intelimon",
-          owned: true,
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -117,7 +117,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Potemon",
-          owned: true,
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -128,7 +128,7 @@ export default class TamaMenu extends Component {
 
         {
           name: "Higemon",
-          owned: true,
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -144,7 +144,7 @@ export default class TamaMenu extends Component {
 
         {
           name: "Birdmon",
-          owned: true,
+          owned: false,
           washed: false,
           played: false,
           fed: false,
@@ -1080,7 +1080,7 @@ var localStyles = StyleSheet.create({
     marginTop: 20,
     width: "100%",
     flexDirection: "column",
-    flexWrap: "wrap",
+    // flexWrap: "wrap",
     justifyContent: "space-evenly",
     justifyContent: "center",
     alignItems: "center"
@@ -1094,6 +1094,7 @@ var localStyles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "center"
+    // height: 380
   },
   title: {
     marginTop: 100,
