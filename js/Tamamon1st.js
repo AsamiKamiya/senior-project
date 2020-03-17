@@ -2,33 +2,17 @@
 
 import React, { Component } from "react";
 
-import {
-  StyleSheet,
-  View,
-  TouchableHighlight,
-  Text,
-  TouchableWithoutFeedback
-} from "react-native";
+import { StyleSheet } from "react-native";
 
 import {
   ViroARScene,
   ViroText,
-  ViroConstants,
-  ViroBox,
-  ViroMaterials,
   Viro3DObject,
   ViroAmbientLight,
   ViroSpotLight,
-  ViroARPlaneSelector,
   ViroNode,
   ViroAnimations,
-  ViroARTrackingTargets,
-  ViroARImageMarker,
-  ViroARTrackingTarget,
-  ViroButton,
-  ViroFlexView,
   ViroImage,
-  ViroParticleEmitter,
   ViroSound
 } from "react-viro";
 
@@ -96,11 +80,6 @@ export default class HelloWorldSceneAR extends Component {
               scale={[-0.4, 0.4, 0.4]}
               position={[0.1, -0.95, -3]}
               opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-              animation={{
-                name: "disappearForText",
-                run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-                delay: 2000
-              }}
             ></Viro3DObject>
             <ViroText
               text={this.props.arSceneNavigator.viroAppProps.text}
@@ -110,11 +89,6 @@ export default class HelloWorldSceneAR extends Component {
               width={2}
               height={2}
               opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-              animation={{
-                name: "disappearForText",
-                run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-                delay: 2000
-              }}
             />
           </ViroNode>
         )}
@@ -216,11 +190,6 @@ export default class HelloWorldSceneAR extends Component {
           style={styles.nameText}
           position={[-0.1, 0.35, -3]}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          // animation={{
-          //   name: "disappearForText",
-          //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-          //   delay: 2000
-          // }}
         ></ViroText>
 
         <ViroSpotLight
