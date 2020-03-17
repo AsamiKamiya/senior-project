@@ -50,36 +50,43 @@ export default class TamaStore extends Component {
     const poteBought = <Text style={localStyles.textBox}>Already Owned</Text>;
 
     const walletDisplay = (
-      <Text style={localStyles.heroText}>Wallet: {this.props.wallet}G</Text>
+      <View style={localStyles.walletBack}>
+        <Text style={localStyles.heroText}>Wallet: {this.props.wallet}G</Text>
+      </View>
     );
 
     return (
-      <ScrollView>
-        {walletDisplay}
-        {/* Hero Image */}
-        <View style={localStyles.heroBox}>
-          <Text style={localStyles.heroTitle}>
-            Welcome to the Tamamon Store!
-          </Text>
-        </View>
-
-        {/*Store Cards */}
+      <ScrollView style={localStyles.scrollview}>
+        <ImageBackground
+          source={require("./res/images/Sprite-0004.gif")}
+          style={{ width: "100%", height: 400, flex: 1 }}
+          resizeMode="stretch"
+          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
+        >
+          {walletDisplay}
+          {/* Hero Image */}
+          <View style={localStyles.heroBox}>
+            <Text style={localStyles.heroTitle}>Tamamon Store!</Text>
+          </View>
+          {/*Store Cards */}
+          <View style={localStyles.parent1st}>
+            {/*Pocchamon*/}
+            <TouchableOpacity
+              style={localStyles.blocks}
+              onPress={() => {
+                this._displayCostPoccha();
+              }}
+            >
+              <Image
+                source={require("./res/images/icons/cat-1.png")}
+                style={localStyles.blockContent}
+              ></Image>
+              <Text style={localStyles.textBox}>Pocchamon</Text>
+              {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
         <View style={localStyles.parent}>
-          {/*Pocchamon*/}
-          <TouchableOpacity
-            style={localStyles.blocks}
-            onPress={() => {
-              this._displayCostPoccha();
-            }}
-          >
-            <Image
-              source={require("./res/images/icons/cat-1.png")}
-              style={localStyles.blockContent}
-            ></Image>
-            <Text style={localStyles.textBox}>Pocchamon</Text>
-            {this.props.pocchaOwned ? pocchaBought : pocchaBuy}
-          </TouchableOpacity>
-
           {/*Intelimon*/}
           <TouchableOpacity
             style={localStyles.blocks}
@@ -121,6 +128,17 @@ export default class TamaStore extends Component {
             <Text style={localStyles.textBox}>Cost</Text>
           </TouchableOpacity>
         </View>
+        {/* </ImageBackground> */}
+        <ImageBackground
+          source={require("./res/images/Sprite-0003.gif")}
+          style={{
+            width: "100%",
+            height: 210,
+            flex: 1
+          }}
+          resizeMode="stretch"
+          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
+        ></ImageBackground>
       </ScrollView>
     );
   }
@@ -135,9 +153,19 @@ export default class TamaStore extends Component {
 }
 
 const localStyles = StyleSheet.create({
+  parent1st: {
+    // paddingBottom: 20,
+    // marginTop: 20,
+    //width: "100%",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    justifyContent: "space-evenly",
+    justifyContent: "center",
+    alignItems: "center"
+  },
   parent: {
-    padding: 20,
-    marginTop: 20,
+    paddingBottom: 20,
+    // marginTop: 20,
     //width: "100%",
     flexDirection: "column",
     flexWrap: "wrap",
@@ -146,43 +174,57 @@ const localStyles = StyleSheet.create({
     alignItems: "center"
   },
   blocks: {
-    flexGrow: 1,
-    width: "75%",
-    margin: 10,
+    // margin: 20,
+    marginBottom: 20,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#839BE4",
+    alignItems: "center",
     padding: 10,
-    backgroundColor: "powderblue"
+    backgroundColor: "#fff",
+    flexGrow: 1,
+    width: "80%",
+    minWidth: "30%"
+    // backgroundColor: "#839BE4"
   },
   blockContent: {
     alignSelf: "center",
-    width: 150,
-    height: 150,
-    padding: 20
+    width: 80,
+    height: 80
+    // padding: 20
   },
   textBox: {
-    fontSize: 30,
-    marginBottom: 20,
-    marginLeft: 20,
-    alignSelf: "center"
+    color: "#007aff",
+    textAlign: "center",
+    fontSize: 20,
+    marginTop: 10,
+    color: "#839BE4"
   },
   heroBox: {
     flex: 2,
-    height: 350,
-    backgroundColor: "powderblue",
+    height: 100,
+    // backgroundColor: "#839BE4",
     justifyContent: "center",
     alignItems: "center"
   },
   heroTitle: {
-    fontSize: 40,
+    fontSize: 30,
     color: "white"
   },
   heroText: {
     width: "100%",
     fontSize: 20,
-    backgroundColor: "powderblue",
+    // backgroundColor: "powderblue",
     alignSelf: "flex-start",
     paddingLeft: 30,
     paddingTop: 20,
     color: "yellow"
+  },
+  scrollview: {
+    backgroundColor: "#839BE4"
+  },
+  walletBack: {
+    // backgroundColor: "#839BE4"
   }
 });
 module.exports = TamaStore;

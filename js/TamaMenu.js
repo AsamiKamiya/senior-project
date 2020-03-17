@@ -13,7 +13,8 @@ import {
   ImageBackground,
   Image,
   Button,
-  ScrollView
+  ScrollView,
+  Dimensions
 } from "react-native";
 
 import {
@@ -90,6 +91,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: false,
           text: [
             "Thank you for feeding me!",
             "I could totally eat more...",
@@ -100,7 +102,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Intelimon",
-          owned: false,
+          owned: true,
           washed: false,
           played: false,
           fed: false,
@@ -115,7 +117,7 @@ export default class TamaMenu extends Component {
         },
         {
           name: "Potemon",
-          owned: false,
+          owned: true,
           washed: false,
           played: false,
           fed: false,
@@ -166,6 +168,7 @@ export default class TamaMenu extends Component {
     );
     this._buyTamamon = this._buyTamamon.bind(this);
     this._addARTamamon = this._addARTamamon.bind(this);
+    this._updateNeglected = this._updateNeglected.bind(this);
   }
 
   //Switch AR scenes based on Navigator Type
@@ -297,10 +300,15 @@ export default class TamaMenu extends Component {
     );
 
     return (
-      <ScrollView>
+      <ScrollView style={localStyles.scrollview}>
         <ImageBackground
-          source={require("./res/images/Sprite-0002.gif")}
-          style={{ width: "100%", height: "100%" }}
+          source={require("./res/images/Sprite-0004.gif")}
+          style={{
+            width: "100%",
+            height: 300
+          }}
+          resizeMode="stretch"
+          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
           <View style={localStyles.inner}>
             <Image
@@ -308,27 +316,40 @@ export default class TamaMenu extends Component {
               style={localStyles.title}
             />
 
-            {storeButton}
-            {addButton}
-
-            <View style={localStyles.parent}>
-              {/* Select Pocchamon */}
-              {this.state.tamamon[0].owned ? pocchaButton : null}
-
-              {/* Select Intelimon*/}
-              {this.state.tamamon[1].owned ? inteliButton : null}
-
-              {/*Select Potemon*/}
-              {this.state.tamamon[2].owned ? poteButton : null}
-
-              {/*Select Higemon*/}
-              {this.state.tamamon[3].owned ? higeButton : null}
-
-              {/*Select Birdmon */}
-              {this.state.tamamon[4].owned ? birdButton : null}
+            <View style={{ flexDirection: "row" }}>
+              {storeButton}
+              {addButton}
             </View>
           </View>
         </ImageBackground>
+        <View style={localStyles.inner}>
+          <View style={localStyles.parent}>
+            {/* Select Pocchamon */}
+            {this.state.tamamon[0].owned ? pocchaButton : null}
+
+            {/* Select Intelimon*/}
+            {this.state.tamamon[1].owned ? inteliButton : null}
+
+            {/*Select Potemon*/}
+            {this.state.tamamon[2].owned ? poteButton : null}
+
+            {/*Select Higemon*/}
+            {this.state.tamamon[3].owned ? higeButton : null}
+
+            {/*Select Birdmon */}
+            {this.state.tamamon[4].owned ? birdButton : null}
+          </View>
+        </View>
+        <ImageBackground
+          source={require("./res/images/Sprite-0003.gif")}
+          style={{
+            width: "100%",
+            height: 210,
+            flex: 1
+          }}
+          resizeMode="stretch"
+          // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
+        ></ImageBackground>
       </ScrollView>
     );
   }
@@ -378,7 +399,9 @@ export default class TamaMenu extends Component {
             washed: this.state.tamamon[0].washed,
             played: this.state.tamamon[0].played,
             text: this.state.displayText,
-            flgs: this.state.tamamon[0].flgs
+            flgs: this.state.tamamon[0].flgs,
+            neglected: this.state.tamamon[0].neglected,
+            updateNeglected: this._updateNeglected
           }}
           initialScene={{ scene: InitialARScene }}
         />
@@ -967,6 +990,14 @@ export default class TamaMenu extends Component {
     }, 4000);
   };
 
+  _updateNeglected = async name => {
+    this.setState(prevState => ({
+      tamamon: prevState.tamamon.map(obj =>
+        obj.name === name ? Object.assign(obj, { neglected: false }) : obj
+      )
+    }));
+  };
+
   _washTamamon = name => {
     let washedTamamon = this.state.tamamon.filter(obj => {
       return obj.name === name;
@@ -1053,6 +1084,7 @@ var localStyles = StyleSheet.create({
     justifyContent: "space-evenly",
     justifyContent: "center",
     alignItems: "center"
+    // flexDirection: "row"
   },
   images: {
     width: 80,
@@ -1083,7 +1115,9 @@ var localStyles = StyleSheet.create({
     padding: 10,
     backgroundColor: "#fff",
     flexGrow: 1,
-    width: "30%"
+    width: "80%",
+    minWidth: "30%"
+    // flex: 1
   },
   bottomNav: {
     height: 75,
@@ -1127,6 +1161,7 @@ var localStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#007aff",
     marginTop: 50,
+    margin: 10,
     justifyContent: "center"
   },
 
@@ -1137,6 +1172,24 @@ var localStyles = StyleSheet.create({
     fontWeight: "600",
     paddingTop: 10,
     paddingBottom: 10
+  },
+  containter: {
+    width: Dimensions.get("window").width, //for full screen
+    height: Dimensions.get("window").height //for full screen
+  },
+  fixed: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
+  },
+  scrollview: {
+    backgroundColor: "#839BE4"
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover" // or 'stretch'
   }
 });
 module.exports = TamaMenu;

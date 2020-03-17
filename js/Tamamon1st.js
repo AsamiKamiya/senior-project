@@ -42,43 +42,82 @@ export default class HelloWorldSceneAR extends Component {
       forPlay: false
     };
     this._onFinishAnimation4play = this._onFinishAnimation4play.bind(this);
+    this._onFinishAnimation4neglected = this._onFinishAnimation4neglected.bind(
+      this
+    );
   }
-
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps.flgs);
     return (
       <ViroARScene>
-        {/* This is the speech bubble and text */}
-        <Viro3DObject
-          source={require("./res/speechBubble.obj")}
-          resources={[
-            require("./res/speechBubble.mtl"),
-            require("./res/speechBubble.png")
-          ]}
-          type="OBJ"
-          scale={[-0.4, 0.4, 0.4]}
-          position={[0.1, -0.95, -3]}
-          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          //animation={{
-          //name: "disappearForText",
-          //run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-          //delay: 2000
-          //}}
-        ></Viro3DObject>
-        <ViroText
-          text={this.props.arSceneNavigator.viroAppProps.text}
-          scale={[0.4, 0.4, 0.4]}
-          position={[-0.7, 0.8, -2.9]}
-          style={styles.helloWorldTextStyle}
-          width={2}
-          height={2}
-          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          /*animation={{
-            name: "disappearForText",
-            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 2000
-          }}*/
-        />
+        {/* this is for neglected aimation */}
+        {this.props.arSceneNavigator.viroAppProps.neglected ? (
+          <ViroNode>
+            <Viro3DObject
+              source={require("./res/speechBubble.obj")}
+              resources={[
+                require("./res/speechBubble.mtl"),
+                require("./res/speechBubble.png")
+              ]}
+              type="OBJ"
+              scale={[-0.4, 0.4, 0.4]}
+              position={[0.1, -0.95, -3]}
+              opacity={1}
+              animation={{
+                name: "disappearForText",
+                run: this.props.arSceneNavigator.viroAppProps.neglected,
+                delay: 3000
+              }}
+            ></Viro3DObject>
+            <ViroText
+              text={"long time no see..."}
+              scale={[0.4, 0.4, 0.4]}
+              position={[-0.7, 0.8, -2.9]}
+              style={styles.helloWorldTextStyle}
+              width={2}
+              height={2}
+              opacity={1}
+              animation={{
+                name: "disappearForText",
+                run: this.props.arSceneNavigator.viroAppProps.neglected,
+                delay: 3000
+              }}
+            />
+          </ViroNode>
+        ) : (
+          /* This is the speech bubble and text */
+          <ViroNode>
+            <Viro3DObject
+              source={require("./res/speechBubble.obj")}
+              resources={[
+                require("./res/speechBubble.mtl"),
+                require("./res/speechBubble.png")
+              ]}
+              type="OBJ"
+              scale={[-0.4, 0.4, 0.4]}
+              position={[0.1, -0.95, -3]}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+              // animation={{
+              //   name: "disappearForText",
+              //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              //   delay: 2000
+              // }}
+            ></Viro3DObject>
+            <ViroText
+              text={this.props.arSceneNavigator.viroAppProps.text}
+              scale={[0.4, 0.4, 0.4]}
+              position={[-0.7, 0.8, -2.9]}
+              style={styles.helloWorldTextStyle}
+              width={2}
+              height={2}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+              // animation={{
+              //   name: "disappearForText",
+              //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+              //   delay: 2000
+              // }}
+            />
+          </ViroNode>
+        )}
         {/* This is the heart that appears */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
@@ -102,14 +141,35 @@ export default class HelloWorldSceneAR extends Component {
             style={styles.helloWorldTextStyle}
           />
         )}
-
-        {/* This is the Pocchamon animation */}
-        {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
-        this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
+        {/* this is for neglected aimation */}
+        {this.props.arSceneNavigator.viroAppProps.neglected ? (
           <Viro3DObject
-            source={require("./res/cat2.obj")}
+            source={require("./res/pocchamon/cat2-a3.obj")}
+            resources={[
+              require("./res/pocchamon/cat2-a3.mtl"),
+              require("./res/pocchamon/cat2-a3.png")
+            ]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
             position={[-0.0, -1, -3]}
-            resources={[require("./res/cat2.mtl"), require("./res/cat2.png")]}
+            opacity={1}
+            animation={{
+              name: "catNeglected",
+              run: this.props.arSceneNavigator.viroAppProps.neglected,
+              onFinish: this._onFinishAnimation4neglected,
+              delay: 3000
+            }}
+          ></Viro3DObject>
+        ) : /* This is the Pocchamon animation */
+        this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
+          this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
+          <Viro3DObject
+            source={require("./res/pocchamon/cat2.obj")}
+            position={[-0.0, -1, -3]}
+            resources={[
+              require("./res/pocchamon/cat2.mtl"),
+              require("./res/pocchamon/cat2.png")
+            ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
             animation={{
@@ -119,11 +179,11 @@ export default class HelloWorldSceneAR extends Component {
           />
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
-            source={require("./res/cat2-a1.obj")}
+            source={require("./res/pocchamon/cat2-a1.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/cat2-a1.mtl"),
-              require("./res/cat2-a1.png")
+              require("./res/pocchamon/cat2-a1.mtl"),
+              require("./res/pocchamon/cat2-a1.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -134,11 +194,11 @@ export default class HelloWorldSceneAR extends Component {
           />
         ) : (
           <Viro3DObject
-            source={require("./res/cat2-a2.obj")}
+            source={require("./res/pocchamon/cat2-a2.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/cat2-a2.mtl"),
-              require("./res/cat2-a2.png")
+              require("./res/pocchamon/cat2-a2.mtl"),
+              require("./res/pocchamon/cat2-a2.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -148,7 +208,6 @@ export default class HelloWorldSceneAR extends Component {
             }}
           />
         )}
-
         {/*Tamamon Name */}
         <ViroText
           text="Pocchamon"
@@ -156,13 +215,12 @@ export default class HelloWorldSceneAR extends Component {
           height={2}
           style={styles.nameText}
           position={[-0.1, 0.35, -3]}
-          //position={[1.2, -1.3, -3]}
           opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-          animation={{
-            name: "disappearForText",
-            run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
-            delay: 2000
-          }}
+          // animation={{
+          //   name: "disappearForText",
+          //   run: this.props.arSceneNavigator.viroAppProps.flgs[3] === 1,
+          //   delay: 2000
+          // }}
         ></ViroText>
 
         <ViroSpotLight
@@ -325,6 +383,9 @@ export default class HelloWorldSceneAR extends Component {
       this.setState({ forPlay: true });
     }
   }
+  _onFinishAnimation4neglected() {
+    this.props.arSceneNavigator.viroAppProps.updateNeglected("Pocchamon");
+  }
 }
 
 var styles = StyleSheet.create({
@@ -418,7 +479,8 @@ ViroAnimations.registerAnimations({
       "catBoundUpR",
       "catBoundDownR"
     ]
-  ]
+  ],
+  catNeglected: [["catBoundNo1st", "catBoundNo1st"]]
   // catBoundAngry: [["catBound"]],
   // heartAnimation: [["moveUp", "rotate"]]
 });
