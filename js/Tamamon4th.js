@@ -107,11 +107,11 @@ export default class TamamonFourth extends Component {
         {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
         this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
-            source={require("./res/higemon/hige_default.obj")}
+            source={require("./res/higemon/hige_defaultUpdate.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/higemon/hige_default.mtl"),
-              require("./res/higemon/hige_default.png")
+              require("./res/higemon/hige_defaultUpdate.mtl"),
+              require("./res/higemon/hige_defaultUpdate.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -137,11 +137,11 @@ export default class TamamonFourth extends Component {
           />
         ) : (
           <Viro3DObject
-            source={require("./res/higemon/hige_default.obj")}
+            source={require("./res/higemon/hige_defaultUpdate.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/higemon/hige_default.mtl"),
-              require("./res/higemon/hige_default.png")
+              require("./res/higemon/hige_defaultUpdate.mtl"),
+              require("./res/higemon/hige_defaultUpdate.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}

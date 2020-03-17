@@ -136,8 +136,8 @@ export default class TamaMenu extends Component {
           text: [
             "I usually expect higher quality food...",
             "But what about third breakfast?",
-            "Breakfast was fine, I guess. It's not like I'm happy or anything.",
-            "Okay maybe five breakfasts was too much."
+            "Breakfast was fine, I guess...",
+            "Maybe five breakfasts was too much."
           ],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
