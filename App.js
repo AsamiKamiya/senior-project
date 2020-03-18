@@ -52,7 +52,7 @@ export default class ViroSample extends Component {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
       //deviceID: DeviceInfo.getUniqueId(),
-      //deviceID: "Sadness",
+      deviceID: "Sadness",
       wallet: 0,
       serverData: [],
       loaded: false

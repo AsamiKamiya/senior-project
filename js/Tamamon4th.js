@@ -32,27 +32,55 @@ export default class TamamonFourth extends Component {
     console.log(this.props.arSceneNavigator.viroAppProps.flgs);
     return (
       <ViroARScene>
-        {/* This is the speech bubble and text */}
-        <Viro3DObject
-          source={require("./res/speechBubble.obj")}
-          resources={[
-            require("./res/speechBubble.mtl"),
-            require("./res/speechBubble.png")
-          ]}
-          type="OBJ"
-          scale={[-0.4, 0.4, 0.4]}
-          position={[0.1, -0.95, -3]}
-          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-        ></Viro3DObject>
-        <ViroText
-          text={this.props.arSceneNavigator.viroAppProps.text}
-          scale={[0.4, 0.4, 0.4]}
-          position={[-0.7, 0.8, -2.9]}
-          style={styles.helloWorldTextStyle}
-          width={2}
-          height={2}
-          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-        />
+        {/*Neglected */}
+        {this.props.arSceneNavigator.viroAppProps.neglected ? (
+          <ViroNode>
+            <Viro3DObject
+              source={require("./res/speechBubble.obj")}
+              resources={[
+                require("./res/speechBubble.mtl"),
+                require("./res/speechBubble.png")
+              ]}
+              type="OBJ"
+              scale={[-0.4, 0.4, 0.4]}
+              position={[0.1, -0.95, -3]}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            ></Viro3DObject>
+            <ViroText
+              text={"...I thought you were dead"}
+              scale={[0.4, 0.4, 0.4]}
+              position={[-0.7, 0.8, -2.9]}
+              style={styles.helloWorldTextStyle}
+              width={2}
+              height={2}
+              opacity={this.props.arSceneNavigator.viroAppProps.neglected}
+            />
+          </ViroNode>
+        ) : (
+          /* This is the speech bubble and text */
+          <ViroNode>
+            <Viro3DObject
+              source={require("./res/speechBubble.obj")}
+              resources={[
+                require("./res/speechBubble.mtl"),
+                require("./res/speechBubble.png")
+              ]}
+              type="OBJ"
+              scale={[-0.4, 0.4, 0.4]}
+              position={[0.1, -0.95, -3]}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            ></Viro3DObject>
+            <ViroText
+              text={this.props.arSceneNavigator.viroAppProps.text}
+              scale={[0.4, 0.4, 0.4]}
+              position={[-0.7, 0.8, -2.9]}
+              style={styles.helloWorldTextStyle}
+              width={2}
+              height={2}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            />
+          </ViroNode>
+        )}
         {/* This is the heart that appears */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
@@ -77,7 +105,7 @@ export default class TamamonFourth extends Component {
           />
         )}
 
-        {/* This is the Pocchamon animation */}
+        {/* This is the Higemon animation */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
         this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
