@@ -77,7 +77,7 @@ export default class TamaStore extends Component {
 
     return (
       <ScrollView style={localStyles.scrollview}>
-        {walletDisplay}
+        {/* {walletDisplay} */}
         <ImageBackground
           source={require("./res/images/roof.gif")}
           style={{ width: "100%", height: 250 }}

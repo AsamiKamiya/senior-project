@@ -446,25 +446,38 @@ export default class TamaMenu extends Component {
   _getStore() {
     return (
       <View>
-        <TouchableOpacity
-          style={localStyles.tabItem}
-          onPress={this._getExperienceButtonOnPress(UNSET)}
-        >
-          <Image
-            source={require("./res/icons/icon_left.png")}
-            style={localStyles.backButtonStore}
-          ></Image>
-        </TouchableOpacity>
-        <TamaStore
-          pocchaOwned={this.state.server.Pocchamon.owned}
-          intelliOwned={this.state.server.Intellimon.owned}
-          poteOwned={this.state.server.Potemon.owned}
-          higeOwned={this.state.server.Higemon.owned}
-          birdOwned={this.state.server.Birdmon.owned}
-          keroOwned={this.state.server.Keromon.owned}
-          wallet={this.state.wallet}
-          buyTamamon={this._buyTamamon}
-        ></TamaStore>
+        <View style={localStyles.bottomNav}>
+          <TouchableOpacity
+            style={localStyles.tabItemforStoreL}
+            onPress={this._getExperienceButtonOnPress(UNSET)}
+          >
+            <Image
+              source={require("./res/icons/icon_left.png")}
+              style={localStyles.backButtonStore}
+            ></Image>
+          </TouchableOpacity>
+          <View style={localStyles.tabItemforStoreR}>
+            <View style={localStyles.bottomNav}>
+              <Image
+                source={require("./res/icons/coinSpriteUpdated.png")}
+                style={localStyles.walletmark}
+              ></Image>
+              <Text style={{ fontSize: 20 }}>{this.state.wallet}G</Text>
+            </View>
+          </View>
+        </View>
+        <View>
+          <TamaStore
+            pocchaOwned={this.state.server.Pocchamon.owned}
+            intelliOwned={this.state.server.Intellimon.owned}
+            poteOwned={this.state.server.Potemon.owned}
+            higeOwned={this.state.server.Higemon.owned}
+            birdOwned={this.state.server.Birdmon.owned}
+            keroOwned={this.state.server.Keromon.owned}
+            wallet={this.state.wallet}
+            buyTamamon={this._buyTamamon}
+          ></TamaStore>
+        </View>
       </View>
     );
   }
@@ -1367,6 +1380,17 @@ var localStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center"
   },
+  tabItemforStoreL: {
+    // alignItems: "center",
+    justifyContent: "center",
+    marginRight: 100
+  },
+  tabItemforStoreR: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: 50,
+    marginTop: 50
+  },
   tabTitle: {
     fontSize: 15,
     //color: "#3c3c3c",
@@ -1378,6 +1402,11 @@ var localStyles = StyleSheet.create({
     width: 80,
     marginBottom: 10,
     backgroundColor: "transparent"
+  },
+  walletmark: {
+    height: 30,
+    width: 30,
+    marginRight: 10
   },
   backButton: {
     height: 40,
