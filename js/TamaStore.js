@@ -159,7 +159,7 @@ export default class TamaStore extends Component {
                 }}
               >
                 <Image
-                  source={require("./res/icons/menuIcons/tinybird2d.png")}
+                  source={require("./res/icons/menuIcons/birdmon2d.png")}
                   style={localStyles.blockContent}
                 ></Image>
 
@@ -174,7 +174,7 @@ export default class TamaStore extends Component {
                 }}
               >
                 <Image
-                  source={require("./res/icons/menuIcons/greenfrog.png")}
+                  source={require("./res/icons/menuIcons/kero.png")}
                   style={localStyles.blockContent}
                 ></Image>
 

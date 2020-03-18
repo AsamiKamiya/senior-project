@@ -16,7 +16,7 @@ import {
   ViroSound
 } from "react-viro";
 
-export default class TamamonFifth extends Component {
+export default class TamamonSixth extends Component {
   constructor() {
     super();
 
@@ -29,7 +29,11 @@ export default class TamamonFifth extends Component {
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps.flgs);
+    console.log("keromon", this.props.arSceneNavigator.viroAppProps.flgs);
+    console.log(
+      "wash keromon",
+      this.props.arSceneNavigator.viroAppProps.washed
+    );
     return (
       <ViroARScene>
         {/* This is the speech bubble and text */}
@@ -81,11 +85,11 @@ export default class TamamonFifth extends Component {
         {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
         this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
-            source={require("./res/birdmon/birdmon.obj")}
+            source={require("./res/keromon/kero.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/birdmon/birdmon.mtl"),
-              require("./res/birdmon/birdmon.png")
+              require("./res/keromon/kero.mtl"),
+              require("./res/keromon/kero.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -96,11 +100,11 @@ export default class TamamonFifth extends Component {
           />
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
-            source={require("./res/birdmon/birdmon.obj")}
+            source={require("./res/keromon/kero.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/birdmon/birdmon.mtl"),
-              require("./res/birdmon/birdmon.png")
+              require("./res/keromon/kero.mtl"),
+              require("./res/keromon/kero.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -111,11 +115,11 @@ export default class TamamonFifth extends Component {
           />
         ) : (
           <Viro3DObject
-            source={require("./res/birdmon/birdmon.obj")}
+            source={require("./res/keromon/kero.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/birdmon/birdmon.mtl"),
-              require("./res/birdmon/birdmon.png")
+              require("./res/keromon/kero.mtl"),
+              require("./res/keromon/kero.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -128,7 +132,7 @@ export default class TamamonFifth extends Component {
 
         {/*Tamamon Name */}
         <ViroText
-          text="Birdmon"
+          text="Keromon"
           width={2}
           height={2}
           style={styles.nameText}
@@ -392,4 +396,4 @@ ViroAnimations.registerAnimations({
   ]
 });
 
-module.exports = TamamonFifth;
+module.exports = TamamonSixth;
