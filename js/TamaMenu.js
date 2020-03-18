@@ -140,7 +140,12 @@ export default class TamaMenu extends Component {
           fed: false,
           fedCount: 0,
           neglected: false,
-          text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
+          text: [
+            "Yum!",
+            "Feed me more!",
+            "I still have room",
+            "I hope I can still fly..."
+          ],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
 
@@ -152,7 +157,12 @@ export default class TamaMenu extends Component {
           fed: false,
           fedCount: 0,
           neglected: false,
-          text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
+          text: [
+            "Free food?!",
+            "I don't have to pay for this, right?",
+            "So good...",
+            "...... I need a nap."
+          ],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         }
       ],
