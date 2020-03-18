@@ -379,7 +379,7 @@ export default class TamaMenu extends Component {
         style={localStyles.buttonStyle}
         underlayColor={"#68a0ff"}
       >
-        <Text style={localStyles.textStyle}>AR</Text>
+        <Text style={localStyles.textStyle}>UNLOCK</Text>
       </TouchableHighlight>
     );
 
@@ -400,10 +400,7 @@ export default class TamaMenu extends Component {
               style={localStyles.title}
             />
 
-            <View style={{ flexDirection: "row" }}>
-              {storeButton}
-              {addButton}
-            </View>
+            <View style={{ flexDirection: "row" }}>{storeButton}</View>
           </View>
         </ImageBackground>
         <View style={localStyles.inner}>
@@ -420,6 +417,16 @@ export default class TamaMenu extends Component {
             {this.state.server.Birdmon.owned ? birdButton : null}
             {/*Select Keromon */}
             {this.state.server.Keromon.owned ? keroButton : null}
+            {this.state.server.Potemon.owned ? null : (
+              <View style={{ alignItems: "center", marginTop: 30 }}>
+                <Text
+                  style={{ color: "white", fontSize: 20, textAlign: "center" }}
+                >
+                  Use the Potemon AR marker to unlock a bonus Tamamon.
+                </Text>
+                {addButton}
+              </View>
+            )}
           </View>
         </View>
         <ImageBackground
