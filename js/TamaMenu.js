@@ -286,7 +286,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Potemon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          {this.state.server.Potemon.fedCount}
+          You've fed Potemon {this.state.server.Potemon.fedCount} times.
         </Text>
       </TouchableOpacity>
     );
@@ -506,9 +506,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._washTamamon("Pocchamon");
-              this._updateFlg("Pocchamon", WASHED_FLG);
+            onPress={async () => {
+              await this._washTamamon("Pocchamon");
+              await this._updateFlg("Pocchamon", WASHED_FLG);
             }}
           >
             <Image
@@ -521,9 +521,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._playTamamon("Pocchamon");
-              this._updateFlg("Pocchamon", PLAYED_FLG);
+            onPress={async () => {
+              await this._playTamamon("Pocchamon");
+              await this._updateFlg("Pocchamon", PLAYED_FLG);
             }}
           >
             <Image
@@ -594,9 +594,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._washTamamon("Intellimon");
-              this._updateFlg("Intellimon", WASHED_FLG);
+            onPress={async () => {
+              await this._washTamamon("Intellimon");
+              await this._updateFlg("Intellimon", WASHED_FLG);
             }}
           >
             <Image
@@ -609,9 +609,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._playTamamon("Intellimon");
-              this._updateFlg("Intellimon", PLAYED_FLG);
+            onPress={async () => {
+              await this._playTamamon("Intellimon");
+              await this._updateFlg("Intellimon", PLAYED_FLG);
             }}
           >
             <Image
@@ -682,9 +682,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._washTamamon("Potemon");
-              this._updateFlg("Potemon", WASHED_FLG);
+            onPress={async () => {
+              await this._washTamamon("Potemon");
+              await this._updateFlg("Potemon", WASHED_FLG);
             }}
           >
             <Image
@@ -697,9 +697,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._playTamamon("Potemon");
-              this._updateFlg("Potemon", PLAYED_FLG);
+            onPress={async () => {
+              await this._playTamamon("Potemon");
+              await this._updateFlg("Potemon", PLAYED_FLG);
             }}
           >
             <Image
@@ -769,9 +769,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._washTamamon("Higemon");
-              this._updateFlg("Higemon", WASHED_FLG);
+            onPress={async () => {
+              await this._washTamamon("Higemon");
+              await this._updateFlg("Higemon", WASHED_FLG);
             }}
           >
             <Image
@@ -784,9 +784,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._playTamamon("Higemon");
-              this._updateFlg("Higemon", PLAYED_FLG);
+            onPress={async () => {
+              await this._playTamamon("Higemon");
+              await this._updateFlg("Higemon", PLAYED_FLG);
             }}
           >
             <Image
@@ -860,9 +860,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._washTamamon("Birdmon");
-              this._updateFlg("Birdmon", WASHED_FLG);
+            onPress={async () => {
+              await this._washTamamon("Birdmon");
+              await this._updateFlg("Birdmon", WASHED_FLG);
             }}
           >
             <Image
@@ -875,9 +875,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._playTamamon("Birdmon");
-              this._updateFlg("Birdmon", PLAYED_FLG);
+            onPress={async () => {
+              await this._playTamamon("Birdmon");
+              await this._updateFlg("Birdmon", PLAYED_FLG);
             }}
           >
             <Image
@@ -951,9 +951,9 @@ export default class TamaMenu extends Component {
           {/*Clean button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._washTamamon("Keromon");
-              this._updateFlg("Keromon", WASHED_FLG);
+            onPress={async () => {
+              await this._washTamamon("Keromon");
+              await this._updateFlg("Keromon", WASHED_FLG);
             }}
           >
             <Image
@@ -966,9 +966,9 @@ export default class TamaMenu extends Component {
           {/*Play button*/}
           <TouchableOpacity
             style={localStyles.tabItem}
-            onPress={() => {
-              this._playTamamon("Keromon");
-              this._updateFlg("Keromon", PLAYED_FLG);
+            onPress={async () => {
+              await this._playTamamon("Keromon");
+              await this._updateFlg("Keromon", PLAYED_FLG);
             }}
           >
             <Image
@@ -1038,6 +1038,12 @@ export default class TamaMenu extends Component {
       }
       if (navigatorType === AR_NAVIGATOR_TYPE_4th) {
         this._updateFlg("Higemon", SPEECH_FLG);
+      }
+      if (navigatorType === AR_NAVIGATOR_TYPE_5th) {
+        this._updateFlg("Birdmon", SPEECH_FLG);
+      }
+      if (navigatorType === AR_NAVIGATOR_TYPE_6th) {
+        this._updateFlg("Keromon", SPEECH_FLG);
       }
     };
   }
@@ -1145,21 +1151,22 @@ export default class TamaMenu extends Component {
     });
   };
 
-  _washTamamon = name => {
+  _washTamamon = async name => {
     if (this.state.server[name].washed === false) {
       this.setState({ wallet: (this.state.wallet += 10) });
     }
-    const newWash = clone(this.state.server); //Deep clone state
+    const newWash = await clone(this.state.server); //Deep clone state
 
     newWash[name].washed = true;
-    this.setState(
+    await this.setState(
       //Set state with callback fn to call API
       {
         server: newWash
       },
-      () => {
-        const time = new Date();
-        const newData = this._formatState(name, time); //Format data to send
+      async () => {
+        await console.log("w:", this.state.server[name]);
+        const time = await new Date();
+        const newData = await this._formatState(name, time); //Format data to send
 
         const updateWashed = async newData => {
           //API call fn
@@ -1168,30 +1175,30 @@ export default class TamaMenu extends Component {
             method: "post",
             data: updateUserData(newData)
           }).then(result => {
-            console.log(result);
+            console.log("ww:", this.state.server[name]);
           });
         };
 
-        updateWashed(newData); //Execute API call
+        await updateWashed(newData); //Execute API call
       }
     );
   };
 
-  _playTamamon = name => {
+  _playTamamon = async name => {
     if (this.state.server[name].played === false) {
       this.setState({ wallet: (this.state.wallet += 10) });
     }
-    const newPlay = clone(this.state.server); //Deep clone state
+    const newPlay = await clone(this.state.server); //Deep clone state
     newPlay[name].played = true;
 
-    this.setState(
+    await this.setState(
       //Set state with callback fn to call API
       {
         server: newPlay
       },
-      () => {
-        const time = new Date();
-        const newData = this._formatState(name, time); //Format data to send
+      async () => {
+        const time = await new Date();
+        const newData = await this._formatState(name, time); //Format data to send
 
         const updatePlayed = async newData => {
           //API call fn
@@ -1204,7 +1211,7 @@ export default class TamaMenu extends Component {
           });
         };
 
-        updatePlayed(newData); //Execute API call
+        await updatePlayed(newData); //Execute API call
       }
     );
   };
