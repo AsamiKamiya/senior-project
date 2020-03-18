@@ -29,7 +29,11 @@ export default class TamamonSixth extends Component {
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps.flgs);
+    console.log("keromon", this.props.arSceneNavigator.viroAppProps.flgs);
+    console.log(
+      "wash keromon",
+      this.props.arSceneNavigator.viroAppProps.washed
+    );
     return (
       <ViroARScene>
         {/* This is the speech bubble and text */}
