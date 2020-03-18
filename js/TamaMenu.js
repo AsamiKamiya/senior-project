@@ -1139,10 +1139,13 @@ export default class TamaMenu extends Component {
     }
   }
   _addARTamamon(name) {
-    const newOwn = clone(this.state.server);
     if (this.state.server[name].owned === true) {
       return;
     }
+    console.log("addTamamon", name);
+    const newOwn = clone(this.state.server);
+    newOwn[name].owned = true;
+    console.log(newOwn);
     this.setState({
       server: newOwn
     });
