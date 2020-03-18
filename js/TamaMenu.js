@@ -1063,13 +1063,16 @@ export default class TamaMenu extends Component {
   };
 
   _washTamamon = name => {
+    if (this.state.server[name].washed === false) {
+      this.setState({ wallet: (this.state.wallet += 10) });
+    }
     const newWash = clone(this.state.server); //Deep clone state
+
     newWash[name].washed = true;
     this.setState(
       //Set state with callback fn to call API
       {
-        server: newWash,
-        wallet: (this.state.wallet += 10)
+        server: newWash
       },
       () => {
         const time = new Date();
@@ -1092,14 +1095,16 @@ export default class TamaMenu extends Component {
   };
 
   _playTamamon = name => {
+    if (this.state.server[name].played === false) {
+      this.setState({ wallet: (this.state.wallet += 10) });
+    }
     const newPlay = clone(this.state.server); //Deep clone state
     newPlay[name].played = true;
 
     this.setState(
       //Set state with callback fn to call API
       {
-        server: newPlay,
-        wallet: (this.state.wallet += 10)
+        server: newPlay
       },
       () => {
         const time = new Date();
@@ -1132,20 +1137,61 @@ export default class TamaMenu extends Component {
       const newOwn = clone(this.state.server);
       newOwn[name].owned = true;
 
-      this.setState({
-        wallet: (this.state.wallet -= price),
-        server: newOwn
-      });
+      this.setState(
+        {
+          wallet: (this.state.wallet -= price),
+          server: newOwn
+        },
+        () => {
+          const time = new Date();
+          const newData = this._formatState(name, time); //Format data to send
+
+          const updateOwned = async newData => {
+            //API call fn
+            await axios({
+              url: "https://tamomon.herokuapp.com/v1/graphql",
+              method: "post",
+              data: updateUserData(newData)
+            }).then(result => {
+              console.log(result);
+            });
+          };
+
+          updateOwned(newData); //Execute API call
+        }
+      );
     }
   }
+
   _addARTamamon(name) {
     const newOwn = clone(this.state.server);
     if (this.state.server[name].owned === true) {
       return;
     }
-    this.setState({
-      server: newOwn
-    });
+    newOwn[name].owned = true;
+
+    this.setState(
+      {
+        server: newOwn
+      },
+      () => {
+        const time = new Date();
+        const newData = this._formatState(name, time); //Format data to send
+
+        const updateOwned = async newData => {
+          //API call fn
+          await axios({
+            url: "https://tamomon.herokuapp.com/v1/graphql",
+            method: "post",
+            data: updateUserData(newData)
+          }).then(result => {
+            console.log(result);
+          });
+        };
+
+        updateOwned(newData); //Execute API call
+      }
+    );
   }
 }
 
