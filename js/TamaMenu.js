@@ -1025,33 +1025,17 @@ export default class TamaMenu extends Component {
   };
 
   _updateFlg = async (name, index) => {
-    await this.setState(prevState => ({
-      tamamon: prevState.tamamon.map(obj => {
-        if (obj.name === name) {
-          console.log("flgs", obj.flgs);
-          obj.flgs[index] = 1;
-          console.log("flgs--", obj.flgs);
-          return Object.assign(obj, { flgs: obj.flgs });
-        } else {
-          return obj;
-        }
-      })
-    }));
-    await setTimeout(() => {
-      console.log("call SetTimeOut");
-      this.setState(prevState => ({
-        tamamon: prevState.tamamon.map(obj => {
-          if (obj.name === name) {
-            console.log("flgsback", obj.flgs);
-            obj.flgs[index] = 0;
-            console.log("flgsback--", obj.flgs);
-            return Object.assign(obj, { flgs: obj.flgs });
-          } else {
-            return obj;
-          }
-        })
-      }));
-    }, 4000);
+    const newFlag = clone(this.state.server);
+    newFlag[name].flgs[index] = 1;
+    this.setState({ server: newFlag }, () => {
+      console.log(newFlag[name].flgs);
+    });
+    setTimeout(() => {
+      newFlag[name].flgs[index] = 0;
+      this.setState({ server: newFlag }, () => {
+        console.log(newFlag[name].flgs);
+      });
+    }, 3500);
   };
 
   _updateNeglected = async name => {
