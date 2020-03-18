@@ -170,13 +170,13 @@ export default class ViroSample extends Component {
         style={localStyles.buttonStyle}
         onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
       >
-        <Text style={localStyles.textStyle}>Start</Text>
+        <Text style={localStyles.textStyle}>START</Text>
       </TouchableOpacity>
     );
 
     const loadingButton = (
       <TouchableOpacity style={localStyles.loadingStyle}>
-        <Text style={localStyles.loadingText}>Start</Text>
+        <Text style={localStyles.loadingText}>START</Text>
       </TouchableOpacity>
     );
 
