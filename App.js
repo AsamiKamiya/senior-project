@@ -23,7 +23,7 @@ import { ViroARSceneNavigator } from "react-viro";
 
 // Device ID module --> to integrate see README
 
-import DeviceInfo from "react-native-device-info";
+//import DeviceInfo from "react-native-device-info";
 import { makeNewUser } from "./graphql/mutations";
 import { userData, devices } from "./graphql/queries";
 import clone from "./utils/clone";
@@ -52,7 +52,7 @@ export default class ViroSample extends Component {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
       //deviceID: DeviceInfo.getUniqueId(),
-      deviceID: "Sadness",
+      //deviceID: "Sadness3",
       wallet: 0,
       serverData: [],
       loaded: false

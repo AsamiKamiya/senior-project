@@ -733,7 +733,9 @@ export default class TamaMenu extends Component {
             washed: this.state.server.Higemon.washed,
             played: this.state.server.Higemon.played,
             text: this.state.displayText,
-            flgs: this.state.server.Higemon.flgs
+            flgs: this.state.server.Higemon.flgs,
+            neglected: this.state.server.Higemon.neglected,
+            updateNeglected: this._updateNeglected
           }}
           initialScene={{ scene: InitialARSceneForTama4th }}
         />
