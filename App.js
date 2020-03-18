@@ -155,8 +155,6 @@ export default class ViroSample extends Component {
     updateCall();
   }
 
-  // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
-  // if you are building a specific type of experience.
   render() {
     if (this.state.navigatorType == UNSET) {
       return this._getExperienceSelector();
@@ -165,7 +163,6 @@ export default class ViroSample extends Component {
     }
   }
 
-  // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     const startButton = (
       <TouchableOpacity
@@ -173,6 +170,12 @@ export default class ViroSample extends Component {
         onPress={this._getExperienceButtonOnPress(TAMA_MENU_TYPE)}
       >
         <Text style={localStyles.textStyle}>Start</Text>
+      </TouchableOpacity>
+    );
+
+    const loadingButton = (
+      <TouchableOpacity style={localStyles.loadingStyle}>
+        <Text style={localStyles.loadingText}>Start</Text>
       </TouchableOpacity>
     );
 
@@ -196,7 +199,7 @@ export default class ViroSample extends Component {
               <Text style={localStyles.buttonText}>START</Text>
             </TouchableHighlight>
             */}
-            {this.state.loaded ? startButton : null}
+            {this.state.loaded ? startButton : loadingButton}
           </View>
         </ImageBackground>
       </View>
@@ -271,6 +274,17 @@ var localStyles = StyleSheet.create({
     justifyContent: "center"
   },
 
+  loadingStyle: {
+    height: 70,
+    width: 150,
+    backgroundColor: "#D3D3D3",
+    borderRadius: 100,
+    borderWidth: 1,
+    borderColor: "#808080",
+    marginTop: 50,
+    justifyContent: "center"
+  },
+
   textStyle: {
     textAlign: "center",
     color: "#007aff",
@@ -278,6 +292,15 @@ var localStyles = StyleSheet.create({
     fontWeight: "600",
     paddingTop: 10,
     paddingBottom: 10
+  },
+
+  loadingText: {
+    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "600",
+    paddingTop: 10,
+    paddingBottom: 10,
+    color: "#808080"
   }
 });
 
