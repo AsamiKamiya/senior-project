@@ -101,7 +101,7 @@ export default class HelloWorldSceneAR extends Component {
             opacity={0}
             transformBehaviors={["billboard"]}
             animation={{
-              name: "moveUp",
+              name: "heartAnimation",
               run: this.props.arSceneNavigator.viroAppProps.fedCount === 1
             }}
           />

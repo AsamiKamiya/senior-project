@@ -439,7 +439,7 @@ ViroAnimations.registerAnimations({
     ["boundUp", "boundDown", "boundUp", "boundDown", "boundUp", "boundDown"]
   ],
   catBoundAngry: [["catBound"]],
-  heartAnimation: [["moveUp"]],
+  heartAnimation: [["moveUp", "disappear"]],
   angryAnimation: [["scaleUp", "scaleDown"]],
   washAnimation: [
     [

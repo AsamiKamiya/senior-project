@@ -1225,7 +1225,7 @@ export default class TamaMenu extends Component {
       this.setState({ server: newFlag }, () => {
         console.log(newFlag[name].flgs);
       });
-    }, 4000);
+    }, 3500);
   };
 
   _updateNeglected = async name => {
