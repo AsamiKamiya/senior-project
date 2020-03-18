@@ -94,6 +94,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: false,
           text: [
             "Thank you for feeding me!",
             "I could totally eat more...",
@@ -109,6 +110,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: false,
           text: ["Food", "More food", "There's more food?", "...food"],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
@@ -120,6 +122,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: true,
           text: [
             "I usually expect higher quality food...",
             "But what about third breakfast?",
@@ -136,6 +139,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: false,
           text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         },
@@ -147,6 +151,7 @@ export default class TamaMenu extends Component {
           played: false,
           fed: false,
           fedCount: 0,
+          neglected: false,
           text: ["Message 1", "Message 2", "Message 3?", "Message 4"],
           flgs: [0, 0, 0, 0] // feed, wash, play, speech
         }
@@ -729,12 +734,14 @@ export default class TamaMenu extends Component {
         {/* This is our AR Scene for higemon*/}
         <ViroARSceneNavigator
           viroAppProps={{
-            fed: this.state.tamamon[3].fed,
-            fedCount: this.state.tamamon[3].fedCount,
-            washed: this.state.tamamon[3].washed,
-            played: this.state.tamamon[3].played,
+            fed: this.state.server.Higemon.fed,
+            fedCount: this.state.server.Higemon.fedCount,
+            washed: this.state.server.Higemon.washed,
+            played: this.state.server.Higemon.played,
             text: this.state.displayText,
-            flgs: this.state.tamamon[3].flgs
+            flgs: this.state.server.Higemon.flgs,
+            neglected: this.state.server.Higemon.neglected,
+            updateNeglected: this._updateNeglected
           }}
           initialScene={{ scene: InitialARSceneForTama4th }}
         />
