@@ -542,6 +542,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Pocchamon.flgs.includes(1)) {
+                return;
+              }
               await this._washTamamon("Pocchamon");
               await this._updateFlg("Pocchamon", WASHED_FLG);
             }}
@@ -557,6 +561,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Pocchamon.flgs.includes(1)) {
+                return;
+              }
               await this._playTamamon("Pocchamon");
               await this._updateFlg("Pocchamon", PLAYED_FLG);
             }}
@@ -630,6 +638,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Intellimon.flgs.includes(1)) {
+                return;
+              }
               await this._washTamamon("Intellimon");
               await this._updateFlg("Intellimon", WASHED_FLG);
             }}
@@ -645,6 +657,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Intellimon.flgs.includes(1)) {
+                return;
+              }
               await this._playTamamon("Intellimon");
               await this._updateFlg("Intellimon", PLAYED_FLG);
             }}
@@ -718,6 +734,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Potemon.flgs.includes(1)) {
+                return;
+              }
               await this._washTamamon("Potemon");
               await this._updateFlg("Potemon", WASHED_FLG);
             }}
@@ -733,6 +753,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Potemon.flgs.includes(1)) {
+                return;
+              }
               await this._playTamamon("Potemon");
               await this._updateFlg("Potemon", PLAYED_FLG);
             }}
@@ -807,6 +831,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Higemon.flgs.includes(1)) {
+                return;
+              }
               await this._washTamamon("Higemon");
               await this._updateFlg("Higemon", WASHED_FLG);
             }}
@@ -822,6 +850,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Higemon.flgs.includes(1)) {
+                return;
+              }
               await this._playTamamon("Higemon");
               await this._updateFlg("Higemon", PLAYED_FLG);
             }}
@@ -898,6 +930,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Birdmon.flgs.includes(1)) {
+                return;
+              }
               await this._washTamamon("Birdmon");
               await this._updateFlg("Birdmon", WASHED_FLG);
             }}
@@ -913,6 +949,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Birdmon.flgs.includes(1)) {
+                return;
+              }
               await this._playTamamon("Birdmon");
               await this._updateFlg("Birdmon", PLAYED_FLG);
             }}
@@ -989,6 +1029,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Keromon.flgs.includes(1)) {
+                return;
+              }
               await this._washTamamon("Keromon");
               await this._updateFlg("Keromon", WASHED_FLG);
             }}
@@ -1004,6 +1048,10 @@ export default class TamaMenu extends Component {
           <TouchableOpacity
             style={localStyles.tabItem}
             onPress={async () => {
+              // Prohibition of repeated hits
+              if (this.state.server.Keromon.flgs.includes(1)) {
+                return;
+              }
               await this._playTamamon("Keromon");
               await this._updateFlg("Keromon", PLAYED_FLG);
             }}
@@ -1104,7 +1152,7 @@ export default class TamaMenu extends Component {
 
   _feedTamamon = name => {
     // Prohibition of repeated hits
-    if (this.state.server[name].flgs[3] === 1) {
+    if (this.state.server[name].flgs.includes(1)) {
       return;
     }
 

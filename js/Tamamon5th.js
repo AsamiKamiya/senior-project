@@ -96,11 +96,11 @@ export default class TamamonFifth extends Component {
           />
         ) : this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <Viro3DObject
-            source={require("./res/birdmon/birdmon.obj")}
+            source={require("./res/birdmon/birdmona1.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/birdmon/birdmon.mtl"),
-              require("./res/birdmon/birdmon.png")
+              require("./res/birdmon/birdmona1.mtl"),
+              require("./res/birdmon/birdmona1.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
@@ -111,11 +111,11 @@ export default class TamamonFifth extends Component {
           />
         ) : (
           <Viro3DObject
-            source={require("./res/birdmon/birdmon.obj")}
+            source={require("./res/birdmon/birdmona1.obj")}
             position={[-0.0, -1, -3]}
             resources={[
-              require("./res/birdmon/birdmon.mtl"),
-              require("./res/birdmon/birdmon.png")
+              require("./res/birdmon/birdmona1.mtl"),
+              require("./res/birdmon/birdmona1.png")
             ]}
             type="OBJ"
             scale={[0.3, 0.3, 0.3]}
