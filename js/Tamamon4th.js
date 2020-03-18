@@ -16,43 +16,72 @@ import {
   ViroSound
 } from "react-viro";
 
+//NOTE: Using a stand-in "this.state.neglectedTest" to test our neglected functionality. Replace all instances of this.state.neglectedTest with this.props.arSceneNavigator.viroAppProps.neglected for actual functionality
+
 export default class TamamonFourth extends Component {
   constructor() {
     super();
-
-    // Set initial state here
     this.state = {
       text: "Initializing AR...",
-      forPlay: false
+      forPlay: false,
+      neglectedTest: true
     };
     this._onFinishAnimation4play = this._onFinishAnimation4play.bind(this);
   }
 
   render() {
-    console.log(this.props.arSceneNavigator.viroAppProps.flgs);
+    console.log(this.props.arSceneNavigator.viroAppProps.neglected);
     return (
       <ViroARScene>
-        {/* This is the speech bubble and text */}
-        <Viro3DObject
-          source={require("./res/speechBubble.obj")}
-          resources={[
-            require("./res/speechBubble.mtl"),
-            require("./res/speechBubble.png")
-          ]}
-          type="OBJ"
-          scale={[-0.4, 0.4, 0.4]}
-          position={[0.1, -0.95, -3]}
-          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-        ></Viro3DObject>
-        <ViroText
-          text={this.props.arSceneNavigator.viroAppProps.text}
-          scale={[0.4, 0.4, 0.4]}
-          position={[-0.7, 0.8, -2.9]}
-          style={styles.helloWorldTextStyle}
-          width={2}
-          height={2}
-          opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
-        />
+        {/*Neglected */}
+        {this.state.neglectedTest ? (
+          <ViroNode>
+            <Viro3DObject
+              source={require("./res/speechBubble.obj")}
+              resources={[
+                require("./res/speechBubble.mtl"),
+                require("./res/speechBubble.png")
+              ]}
+              type="OBJ"
+              scale={[-0.4, 0.4, 0.4]}
+              position={[0.1, -0.95, -3]}
+              opacity={this.state.neglectedTest}
+            ></Viro3DObject>
+            <ViroText
+              text={"...I thought you were dead"}
+              scale={[0.4, 0.4, 0.4]}
+              position={[-0.7, 0.8, -2.9]}
+              style={styles.helloWorldTextStyle}
+              width={2}
+              height={2}
+              opacity={this.state.neglectedTest}
+            />
+          </ViroNode>
+        ) : (
+          /* This is the speech bubble and text */
+          <ViroNode>
+            <Viro3DObject
+              source={require("./res/speechBubble.obj")}
+              resources={[
+                require("./res/speechBubble.mtl"),
+                require("./res/speechBubble.png")
+              ]}
+              type="OBJ"
+              scale={[-0.4, 0.4, 0.4]}
+              position={[0.1, -0.95, -3]}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            ></Viro3DObject>
+            <ViroText
+              text={this.props.arSceneNavigator.viroAppProps.text}
+              scale={[0.4, 0.4, 0.4]}
+              position={[-0.7, 0.8, -2.9]}
+              style={styles.helloWorldTextStyle}
+              width={2}
+              height={2}
+              opacity={this.props.arSceneNavigator.viroAppProps.flgs[3]}
+            />
+          </ViroNode>
+        )}
         {/* This is the heart that appears */}
         {this.props.arSceneNavigator.viroAppProps.fedCount === 1 ? (
           <ViroImage
@@ -77,9 +106,29 @@ export default class TamamonFourth extends Component {
           />
         )}
 
-        {/* This is the Pocchamon animation */}
-        {this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
-        this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
+        {/*This should be neglected animation */}
+
+        {this.state.neglectedTest ? (
+          <Viro3DObject
+            source={require("./res/higemon/hige_sad1.obj")}
+            resources={[
+              require("./res/higemon/hige_sad1.mtl"),
+              require("./res/higemon/hige_sad1.png")
+            ]}
+            type="OBJ"
+            scale={[0.3, 0.3, 0.3]}
+            position={[-0.0, -1, -3]}
+            opacity={1}
+            animation={{
+              name: "higeNeglected",
+              run: this.state.neglectedTest,
+              onFinish: this._onFinishAnimation4neglected,
+              delay: 3000
+            }}
+          ></Viro3DObject>
+        ) : /* This is the Higemon animation */
+        this.props.arSceneNavigator.viroAppProps.fedCount === 0 ||
+          this.props.arSceneNavigator.viroAppProps.fedCount === 2 ? (
           <Viro3DObject
             source={require("./res/higemon/hige_defaultUpdate.obj")}
             position={[-0.0, -1, -3]}
@@ -296,6 +345,15 @@ export default class TamamonFourth extends Component {
       this.setState({ forPlay: true });
     }
   }
+
+  _onFinishAnimation4neglected = () => {
+    /*
+    this.props.arSceneNavigator.viroAppProps.updateNeglected("Higemon");
+    */
+    this.setState({
+      neglectedTest: false
+    });
+  };
 }
 
 var styles = StyleSheet.create({
@@ -389,7 +447,9 @@ ViroAnimations.registerAnimations({
       "catBoundUpR",
       "catBoundDownR"
     ]
-  ]
+  ],
+
+  higeNeglected: [["catBoundNo1st", "catBoundNo1st"]]
   // catBoundAngry: [["catBound"]],
   // heartAnimation: [["moveUp", "rotate"]]
 });
