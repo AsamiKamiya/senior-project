@@ -344,6 +344,17 @@ export default class HelloWorldSceneAR extends Component {
             run: this.state.forPlay
           }}
         />
+        <ViroImage
+          source={require("./res/icons/coinSpriteUpdated.png")}
+          position={[0.1, 0, -3]}
+          scale={[0.2, 0.2, 0.2]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{
+            name: "coinAnimation",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[0] === 1
+          }}
+        />
       </ViroARScene>
     );
   }
@@ -433,6 +444,29 @@ ViroAnimations.registerAnimations({
     duration: 200,
     easing: "bounce"
   },
+  coinAppear: {
+    properties: { opacity: 1.0 },
+    easing: "bounce"
+  },
+  coinDisappear: {
+    properties: { opacity: 0.0 },
+    easing: "bounce"
+  },
+  coinUp: {
+    properties: { positionY: "+=0.1", positionX: "-=0.1" },
+    duration: 300,
+    easing: "Linear"
+  },
+  coinDown: {
+    properties: { positionY: "-=0.3", positionX: "-=0.1" },
+    duration: 200,
+    easing: "bounce"
+  },
+  coinClear: {
+    properties: { positionY: "+=0.2", positionX: "+=0.1" },
+    duration: 200,
+    easing: "bounce"
+  },
   tapAnimation: [["scaleUp", "scaleDown"]],
   catBoundNo1st: [
     ["moveLeft1st", "moveRight1st", "moveLeft1st", "moveRight1st"]
@@ -449,9 +483,10 @@ ViroAnimations.registerAnimations({
       "catBoundDownR"
     ]
   ],
-  catNeglected: [["catBoundNo1st", "catBoundNo1st"]]
-  // catBoundAngry: [["catBound"]],
-  // heartAnimation: [["moveUp", "rotate"]]
+  catNeglected: [["catBoundNo1st", "catBoundNo1st"]],
+  coinAnimation: [
+    ["coinAppear", "coinUp", "coinDown", "coinDisappear", "coinClear"]
+  ]
 });
 
 module.exports = HelloWorldSceneAR;

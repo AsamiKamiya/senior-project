@@ -546,8 +546,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Pocchamon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Pocchamon.washed) {
+                coinChk = true;
+              }
               await this._washTamamon("Pocchamon");
-              await this._updateFlg("Pocchamon", WASHED_FLG);
+              await this._updateFlg("Pocchamon", WASHED_FLG, coinChk);
             }}
           >
             <Image
@@ -565,8 +569,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Pocchamon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Pocchamon.played) {
+                coinChk = true;
+              }
               await this._playTamamon("Pocchamon");
-              await this._updateFlg("Pocchamon", PLAYED_FLG);
+              await this._updateFlg("Pocchamon", PLAYED_FLG, coinChk);
             }}
           >
             <Image
@@ -642,8 +650,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Intellimon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Intellimon.washed) {
+                coinChk = true;
+              }
               await this._washTamamon("Intellimon");
-              await this._updateFlg("Intellimon", WASHED_FLG);
+              await this._updateFlg("Intellimon", WASHED_FLG, coinChk);
             }}
           >
             <Image
@@ -661,8 +673,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Intellimon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Intellimon.played) {
+                coinChk = true;
+              }
               await this._playTamamon("Intellimon");
-              await this._updateFlg("Intellimon", PLAYED_FLG);
+              await this._updateFlg("Intellimon", PLAYED_FLG, coinChk);
             }}
           >
             <Image
@@ -738,8 +754,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Potemon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Potemon.washed) {
+                coinChk = true;
+              }
               await this._washTamamon("Potemon");
-              await this._updateFlg("Potemon", WASHED_FLG);
+              await this._updateFlg("Potemon", WASHED_FLG, coinChk);
             }}
           >
             <Image
@@ -757,8 +777,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Potemon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Potemon.played) {
+                coinChk = true;
+              }
               await this._playTamamon("Potemon");
-              await this._updateFlg("Potemon", PLAYED_FLG);
+              await this._updateFlg("Potemon", PLAYED_FLG, coinChk);
             }}
           >
             <Image
@@ -835,8 +859,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Higemon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Higemon.washed) {
+                coinChk = true;
+              }
               await this._washTamamon("Higemon");
-              await this._updateFlg("Higemon", WASHED_FLG);
+              await this._updateFlg("Higemon", WASHED_FLG, coinChk);
             }}
           >
             <Image
@@ -854,8 +882,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Higemon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Higemon.played) {
+                coinChk = true;
+              }
               await this._playTamamon("Higemon");
-              await this._updateFlg("Higemon", PLAYED_FLG);
+              await this._updateFlg("Higemon", PLAYED_FLG, coinChk);
             }}
           >
             <Image
@@ -934,8 +966,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Birdmon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Birdmon.washed) {
+                coinChk = true;
+              }
               await this._washTamamon("Birdmon");
-              await this._updateFlg("Birdmon", WASHED_FLG);
+              await this._updateFlg("Birdmon", WASHED_FLG, coinChk);
             }}
           >
             <Image
@@ -953,8 +989,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Birdmon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Birdmon.played) {
+                coinChk = true;
+              }
               await this._playTamamon("Birdmon");
-              await this._updateFlg("Birdmon", PLAYED_FLG);
+              await this._updateFlg("Birdmon", PLAYED_FLG, coinChk);
             }}
           >
             <Image
@@ -1033,8 +1073,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Keromon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Keromon.washed) {
+                coinChk = true;
+              }
               await this._washTamamon("Keromon");
-              await this._updateFlg("Keromon", WASHED_FLG);
+              await this._updateFlg("Keromon", WASHED_FLG, coinChk);
             }}
           >
             <Image
@@ -1052,8 +1096,12 @@ export default class TamaMenu extends Component {
               if (this.state.server.Keromon.flgs.includes(1)) {
                 return;
               }
+              let coinChk = false;
+              if (!this.state.server.Keromon.played) {
+                coinChk = true;
+              }
               await this._playTamamon("Keromon");
-              await this._updateFlg("Keromon", PLAYED_FLG);
+              await this._updateFlg("Keromon", PLAYED_FLG, coinChk);
             }}
           >
             <Image
@@ -1155,7 +1203,10 @@ export default class TamaMenu extends Component {
     if (this.state.server[name].flgs.includes(1)) {
       return;
     }
-
+    let coinChk = false;
+    if (!this.state.server[name].fed) {
+      coinChk = true;
+    }
     const newFeed = clone(this.state.server); //Deep clone state
     newFeed[name].fed = true;
     if (newFeed[name].fedCount === 0) {
@@ -1184,7 +1235,7 @@ export default class TamaMenu extends Component {
 
       if (this.state.server[name].fedCount === 1) {
         this._updateText(this.state.server[name].text[0]);
-        this._updateFlg(name, SPEECH_FLG);
+        this._updateFlg(name, SPEECH_FLG, coinChk);
       }
       if (this.state.server[name].fedCount === 2) {
         this._updateText(this.state.server[name].text[1]);
@@ -1214,14 +1265,18 @@ export default class TamaMenu extends Component {
     });
   };
 
-  _updateFlg = async (name, index) => {
+  _updateFlg = async (name, index, coin) => {
     const newFlag = clone(this.state.server);
     newFlag[name].flgs[index] = 1;
+    if (coin) {
+      newFlag[name].flgs[0] = 1;
+    }
     this.setState({ server: newFlag }, () => {
       console.log(newFlag[name].flgs);
     });
     setTimeout(() => {
       newFlag[name].flgs[index] = 0;
+      newFlag[name].flgs[0] = 0;
       this.setState({ server: newFlag }, () => {
         console.log(newFlag[name].flgs);
       });

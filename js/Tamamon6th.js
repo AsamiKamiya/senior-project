@@ -292,6 +292,17 @@ export default class TamamonSixth extends Component {
             run: this.state.forPlay
           }}
         />
+        <ViroImage
+          source={require("./res/icons/coinSpriteUpdated.png")}
+          position={[0.1, 0, -3]}
+          scale={[0.2, 0.2, 0.2]}
+          opacity={0}
+          transformBehaviors={["billboard"]}
+          animation={{
+            name: "coinAnimation",
+            run: this.props.arSceneNavigator.viroAppProps.flgs[0] === 1
+          }}
+        />
       </ViroARScene>
     );
   }
