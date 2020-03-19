@@ -10,29 +10,35 @@ Tamamon allows you to interact with your Tamamon by feeding, playing and washing
 
 If you want to buy more Tamamon, head to the store and use your hard earned in-game currency to expand your collection.
 
-
-
-
-
-
 ## Link to APP store
-
-
 
 Created by:
 
-Mary      - github.com/MarySed  
+Mary Sedarous
 
-Asami     - github.com/AsamiKamiya  
+[Github](https://github.com/MarySed)
 
-Antonio   - github.com/antoniomalacad  
+[LinkedIn](https://www.linkedin.com/in/marysedarous/)
 
-Dan       - github.com/djrcoder  
+Asami Kamiya
+
+[Github](https://github.com/AsamiKamiya)
+
+[LinkedIn](https://www.linkedin.com/in/asamikamiya68/)
+
+Antonio Malacad
+
+[Github](https://github.com/antoniomalacad)
+
+[LinkedIn](https://www.linkedin.com/in/antonio-malacad/)
+
+Daniel Reaney
+
+[Github](https://github.com/djrcoder)
+
+[LinkedIn](https://www.linkedin.com/in/djrcoder/)
 
 ![Egg](js/res/egg.png)
-
-
-
 
 ## Installation
 
@@ -94,7 +100,6 @@ yarn
 - Replace `pod 'ViroKit', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/'` with <br />
   `pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'`
 
-
 7. Navigate to the iOS subdirectory, update the podfiles, and open the app in Xcode:
 
 ```
@@ -105,9 +110,9 @@ open <app-name>.xcworkspace
 
 ```
 
-8. To manually link "react-native-device-info" 
+8. To manually link "react-native-device-info"
 
-Do NOT add pod 'RNDeviceInfo' in the podfile 
+Do NOT add pod 'RNDeviceInfo' in the podfile
 
 Instead, we need to link it manually!
 
@@ -123,15 +128,15 @@ In XCode go to the project navigator:
 
 5. In XCode, in the project navigator, select your project.
 
-6. Add the `libRNDeviceInfo.a` from the deviceinfo project to your  project's Build Phases ➜ Link Binary With Libraries
+6. Add the `libRNDeviceInfo.a` from the deviceinfo project to your project's Build Phases ➜ Link Binary With Libraries
 
 7. Click `.xcodeproj` file you added before in the project navigator and go the Build Settings tab. Make sure All is toggled on (instead of Basic).
 
-8. Look for Header Search Paths and make sure it contains both 
+8. Look for Header Search Paths and make sure it contains both
 
 `$(SRCROOT)/../react-native/React`
 
-and 
+and
 
 `$(SRCROOT)/../../React`
 
@@ -145,8 +150,7 @@ Check that both have been marked as recursive.
 2. [ViroReact Quick Start](https://docs.viromedia.com/docs/quick-start) <br />
 3. [Ruby Installation for Macs](https://stackify.com/install-ruby-on-your-mac-everything-you-need-to-get-going/) <br/>
 
-
-## For manually linking 
+## For manually linking
 
 1. https://www.npmjs.com/package/react-native-device-info/v/0.9.1
 
