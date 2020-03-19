@@ -263,7 +263,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Pocchamon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          You've fed Pocchamon {this.state.server.Pocchamon.fedCount} times.
+          You've fed Pocchamon {this.state.server.Pocchamon.fedCount} time(s).
         </Text>
       </TouchableOpacity>
     );
@@ -282,7 +282,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Intellimon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          You've fed Intellimon {this.state.server.Intellimon.fedCount} times.
+          You've fed Intellimon {this.state.server.Intellimon.fedCount} time(s).
         </Text>
       </TouchableOpacity>
     );
@@ -301,7 +301,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Potemon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          You've fed Potemon {this.state.server.Potemon.fedCount} times.
+          You've fed Potemon {this.state.server.Potemon.fedCount} time(s).
         </Text>
       </TouchableOpacity>
     );
@@ -320,7 +320,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Higemon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          You've fed Higemon {this.state.server.Higemon.fedCount} times.
+          You've fed Higemon {this.state.server.Higemon.fedCount} time(s).
         </Text>
       </TouchableOpacity>
     );
@@ -339,7 +339,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Birdmon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          You've fed Birdmon {this.state.server.Birdmon.fedCount} times.
+          You've fed Birdmon {this.state.server.Birdmon.fedCount} time(s).
         </Text>
       </TouchableOpacity>
     );
@@ -358,7 +358,7 @@ export default class TamaMenu extends Component {
           {this.state.server.Keromon.name}
         </Text>
         <Text style={localStyles.buttonText}>
-          You've fed Keromon {this.state.server.Keromon.fedCount} times.
+          You've fed Keromon {this.state.server.Keromon.fedCount} time(s).
         </Text>
       </TouchableOpacity>
     );
