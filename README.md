@@ -12,33 +12,32 @@ If you want to buy more Tamamon, head to the store and use your hard earned in-g
 
 ## Link to APP store
 
-Created by:
+# Created by:
 
 Mary Sedarous
 
-[Github](https://github.com/MarySed)
-
-[LinkedIn](https://www.linkedin.com/in/marysedarous/)
+[Github](https://github.com/MarySed) || [LinkedIn](https://www.linkedin.com/in/marysedarous/)
 
 Asami Kamiya
 
-[Github](https://github.com/AsamiKamiya)
-
-[LinkedIn](https://www.linkedin.com/in/asamikamiya68/)
+[Github](https://github.com/AsamiKamiya) || [LinkedIn](https://www.linkedin.com/in/asamikamiya68/)
 
 Antonio Malacad
 
-[Github](https://github.com/antoniomalacad)
-
-[LinkedIn](https://www.linkedin.com/in/antonio-malacad/)
+[Github](https://github.com/antoniomalacad) || [LinkedIn](https://www.linkedin.com/in/antonio-malacad/)
 
 Daniel Reaney
 
-[Github](https://github.com/djrcoder)
+[Github](https://github.com/djrcoder) || [LinkedIn](https://www.linkedin.com/in/djrcoder/)
 
-[LinkedIn](https://www.linkedin.com/in/djrcoder/)
+<!-- ![screenshot-splash-screen](js/res/screenshots/screenmain.png | width=100) -->
+<img src="js/res/screenshots/screenmain.png" width=200px>
 
-![Egg](js/res/egg.png)
+<img src="js/res/screenshots/screensplash.png" width=200px>
+
+<img src="js/res/screenshots/screenstore.png" width=200px>
+
+# For Developers
 
 ## Installation
 
@@ -154,4 +153,4 @@ Check that both have been marked as recursive.
 
 1. https://www.npmjs.com/package/react-native-device-info/v/0.9.1
 
-![Ground](js/res/images/ground.gif)
+![Egg](js/res/egg.png)
