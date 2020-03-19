@@ -16,8 +16,6 @@ import {
   Button
 } from "react-native";
 
-import TamaMenu from "./TamaMenu";
-
 const MENU = "MENU";
 
 export default class TamaStore extends Component {
@@ -28,9 +26,9 @@ export default class TamaStore extends Component {
       navigatorType: "default",
       pocchaPrice: 20,
       intelliPrice: 150,
-      higePrice: 250,
-      birdPrice: 300,
-      keroPrice: 320,
+      higePrice: 150,
+      birdPrice: 150,
+      keroPrice: 150,
       potePrice: 9999999
     };
   }
