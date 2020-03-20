@@ -385,24 +385,28 @@ export default class TamaMenu extends Component {
 
     return (
       <ScrollView style={localStyles.scrollview}>
+        {/*
         <ImageBackground
           source={require("./res/images/Sprite-0004.gif")}
-          style={{
-            width: "100%",
-            height: 300
-          }}
-          resizeMode="stretch"
+          style={
+            {
+              //width: "100%",
+              //height: 300
+            }
+          }
+          //resizeMode="stretch" //this needs to be a different resizeMode, probably "cover" or "contain"
+          resizeMode="contain"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
-        >
-          <View style={localStyles.inner}>
-            <Image
-              source={require("./res/images/logo.png")}
-              style={localStyles.title}
-            />
+        > */}
+        <View style={localStyles.inner}>
+          <Image
+            source={require("./res/images/logo.png")}
+            style={localStyles.title}
+          />
 
-            <View style={{ flexDirection: "row" }}>{storeButton}</View>
-          </View>
-        </ImageBackground>
+          <View style={{ flexDirection: "row" }}>{storeButton}</View>
+        </View>
+        {/*</ImageBackground>*/}
         <View style={localStyles.inner}>
           <View style={localStyles.parent}>
             {/* Select Pocchamon */}
@@ -430,13 +434,14 @@ export default class TamaMenu extends Component {
           </View>
         </View>
         <ImageBackground
-          source={require("./res/images/Sprite-0003.gif")}
+          source={require("./res/images/Sprite-0003-export_2.gif")}
           style={{
             width: "100%",
-            height: 210,
-            flex: 1
+            height: 250,
+            flex: 1,
+            marginTop: 80
           }}
-          resizeMode="stretch"
+          resizeMode="stretch" //this is also a problem
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         ></ImageBackground>
       </ScrollView>

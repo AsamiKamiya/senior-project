@@ -77,8 +77,8 @@ export default class TamaStore extends Component {
       <ScrollView style={localStyles.scrollview}>
         {/* {walletDisplay} */}
         <ImageBackground
-          source={require("./res/images/roof.gif")}
-          style={{ width: "100%", height: 250 }}
+          source={require("./res/images/roof_3.png")}
+          style={{ width: "100%", height: 340 }}
           resizeMode="stretch"
         ></ImageBackground>
 
@@ -91,12 +91,7 @@ export default class TamaStore extends Component {
           <View style={localStyles.inner}>
             <View style={localStyles.parent}>
               {/*Pocchamon*/}
-              <TouchableOpacity
-                style={localStyles.blocks}
-                onPress={() => {
-                  this._displayCostPoccha();
-                }}
-              >
+              <TouchableOpacity style={localStyles.blocks}>
                 <Image
                   source={require("./res/images/icons/cat-1.png")}
                   style={localStyles.blockContent}
