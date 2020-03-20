@@ -530,64 +530,97 @@ export default class TamaMenu extends Component {
           </TouchableOpacity>
 
           {/*Feed button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={() => {
-              this._feedButtonHandler("Pocchamon");
-            }}
-          >
-            <Image
-              source={require("./res/icons/hamburgerIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Feed</Text>
-          </TouchableOpacity>
+          {this.state.server.Pocchamon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={() => {
+                this._feedButtonHandler("Pocchamon");
+              }}
+            >
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Clean button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Pocchamon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Pocchamon.washed) {
-                coinChk = true;
-              }
-              await this._washTamamon("Pocchamon");
-              await this._updateFlg("Pocchamon", WASHED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/washIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Clean</Text>
-          </TouchableOpacity>
+          {this.state.server.Pocchamon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Pocchamon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Pocchamon.washed) {
+                  coinChk = true;
+                }
+                await this._washTamamon("Pocchamon");
+                await this._updateFlg("Pocchamon", WASHED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Play button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Pocchamon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Pocchamon.played) {
-                coinChk = true;
-              }
-              await this._playTamamon("Pocchamon");
-              await this._updateFlg("Pocchamon", PLAYED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Hug</Text>
-          </TouchableOpacity>
+          {this.state.server.Pocchamon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Pocchamon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Pocchamon.played) {
+                  coinChk = true;
+                }
+                await this._playTamamon("Pocchamon");
+                await this._updateFlg("Pocchamon", PLAYED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -634,64 +667,97 @@ export default class TamaMenu extends Component {
           </TouchableOpacity>
 
           {/*Feed button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={() => {
-              this._feedButtonHandler("Intellimon");
-            }}
-          >
-            <Image
-              source={require("./res/icons/hamburgerIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Feed</Text>
-          </TouchableOpacity>
+          {this.state.server.Intellimon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={() => {
+                this._feedButtonHandler("Intellimon");
+              }}
+            >
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Clean button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Intellimon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Intellimon.washed) {
-                coinChk = true;
-              }
-              await this._washTamamon("Intellimon");
-              await this._updateFlg("Intellimon", WASHED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/washIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Clean</Text>
-          </TouchableOpacity>
+          {this.state.server.Intellimon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Intellimon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Intellimon.washed) {
+                  coinChk = true;
+                }
+                await this._washTamamon("Intellimon");
+                await this._updateFlg("Intellimon", WASHED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Play button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Intellimon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Intellimon.played) {
-                coinChk = true;
-              }
-              await this._playTamamon("Intellimon");
-              await this._updateFlg("Intellimon", PLAYED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Hug</Text>
-          </TouchableOpacity>
+          {this.state.server.Intellimon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Play</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Intellimon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Intellimon.played) {
+                  coinChk = true;
+                }
+                await this._playTamamon("Intellimon");
+                await this._updateFlg("Intellimon", PLAYED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -738,64 +804,97 @@ export default class TamaMenu extends Component {
           </TouchableOpacity>
 
           {/*Feed button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={() => {
-              this._feedButtonHandler("Potemon");
-            }}
-          >
-            <Image
-              source={require("./res/icons/hamburgerIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Feed</Text>
-          </TouchableOpacity>
+          {this.state.server.Potemon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={() => {
+                this._feedButtonHandler("Potemon");
+              }}
+            >
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Clean button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Potemon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Potemon.washed) {
-                coinChk = true;
-              }
-              await this._washTamamon("Potemon");
-              await this._updateFlg("Potemon", WASHED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/washIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Clean</Text>
-          </TouchableOpacity>
+          {this.state.server.Potemon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Potemon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Potemon.washed) {
+                  coinChk = true;
+                }
+                await this._washTamamon("Potemon");
+                await this._updateFlg("Potemon", WASHED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Play button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Potemon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Potemon.played) {
-                coinChk = true;
-              }
-              await this._playTamamon("Potemon");
-              await this._updateFlg("Potemon", PLAYED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Hug</Text>
-          </TouchableOpacity>
+          {this.state.server.Potemon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Play</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Potemon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Potemon.played) {
+                  coinChk = true;
+                }
+                await this._playTamamon("Potemon");
+                await this._updateFlg("Potemon", PLAYED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -843,64 +942,97 @@ export default class TamaMenu extends Component {
           </TouchableOpacity>
 
           {/*Feed button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={() => {
-              this._feedButtonHandler("Higemon");
-            }}
-          >
-            <Image
-              source={require("./res/icons/hamburgerIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Feed</Text>
-          </TouchableOpacity>
+          {this.state.server.Higemon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={() => {
+                this._feedButtonHandler("Higemon");
+              }}
+            >
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Clean button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Higemon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Higemon.washed) {
-                coinChk = true;
-              }
-              await this._washTamamon("Higemon");
-              await this._updateFlg("Higemon", WASHED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/washIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Clean</Text>
-          </TouchableOpacity>
+          {this.state.server.Higemon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Higemon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Higemon.washed) {
+                  coinChk = true;
+                }
+                await this._washTamamon("Higemon");
+                await this._updateFlg("Higemon", WASHED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Play button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Higemon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Higemon.played) {
-                coinChk = true;
-              }
-              await this._playTamamon("Higemon");
-              await this._updateFlg("Higemon", PLAYED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Hug</Text>
-          </TouchableOpacity>
+          {this.state.server.Higemon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Play</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Higemon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Higemon.played) {
+                  coinChk = true;
+                }
+                await this._playTamamon("Higemon");
+                await this._updateFlg("Higemon", PLAYED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -950,64 +1082,97 @@ export default class TamaMenu extends Component {
           </TouchableOpacity>
 
           {/*Feed button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={() => {
-              this._feedButtonHandler("Birdmon");
-            }}
-          >
-            <Image
-              source={require("./res/icons/hamburgerIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Feed</Text>
-          </TouchableOpacity>
+          {this.state.server.Birdmon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={() => {
+                this._feedButtonHandler("Birdmon");
+              }}
+            >
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Clean button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Birdmon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Birdmon.washed) {
-                coinChk = true;
-              }
-              await this._washTamamon("Birdmon");
-              await this._updateFlg("Birdmon", WASHED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/washIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Clean</Text>
-          </TouchableOpacity>
+          {this.state.server.Birdmon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Birdmon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Birdmon.washed) {
+                  coinChk = true;
+                }
+                await this._washTamamon("Birdmon");
+                await this._updateFlg("Birdmon", WASHED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Play button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Birdmon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Birdmon.played) {
-                coinChk = true;
-              }
-              await this._playTamamon("Birdmon");
-              await this._updateFlg("Birdmon", PLAYED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Hug</Text>
-          </TouchableOpacity>
+          {this.state.server.Birdmon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Play</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Birdmon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Birdmon.played) {
+                  coinChk = true;
+                }
+                await this._playTamamon("Birdmon");
+                await this._updateFlg("Birdmon", PLAYED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -1057,64 +1222,96 @@ export default class TamaMenu extends Component {
           </TouchableOpacity>
 
           {/*Feed button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={() => {
-              this._feedButtonHandler("Keromon");
-            }}
-          >
-            <Image
-              source={require("./res/icons/hamburgerIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Feed</Text>
-          </TouchableOpacity>
-
+          {this.state.server.Keromon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={() => {
+                this._feedButtonHandler("Keromon");
+              }}
+            >
+              <Image
+                source={require("./res/icons/hamburgerIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Feed</Text>
+            </TouchableOpacity>
+          )}
           {/*Clean button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Keromon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Keromon.washed) {
-                coinChk = true;
-              }
-              await this._washTamamon("Keromon");
-              await this._updateFlg("Keromon", WASHED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/washIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Clean</Text>
-          </TouchableOpacity>
+          {this.state.server.Keromon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Keromon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Keromon.washed) {
+                  coinChk = true;
+                }
+                await this._washTamamon("Keromon");
+                await this._updateFlg("Keromon", WASHED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/washIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Clean</Text>
+            </TouchableOpacity>
+          )}
 
           {/*Play button*/}
-          <TouchableOpacity
-            style={localStyles.tabItem}
-            onPress={async () => {
-              // Prohibition of repeated hits
-              if (this.state.server.Keromon.flgs.includes(1)) {
-                return;
-              }
-              let coinChk = false;
-              if (!this.state.server.Keromon.played) {
-                coinChk = true;
-              }
-              await this._playTamamon("Keromon");
-              await this._updateFlg("Keromon", PLAYED_FLG, coinChk);
-            }}
-          >
-            <Image
-              source={require("./res/icons/heartIconTEST.png")}
-              style={localStyles.icons}
-            ></Image>
-            <Text style={localStyles.tabTitle}>Hug</Text>
-          </TouchableOpacity>
+          {this.state.server.Keromon.flgs.includes(1) ? (
+            <View style={localStyles.tabItem}>
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+                opacity={0.5}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Play</Text>
+            </View>
+          ) : (
+            <TouchableOpacity
+              style={localStyles.tabItem}
+              onPress={async () => {
+                // Prohibition of repeated hits
+                if (this.state.server.Keromon.flgs.includes(1)) {
+                  return;
+                }
+                let coinChk = false;
+                if (!this.state.server.Keromon.played) {
+                  coinChk = true;
+                }
+                await this._playTamamon("Keromon");
+                await this._updateFlg("Keromon", PLAYED_FLG, coinChk);
+              }}
+            >
+              <Image
+                source={require("./res/icons/heartIconTEST.png")}
+                style={localStyles.icons}
+              ></Image>
+              <Text style={localStyles.tabTitle}>Hug</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
