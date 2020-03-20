@@ -159,7 +159,7 @@ export default class TamamonSixth extends Component {
           <ViroSound
             paused={false}
             muted={false}
-            source={require("./res/sounds/cat2-s1.mp3")}
+            source={require("./res/sounds/tiny-frog-sound.mp3")}
             loop={false}
             volume={1.0}
             onFinish={this.onFinishSound}
@@ -169,7 +169,7 @@ export default class TamamonSixth extends Component {
           <ViroSound
             paused={false}
             muted={false}
-            source={require("./res/sounds/cat2-s2.mp3")}
+            source={require("./res/sounds/tiny-frog-sound.mp3")}
             loop={false}
             volume={1.0}
             onFinish={this.onFinishSound}
@@ -179,7 +179,7 @@ export default class TamamonSixth extends Component {
           <ViroSound
             paused={false}
             muted={false}
-            source={require("./res/sounds/cat2-s3.mp3")}
+            source={require("./res/sounds/tiny-frog-sound.mp3")}
             loop={false}
             volume={1.0}
             onFinish={this.onFinishSound}
