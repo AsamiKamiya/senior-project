@@ -28,6 +28,7 @@ import { makeNewUser } from "./graphql/mutations";
 import { userData, devices } from "./graphql/queries";
 import clone from "./utils/clone";
 const axios = require("axios");
+import SplashScreen from "react-native-splash-screen";
 
 var sharedProps = {
   apiKey: "API_KEY_HERE"
@@ -64,6 +65,7 @@ export default class ViroSample extends Component {
   }
 
   componentDidMount() {
+    SplashScreen.hide();
     const initalCall = async () => {
       console.log("calling");
       await axios({
