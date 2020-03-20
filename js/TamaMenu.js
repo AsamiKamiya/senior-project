@@ -391,7 +391,7 @@ export default class TamaMenu extends Component {
             width: "100%",
             height: 300
           }}
-          resizeMode="stretch"
+          resizeMode="stretch" //this needs to be a different resizeMode, probably "cover" or "contain"
           // style={[localStyles.fixed, localStyles.containter, { zIndex: -1 }]}
         >
           <View style={localStyles.inner}>
