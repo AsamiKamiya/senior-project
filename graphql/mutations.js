@@ -1,7 +1,7 @@
 const makeNewUser = input => {
   const data = {};
   data.device_id = input.id;
-  data.wallet = 2000;
+  data.wallet = 150;
   data.tamamons = {
     Intellimon: {
       owned: false,
