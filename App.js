@@ -52,7 +52,7 @@ export default class ViroSample extends Component {
       navigatorType: defaultNavigatorType,
       sharedProps: sharedProps,
       deviceID: DeviceInfo.getUniqueId(),
-      // deviceID: "TEST_01",
+      //deviceID: "sadness",
       wallet: 0,
       serverData: [],
       loaded: false
@@ -183,7 +183,7 @@ export default class ViroSample extends Component {
     return (
       <View style={{ display: "flex" }}>
         <ImageBackground
-          source={require("./js/res/images/Sprite-0001.gif")}
+          source={require("./js/res/images/Sprite-0001_2.gif")}
           style={{ width: "100%", height: "100%" }}
         >
           <View style={localStyles.inner}>
