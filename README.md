@@ -124,9 +124,11 @@ In XCode go to the project navigator:
 
     5. In XCode, in the project navigator, select your project
 
-    6. Add the `libRNDeviceInfo.a` from the deviceinfo project to your project's Build Phases ➜ Link Binary With Libraries
+    6. Add the `libRNDeviceInfo.a` from the deviceinfo project to
+       your project's Build Phases ➜ Link Binary With Libraries
 
-    7. Click `.xcodeproj` file you added before in the project navigator and go the Build Settings tab. Make sure All is toggled on (instead of Basic)
+    7. Click `.xcodeproj` file you added before in the project navigator and go the Build Settings tab.
+       Make sure All is toggled on (instead of Basic)
 
     8. Look for Header Search Paths and make sure it contains both:
 
