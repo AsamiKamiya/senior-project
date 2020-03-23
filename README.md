@@ -41,6 +41,37 @@ Daniel Reaney
 
 ## Installation
 
+### 1. Clone the repository and install all dependencies
+
+### 2. Set up the local environment
+
+In the root directory run the following in the terminal:
+
+```
+touch .env
+```
+
+Navigate to and fill the .env file with your API key:
+
+```
+API_KEY = your-API-key
+```
+
+### 3. Open the project in Xcode
+
+Navigate to the /ios subdirectory and run the following code to open the project in Xcode:
+
+```
+cd ios
+open ProjectName.xcworkspace/
+```
+
+### 4. Run the project in Xcode
+
+Run the current build with Cmd + R
+
+## Troubleshooting
+
 ### 1. Ensure that Homebrew, Node, and Watchman are installed in your device:
 
 ```
