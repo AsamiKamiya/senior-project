@@ -1,0 +1,5 @@
+platform :ios, '13.1'
+target 'ViroSample' do
+  pod 'ViroReact', :path => '../node_modules/react-viro/ios/'
+  pod 'ViroKit_static_lib', :path => '../node_modules/react-viro/ios/dist/ViroRenderer/static_lib'
+end
