@@ -26,6 +26,7 @@ import {
 import TamaStore from "./TamaStore";
 import { updateUserData } from "../graphql/mutations";
 import clone from "../utils/clone";
+import { API_KEY } from "react-native-dotenv";
 
 const InitialARScene = require("./Tamamon1st");
 const InitialARSceneForTama2nd = require("./Tamamon2nd");
@@ -1425,8 +1426,11 @@ export default class TamaMenu extends Component {
       const updateFed = async newData => {
         //Fn to make API call
         await axios({
-          url: "https://tamomon.herokuapp.com/v1/graphql",
+          url: "https://tamamon-app.herokuapp.com/v1/graphql",
           method: "post",
+          headers: {
+            "x-hasura-admin-secret": API_KEY
+          },
           data: updateUserData(newData)
         }).then(result => {
           console.log(result);
@@ -1513,8 +1517,11 @@ export default class TamaMenu extends Component {
         const updateWashed = async newData => {
           //API call fn
           await axios({
-            url: "https://tamomon.herokuapp.com/v1/graphql",
+            url: "https://tamamon-app.herokuapp.com/v1/graphql",
             method: "post",
+            headers: {
+              "x-hasura-admin-secret": API_KEY
+            },
             data: updateUserData(newData)
           }).then(result => {
             console.log("ww:", this.state.server[name]);
@@ -1545,8 +1552,11 @@ export default class TamaMenu extends Component {
         const updatePlayed = async newData => {
           //API call fn
           await axios({
-            url: "https://tamomon.herokuapp.com/v1/graphql",
+            url: "https://tamamon-app.herokuapp.com/v1/graphql",
             method: "post",
+            headers: {
+              "x-hasura-admin-secret": API_KEY
+            },
             data: updateUserData(newData)
           }).then(result => {
             console.log(result);
@@ -1581,8 +1591,11 @@ export default class TamaMenu extends Component {
           const updateOwned = async newData => {
             //API call fn
             await axios({
-              url: "https://tamomon.herokuapp.com/v1/graphql",
+              url: "https://tamamon-app.herokuapp.com/v1/graphql",
               method: "post",
+              headers: {
+                "x-hasura-admin-secret": API_KEY
+              },
               data: updateUserData(newData)
             }).then(result => {
               console.log(result);
@@ -1613,8 +1626,11 @@ export default class TamaMenu extends Component {
         const updateOwned = async newData => {
           //API call fn
           await axios({
-            url: "https://tamomon.herokuapp.com/v1/graphql",
+            url: "https://tamamon-app.herokuapp.com/v1/graphql",
             method: "post",
+            headers: {
+              "x-hasura-admin-secret": API_KEY
+            },
             data: updateUserData(newData)
           }).then(result => {
             console.log(result);
