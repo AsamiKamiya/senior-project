@@ -9,7 +9,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "react": "16.8.3",
-    "react-native": "0.59.9",
+    "react-native": "0.62.3",
     "react-native-device-info": "^5.5.3",
     "react-native-dotenv": "^0.2.0",
     "react-native-splash-screen": "^3.2.0",
